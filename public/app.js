@@ -1,36 +1,26 @@
-/*document.addEventListener("DOMContentLoaded", event => {
-    const app = firebase.app();
-    //console.log(app);
-    const db = firebase.firestore();
-
-    // const myPost = db.collection('units')
-
-
-
-    db.collection("cities").doc("LA").set({
-        name: "Los Angeles",
-        state: "CA",
-        country: "USA"
-    })
-        .then(() => {
-            console.log("Document successfully written!");
-        })
-        .catch((error) => {
-            console.error("Error writing document: ", error);
-        });
-});*/
 
 function load() {
     const db = firebase.firestore();
-    db.collection("cities").doc("LA").set({
-        name: "Los Angeles",
-        state: "CA",
-        country: "USA"
+    db.collection("units").doc("3509_98765").set({
+        innerSerial: "98765",
+        name: "3509",
+        serial: "55555",
+        state: "На сборке"
     });
 }
-// db.collection("users").add({
-//     first: "Alan",
-//     middle: "Mathison",
-//     last: "Turing",
-//     born: 1912
-// });
+
+function insertSpinner() {
+    document.getElementById('spinner').innerHTML = ''+
+        '   <select id="ra_spinner" onchange="nothing()">'+
+        '                    <option value="1">БДКГ-02</option>'+
+        '                    <option value="2">БДПА-01</option>'+
+        '                    <option value="3">БДМГ-2327</option>'+
+        '                </select>'
+}
+
+function nothing() {
+
+}
+
+
+
