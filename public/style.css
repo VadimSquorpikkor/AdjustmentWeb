@@ -1,0 +1,39 @@
+
+body {
+    font-family: Arial;
+    text-align: center;
+}
+
+.main_div {
+    max-width: 1000px;
+    /*margin: auto;*/
+    box-shadow: 2px 1px 12px 1px rgba(0, 0, 0, 0.23);
+    padding: 30px 15px 20px;
+    margin: 10px auto 20px;
+    border-radius: 10px;
+}
+
+.row_table {
+    margin: auto;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.23);
+    padding: 3px;
+}
+
+.row_table tr {
+
+}
+
+.row_table td {
+    background: darkseagreen;
+    color: #ECEFF1;
+    width: 150px;
+}
+
+.row_table th {
+    background: #039be5;
+    color: #ECEFF1;
+}
+
+h1 {
+    color: darkorange;
+}

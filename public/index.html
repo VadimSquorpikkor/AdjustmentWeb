@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <title>AdjustmentWeb</title>
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/8.2.9/firebase-app.js"></script>
@@ -21,16 +21,27 @@
       to avoid connecting the SDK to running emulators. -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+
     <script defer src="app.js"></script>
     <script defer src="firebaseHelper.js"></script>
 
-  </head>
+</head>
 
-  <body onload="insertSpinner()">
-        <input type="button" onclick="load()" width="50px" value="load">
-        <input type="button" onclick="getAllData()" width="50px" value="getAll">
-        <select id="spinner"></select>
-        <br>
-        <a id="output_a"></a>
-  </body>
+<body onload="insertSpinner()">
+<!--<input type="button" onclick="load()" width="50px" value="load">-->
+<!--<input type="button" onclick="getAllData()" width="50px" value="getAll">-->
+<!--<select id="spinner"></select>-->
+<br>
+<a id="output_a"></a>
+
+<div class="main_div" id="main_div">
+
+<!--    <h1>База данных УРиР</h1>-->
+
+    <table class="row_table" id="row_table">
+    </table>
+</div>
+</body>
 </html>

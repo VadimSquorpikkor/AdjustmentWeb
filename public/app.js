@@ -22,5 +22,26 @@ function nothing() {
 
 }
 
+function addDataRowToPage(arr) {
+    let data = '<tr>'+
+        '<th>Имя</th>' +
+        '<th>Внутренний номер</th>' +
+        '<th>Серийный</th>' +
+        '<th>Статус</th>' +
+        '</tr>';
+    let unit;
+    for (let i = 0; i < arr.length; i++) {
+        unit = arr[i];
+        // data += unit.name + ' ' + unit.innerSerial + ' ' + unit.serial + ' ' + unit.state + '<br>';
+        data += '<tr>'+
+                '<td>'+ unit.name +'</td>' +
+                '<td>'+ unit.innerSerial +'</td>' +
+                '<td>'+ unit.serial +'</td>' +
+                '<td>'+ unit.state +'</td>' +
+                '</tr>';
+    }
+    // document.getElementById('output_a').innerHTML = '' + data;
+    document.getElementById('row_table').innerHTML = '' + data;
+}
 
 
