@@ -18,6 +18,20 @@ function insertSpinner() {
         '                </select>'
 }
 
+/** Массив имен для динамического спиннера выбора имени устройства. Потом массив будет формироваться динамически из БД*/
+let unit_names = ['Все устройства', 'БДКГ-02', 'АТ2503', 'АТ6130']; //уже не используется
+/** Массив статусов для динамического спиннера выбора статусов устройства. Потом массив будет формироваться динамически из БД*/
+let all_states = ['Все статусы', 'На сборке', 'На регулировке', 'На линейке', 'Ещё что-то']; //уже не используется
+
+/** Из массива названий формирует Спиннер */
+function insertSpinnerByArray(name, arr) {
+    let code = '   <select id="ra_spinner" onchange="nothing()">' //первая строчка html (nothing() потом будет изменен на нужный метод)
+    for (let i = 0; i < arr.length; i++) {
+        code += '<option value=' + (i+1) + '>' + arr[i] + '</option>' //через цикл добавляется строка спиннера (option) вида: <option value="1">БДКГ-02</option>
+    }
+    document.getElementById(name).innerHTML = code + '</select>'; //добавляем закрывающий тэг и выводим всё в элемент по id
+}
+
 function nothing() {
 
 }
@@ -40,7 +54,6 @@ function addDataRowToPage(arr) {
                 '<td>'+ unit.state +'</td>' +
                 '</tr>';
     }
-    // document.getElementById('output_a').innerHTML = '' + data;
     document.getElementById('row_table').innerHTML = '' + data;
 }
 

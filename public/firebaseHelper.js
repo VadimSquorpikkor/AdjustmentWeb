@@ -1,5 +1,7 @@
 const DBASE = firebase.firestore();
-const TABLE = "units";
+const TABLE_UNITS = "units";
+const TABLE_NAMES = "dev_types";
+const TABLE_STATES = "states";
 
 /** Класс для устройства, или блока детектирования */
 class DUnit {
@@ -31,28 +33,51 @@ var dUnitConverter = {
     }
 };
 
-/** Загрузка всех данных из БД */
-function getAllData() {
-    /////let data = "";
+/** Загрузка всех юнитов из БД */
+function getAllUnits() {
     let unit;
     var arr = [];
-    DBASE.collection(TABLE).withConverter(dUnitConverter)
+    DBASE.collection(TABLE_UNITS).withConverter(dUnitConverter)
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // Convert to City object
             unit = doc.data();
             // data = data + doc.data() + '<br>'; //просто стринг без объекта
-            //////data += unit.name + ' ' + unit.innerSerial + ' ' + unit.serial + ' ' + unit.state + '<br>';
             arr.push(unit);
         });
         addDataRowToPage(arr);
-        //document.getElementById('output_a').innerHTML = '' + data;
+        // insertSpinnerByArray('name_spinner', unit_names);
+        // insertSpinnerByArray('states_spinner', states);
+    });
+}
+
+/** Загрузка всех статусов из БД */
+function getAllStates() {
+    var arr = [];
+    DBASE.collection(TABLE_STATES)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            arr.push(doc.data().name);
+        });
+        insertSpinnerByArray('states_spinner', arr);
+    });
+}
+
+/** Загрузка всех имен из БД */
+function getAllNames() {
+    var arr = [];
+    DBASE.collection(TABLE_NAMES)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            arr.push(doc.data().name);
+        });
+        insertSpinnerByArray('names_spinner', arr);
     });
 }
 
 /** Загрузка данных в БД (не используется) */
 function load() {
-    DBASE.collection(TABLE).doc("3509_98765").set({
+    DBASE.collection(TABLE_UNITS).doc("3509_98765").set({
         innerSerial: "98765",
         name: "3509",
         serial: "55555",
@@ -61,10 +86,10 @@ function load() {
 }
 
 /**
- * Лисенер для изменений в БД. При изменении/добавлении данных в БД данные на странице автоматически обновляются
+ * Лисенер для изменений юнитов БД. При изменении/добавлении юнитов в БД данные на странице автоматически обновляются
  *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
  */
-DBASE.collection(TABLE)
+DBASE.collection(TABLE_UNITS)
     .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
             console.log(change.doc.data());
@@ -72,7 +97,30 @@ DBASE.collection(TABLE)
             //     id: change.doc.id,
             //     data: change.doc.data(),
             // };
-            getAllData()
+            getAllUnits()
         });
     });
 
+/**
+ * Лисенер для изменений списка статусов в БД. При изменении/добавлении статусов в БД данные в спиннере автоматически обновляются
+ *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
+ */
+DBASE.collection(TABLE_STATES)
+    .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            console.log(change.doc.data());
+            getAllStates();
+        });
+    });
+
+/**
+ * Лисенер для изменений списка статусов в БД. При изменении/добавлении статусов в БД данные в спиннере автоматически обновляются
+ *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
+ */
+DBASE.collection(TABLE_NAMES)
+    .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            console.log(change.doc.data());
+            getAllNames();
+        });
+    });

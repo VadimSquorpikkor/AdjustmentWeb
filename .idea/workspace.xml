@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/firebaseHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/firebaseHelper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +28,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1pCFwmDx6puRdaLfMHgofl1TJB0" />
   <component name="ProjectViewState">
@@ -63,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1614679405720</updated>
       <workItem from="1614679406844" duration="5510000" />
-      <workItem from="1614751416596" duration="8186000" />
+      <workItem from="1614751416596" duration="19211000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -72,7 +80,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614694181223</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="1.03 - 03/03/21&#10;1. Добавлен лисенер изменений в БД. При изменении/добавлении данных в БД данные на странице автоматически обновляются БЕЗ ПЕРЕЗАГРУЗКИ страницы&#10;2. Данные отображаются в виде таблицы (динамически добавляется из JS: addDataRowToPage(unit[]))&#10;3. Добавлен CSS&#10;4. Добавлен ReadMe.md и Version.md&#10;5. Веб страница — https://adjustmentdb.web.app/">
+      <created>1614761783832</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1614761783832</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -91,6 +106,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;" />
+    <MESSAGE value="1.03 - 03/03/21&#10;1. Добавлен лисенер изменений в БД. При изменении/добавлении данных в БД данные на странице автоматически обновляются БЕЗ ПЕРЕЗАГРУЗКИ страницы&#10;2. Данные отображаются в виде таблицы (динамически добавляется из JS: addDataRowToPage(unit[]))&#10;3. Добавлен CSS&#10;4. Добавлен ReadMe.md и Version.md&#10;5. Веб страница — https://adjustmentdb.web.app/" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.03 - 03/03/21&#10;1. Добавлен лисенер изменений в БД. При изменении/добавлении данных в БД данные на странице автоматически обновляются БЕЗ ПЕРЕЗАГРУЗКИ страницы&#10;2. Данные отображаются в виде таблицы (динамически добавляется из JS: addDataRowToPage(unit[]))&#10;3. Добавлен CSS&#10;4. Добавлен ReadMe.md и Version.md&#10;5. Веб страница — https://adjustmentdb.web.app/" />
   </component>
 </project>

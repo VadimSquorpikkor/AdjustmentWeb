@@ -1,10 +1,12 @@
 
-body {
+.body {
     font-family: Arial;
     text-align: center;
+    background-color: #444444;
 }
 
 .main_div {
+    background-color: #666666;
     max-width: 1000px;
     /*margin: auto;*/
     box-shadow: 2px 1px 12px 1px rgba(0, 0, 0, 0.23);
@@ -14,7 +16,10 @@ body {
 }
 
 .row_table {
+    background-color: #444444;
+    /*margin-left: 0px;*/
     margin: auto;
+    /*margin-right: auto;*/
     box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.23);
     padding: 3px;
 }
@@ -26,14 +31,47 @@ body {
 .row_table td {
     background: darkseagreen;
     color: #ECEFF1;
+    /*color: darkorange;*/
     width: 150px;
 }
 
-.row_table th {
-    background: #039be5;
+.states {
+    background: #444444;
+    margin-left: 100px;
+    text-align: end;
+    float: left;
+    margin-right: 0px;
+    padding: 3px;
     color: #ECEFF1;
 }
 
-h1 {
+.selected {
+    background: darkorange;
+}
+
+.row_table th {
+    /*background: #039be5;*/
+    background: darkorange;
+    color: #ECEFF1;
+}
+
+h1, h3 {
     color: darkorange;
+    text-shadow: 2px 3px 2px #444444;
+}
+
+select {
+    margin: 8px;
+    border-radius: 6px 0 0 6px;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 14px;
+    border: 0;
+    box-shadow: inset 5px 10px 5px -9px rgba(0, 0, 0, 0.55);
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.version {
+    color: #ECEFF1;
+    font-size: 12px;
 }
