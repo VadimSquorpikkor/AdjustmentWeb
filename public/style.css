@@ -75,3 +75,22 @@ select {
     color: #ECEFF1;
     font-size: 12px;
 }
+
+a {
+    color: darkorange;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-decoration: none;
+    padding: 2px 4px;
+    transition-property: all;
+    transition-duration: 450ms;
+}
+
+a:hover {
+    color: white;
+    background-color: darkorange;
+    border-radius: 9px;
+    padding: 2px 4px;
+    transition-property: all;
+    transition-duration: 250ms;
+}

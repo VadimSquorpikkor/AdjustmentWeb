@@ -72,6 +72,7 @@ function getAllNames() {
             arr.push(doc.data().name);
         });
         insertSpinnerByArray('names_spinner', arr);
+        insertSpinnerByArray('selected_type', arr);
     });
 }
 
