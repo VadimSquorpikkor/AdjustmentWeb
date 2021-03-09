@@ -1,11 +1,13 @@
 const DBASE = firebase.firestore();
 const TABLE_UNITS = "units";
+const TABLE_REPAIRS = "repairs";
 const TABLE_NAMES = "dev_types";
 const TABLE_STATES = "states";
 
 /** Класс для устройства, или блока детектирования */
 class DUnit {
-    constructor(name, innerSerial, serial, state) {
+    constructor(id, name, innerSerial, serial, state) {
+        this.id = id;
         this.name = name;
         this.innerSerial = innerSerial;
         this.serial = serial;
@@ -13,7 +15,7 @@ class DUnit {
     }
 
     toString() {
-        return this.name + ', ' + this.innerSerial + ', ' + this.serial + ', ' + this.state;
+        return this.id + ', ' + this.name + ', ' + this.innerSerial + ', ' + this.serial + ', ' + this.state;
     }
 }
 
@@ -21,6 +23,7 @@ class DUnit {
 var dUnitConverter = {
     toFirestore: function (dunit) {
         return {
+            id: dunit.id,
             name: dunit.name,
             innerSerial: dunit.innerSerial,
             serial: dunit.serial,
@@ -29,7 +32,7 @@ var dUnitConverter = {
     },
     fromFirestore: function (snapshot, options) {
         const data = snapshot.data(options);
-        return new DUnit(data.name, data.innerSerial, data.serial, data.state);
+        return new DUnit(data.id, data.name, data.innerSerial, data.serial, data.state);
     }
 };
 
@@ -48,6 +51,21 @@ function getAllUnits() {
         addDataRowToPage(arr);
         // insertSpinnerByArray('name_spinner', unit_names);
         // insertSpinnerByArray('states_spinner', states);
+    });
+}
+
+/** Загрузка всех ремонтных юнитов из БД */
+function getAllRepairUnits() {
+    let unit;
+    var arr = [];
+    DBASE.collection(TABLE_REPAIRS).withConverter(dUnitConverter)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // Convert to City object
+            unit = doc.data();
+            arr.push(unit);
+        });
+        addRepairDataRowToPage(arr);
     });
 }
 
@@ -73,6 +91,7 @@ function getAllNames() {
             arr.push(doc.data().name);
         });
         insertSpinnerByArray('selected_type', arr);
+        insertSpinnerByArray('search_names_spinner', arr);
         arr.unshift('Все устройства');//для names_spinner в начало списка добавляю 'Все устройства'
         insertSpinnerByArray('names_spinner', arr);
     });
@@ -105,6 +124,22 @@ DBASE.collection(TABLE_UNITS)
     });
 
 /**
+ * Лисенер для изменений юнитов БД. При изменении/добавлении юнитов в БД данные на странице автоматически обновляются
+ *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
+ */
+DBASE.collection(TABLE_REPAIRS)
+    .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            console.log(change.doc.data());
+            // const payload = {
+            //     id: change.doc.id,
+            //     data: change.doc.data(),
+            // };
+            getAllRepairUnits()
+        });
+    });
+
+/**
  * Лисенер для изменений списка статусов в БД. При изменении/добавлении статусов в БД данные в спиннере автоматически обновляются
  *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
  */
@@ -128,3 +163,33 @@ DBASE.collection(TABLE_NAMES)
             getAllNames();
         });
     });
+
+function getRepairUnitByNameAndSerial(nameId, serialId) {
+
+    let sel = document.getElementById(nameId);
+    let name = ''+sel.options[sel.selectedIndex].text;
+
+    let serial = document.getElementById(serialId).value;
+
+
+    console.log(name);
+    let unit;
+    var arr = [];
+    DBASE.collection(TABLE_REPAIRS).withConverter(dUnitConverter)
+        .where("name", '==', name)//, '&&', "serial", '==', serial
+        .where("serial", '==', serial)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // Convert to City object
+            unit = doc.data();
+            arr.push(unit);
+        });
+        console.log(arr.length)
+        if (arr.length===0) insertNothing('repair_table_2');
+        else addRepairDataRowToPage2(arr);
+    });
+}
+
+function insertNothing(id) {
+    document.getElementById(id).innerHTML = '<span class="white_span">Не найдено</span>'
+}

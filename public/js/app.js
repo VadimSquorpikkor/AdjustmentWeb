@@ -58,4 +58,46 @@ function addDataRowToPage(arr) {
     document.getElementById('row_table').innerHTML = '' + data;
 }
 
+function addRepairDataRowToPage(arr) {
+    let data = '<tr>' +
+        '<th>ID</th>' +
+        '<th>Имя</th>' +
+        '<th>Серийный</th>' +
+        '<th>Статус</th>' +
+        '</tr>';
+    let unit;
+    for (let i = 0; i < arr.length; i++) {
+        unit = arr[i];
+        // data += unit.name + ' ' + unit.innerSerial + ' ' + unit.serial + ' ' + unit.state + '<br>';
+        data += '<tr>' +
+            '<td>' + unit.id + '</td>' +
+            '<td>' + unit.name + '</td>' +
+            '<td>' + unit.serial + '</td>' +
+            '<td>' + unit.state + '</td>' +
+            '</tr>';
+    }
+    document.getElementById('repair_table').innerHTML = '' + data;
+}
 
+//todo это метод для результата поиска по имени и серийнику для ремонтных. Надо переделать, чтобы результат был в
+// виде карточки, а не таблицы. И переименовать
+function addRepairDataRowToPage2(arr) {
+        let data = '<tr>' +
+            '<th>ID</th>' +
+            '<th>Имя</th>' +
+            '<th>Серийный</th>' +
+            '<th>Статус</th>' +
+            '</tr>';
+        let unit;
+        for (let i = 0; i < arr.length; i++) {
+            unit = arr[i];
+            // data += unit.name + ' ' + unit.innerSerial + ' ' + unit.serial + ' ' + unit.state + '<br>';
+            data += '<tr>' +
+                '<td>' + unit.id + '</td>' +
+                '<td>' + unit.name + '</td>' +
+                '<td>' + unit.serial + '</td>' +
+                '<td>' + unit.state + '</td>' +
+                '</tr>';
+        }
+        document.getElementById('repair_table_2').innerHTML = '' + data;
+}
