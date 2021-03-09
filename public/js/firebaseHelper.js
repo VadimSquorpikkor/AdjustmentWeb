@@ -36,6 +36,30 @@ var dUnitConverter = {
     }
 };
 
+class DState {
+    constructor(state, date) {
+        this.state = state;
+        this.date = date;
+    }
+
+    toString() {
+        return this.state + ', ' + this.date;
+    }
+}
+
+var dStateConverter = {
+    toFirestore: function (dstate) {
+        return {
+            state: dstate.state,
+            date: dstate.date
+        };
+    },
+    fromFirestore: function (snapshot, options) {
+        const data = snapshot.data(options);
+        return new DState(data.state, data.date);
+    }
+};
+
 /** Загрузка всех юнитов из БД */
 function getAllUnits() {
     let unit;
@@ -192,4 +216,25 @@ function getRepairUnitByNameAndSerial(nameId, serialId) {
 
 function insertNothing(id) {
     document.getElementById(id).innerHTML = '<span class="white_span">Не найдено</span>'
+}
+
+
+
+function getCollectionOfDocument(collection_1, document_1, collection_2) {
+    let dstate;
+    var arr = [];
+    DBASE.collection(collection_1).doc(document_1).collection(collection_2).withConverter(dStateConverter)
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                //console.log(doc.id, " => ", doc.data());
+                dstate = doc.data();
+                arr.push(dstate);
+            });
+            addCollectionOfDocument(arr);
+        });
+}
+
+function addCollectionOfDocument(arr) {
+
 }
