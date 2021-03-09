@@ -59,6 +59,7 @@ function getAllStates() {
         querySnapshot.forEach((doc) => {
             arr.push(doc.data().name);
         });
+        arr.unshift('Все статусы');// в начало списка добавлено 'Все статусы'
         insertSpinnerByArray('states_spinner', arr);
     });
 }
@@ -71,8 +72,9 @@ function getAllNames() {
         querySnapshot.forEach((doc) => {
             arr.push(doc.data().name);
         });
-        insertSpinnerByArray('names_spinner', arr);
         insertSpinnerByArray('selected_type', arr);
+        arr.unshift('Все устройства');//для names_spinner в начало списка добавляю 'Все устройства'
+        insertSpinnerByArray('names_spinner', arr);
     });
 }
 
@@ -122,6 +124,7 @@ DBASE.collection(TABLE_NAMES)
     .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
             console.log(change.doc.data());
+            console.log('*********РАБОТАЕТ!!!!!!');
             getAllNames();
         });
     });

@@ -1,4 +1,3 @@
-
 function load() {
     const db = firebase.firestore();
     db.collection("units").doc("3509_98765").set({
@@ -10,11 +9,11 @@ function load() {
 }
 
 function insertSpinner() {
-    document.getElementById('spinner').innerHTML = ''+
-        '   <select id="ra_spinner" onchange="nothing()">'+
-        '                    <option value="1">БДКГ-02</option>'+
-        '                    <option value="2">БДПА-01</option>'+
-        '                    <option value="3">БДМГ-2327</option>'+
+    document.getElementById('spinner').innerHTML = '' +
+        '   <select id="ra_spinner" onchange="nothing()">' +
+        '                    <option value="1">БДКГ-02</option>' +
+        '                    <option value="2">БДПА-01</option>' +
+        '                    <option value="3">БДМГ-2327</option>' +
         '                </select>'
 }
 
@@ -25,11 +24,13 @@ let all_states = ['Все статусы', 'На сборке', 'На регул
 
 /** Из массива названий формирует Спиннер */
 function insertSpinnerByArray(name, arr) {
-    let code = '   <select id="ra_spinner" onchange="nothing()">' //первая строчка html (nothing() потом будет изменен на нужный метод)
-    for (let i = 0; i < arr.length; i++) {
-        code += '<option value=' + (i+1) + '>' + arr[i] + '</option>' //через цикл добавляется строка спиннера (option) вида: <option value="1">БДКГ-02</option>
+    if (document.getElementById(name) != null) {
+        let code = '   <select id="ra_spinner" onchange="nothing()">'; //первая строчка html (nothing() потом будет изменен на нужный метод)
+        for (let i = 0; i < arr.length; i++) {
+            code += '<option value=' + (i + 1) + '>' + arr[i] + '</option>' //через цикл добавляется строка спиннера (option) вида: <option value="1">БДКГ-02</option>
+        }
+        document.getElementById(name).innerHTML = code + '</select>'; //добавляем закрывающий тэг и выводим всё в элемент по id
     }
-    document.getElementById(name).innerHTML = code + '</select>'; //добавляем закрывающий тэг и выводим всё в элемент по id
 }
 
 function nothing() {
@@ -37,7 +38,7 @@ function nothing() {
 }
 
 function addDataRowToPage(arr) {
-    let data = '<tr>'+
+    let data = '<tr>' +
         '<th>Имя</th>' +
         '<th>Внутренний номер</th>' +
         '<th>Серийный</th>' +
@@ -47,12 +48,12 @@ function addDataRowToPage(arr) {
     for (let i = 0; i < arr.length; i++) {
         unit = arr[i];
         // data += unit.name + ' ' + unit.innerSerial + ' ' + unit.serial + ' ' + unit.state + '<br>';
-        data += '<tr>'+
-                '<td>'+ unit.name +'</td>' +
-                '<td>'+ unit.innerSerial +'</td>' +
-                '<td>'+ unit.serial +'</td>' +
-                '<td>'+ unit.state +'</td>' +
-                '</tr>';
+        data += '<tr>' +
+            '<td>' + unit.name + '</td>' +
+            '<td>' + unit.innerSerial + '</td>' +
+            '<td>' + unit.serial + '</td>' +
+            '<td>' + unit.state + '</td>' +
+            '</tr>';
     }
     document.getElementById('row_table').innerHTML = '' + data;
 }
