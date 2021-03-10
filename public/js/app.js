@@ -63,7 +63,6 @@ function addRepairDataRowToPage(arr) {
         '<th>ID</th>' +
         '<th>Имя</th>' +
         '<th>Серийный</th>' +
-        '<th>Статус</th>' +
         '</tr>';
     let unit;
     for (let i = 0; i < arr.length; i++) {
@@ -73,7 +72,6 @@ function addRepairDataRowToPage(arr) {
             '<td>' + unit.id + '</td>' +
             '<td>' + unit.name + '</td>' +
             '<td>' + unit.serial + '</td>' +
-            '<td>' + unit.state + '</td>' +
             '</tr>';
     }
     document.getElementById('repair_table').innerHTML = '' + data;
@@ -101,3 +99,4 @@ function addRepairDataRowToPage2(arr) {
         }
         document.getElementById('repair_table_2').innerHTML = '' + data;
 }
+

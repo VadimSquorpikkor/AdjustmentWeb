@@ -3,6 +3,7 @@ const TABLE_UNITS = "units";
 const TABLE_REPAIRS = "repairs";
 const TABLE_NAMES = "dev_types";
 const TABLE_STATES = "states";
+const TABLE_REPAIR_STATES = "repair_states";
 
 /** Класс для устройства, или блока детектирования */
 class DUnit {
@@ -188,15 +189,17 @@ DBASE.collection(TABLE_NAMES)
         });
     });
 
-function getRepairUnitByNameAndSerial(nameId, serialId) {
-
+function getRepairUnit(nameId, serialId) {
     let sel = document.getElementById(nameId);
     let name = ''+sel.options[sel.selectedIndex].text;
 
     let serial = document.getElementById(serialId).value;
+    getRepairUnitByNameAndSerial(name, serial);
+}
 
 
-    console.log(name);
+function getRepairUnitByNameAndSerial(name, serial) {
+    console.log('' + name + ' ' + serial);
     let unit;
     var arr = [];
     DBASE.collection(TABLE_REPAIRS).withConverter(dUnitConverter)
@@ -209,8 +212,12 @@ function getRepairUnitByNameAndSerial(nameId, serialId) {
             arr.push(unit);
         });
         console.log(arr.length)
-        if (arr.length===0) insertNothing('repair_table_2');
-        else addRepairDataRowToPage2(arr);
+        if (arr.length === 0) {
+            insertNothing('repair_search_result');
+            console.log('юнитов не найдено')
+        }
+        //else addRepairDataRowToPage2(arr);
+        else getCollectionOfDocument(TABLE_REPAIRS, TABLE_REPAIR_STATES, arr);
     });
 }
 
@@ -220,7 +227,9 @@ function insertNothing(id) {
 
 
 
-function getCollectionOfDocument(collection_1, document_1, collection_2) {
+function getCollectionOfDocument(collection_1,  collection_2, unitArray) {
+    let dUnit = unitArray[0];
+    let document_1 = 'r_'+dUnit.id;
     let dstate;
     var arr = [];
     DBASE.collection(collection_1).doc(document_1).collection(collection_2).withConverter(dStateConverter)
@@ -231,10 +240,38 @@ function getCollectionOfDocument(collection_1, document_1, collection_2) {
                 dstate = doc.data();
                 arr.push(dstate);
             });
-            addCollectionOfDocument(arr);
+                addCollectionOfDocumentToDiv(arr, dUnit);
         });
 }
 
-function addCollectionOfDocument(arr) {
+function addCollectionOfDocumentToDiv(arr, unit) {
+
+    let data;
+    if (arr.length === 0) {
+        document.getElementById('repair_search_result').innerHTML =
+            '<h3>'+unit.name+' №' + unit.serial + '</h3>'+
+            '<span class="white_span">Статусов не найдено</span>';
+        //insertNothing('repair_search_result_table');
+        console.log('статусов не найдено');
+    } else {
+        let dState;
+        data =
+            '<h3>'+unit.name+' №' + unit.serial + '</h3>'+
+            '<table class="row_table" id="repair_search_result_table">'+
+            '<tr>' +
+            '<th style="width: 200px">Дата</th>' +
+            '<th style="width: 400px">Статус</th>' +
+            '</tr>';
+        for (let i = 0; i < arr.length; i++) {
+            dState = arr[i];
+            data += '<tr>' +
+                '<td>' + dState.date + '</td>' +
+                '<td>' + dState.state + '</td>' +
+                '</tr>';
+        }
+        data += '</table>';
+        document.getElementById('repair_search_result').innerHTML = '' + data;
+    }
+
 
 }
