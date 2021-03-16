@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="1.08 - 10/03/21&#10;1. Для страницы ремонтных приборов реализовано отображение результата поиска прибора в БД по его типу и серийнику (фронтенд)&#10;2. В базе данных, в таблице для ремонтных добавлена коллекция для хранения списка статусов и их даты добавления (т.е. коллекция в коллекции)&#10;3. Добавлены методы для чтения данных коллекции в коллекции&#10;4. Закомментированы лишние импорты Firebase &#10;5. Теперь при нахождении ремонтного прибора в базе, выводится таблица его статусов с датами">
-      <change afterPath="$PROJECT_DIR$/public/js/firebaseHelperNew.js" afterDir="false" />
+    <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="refactoring">
+      <change afterPath="$PROJECT_DIR$/public/js/listeners.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebaseHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebaseHelper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/qr_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/qr_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/repair.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/repair.html" afterDir="false" />
@@ -102,7 +102,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -136,7 +136,8 @@
       <workItem from="1615526842820" duration="2662000" />
       <workItem from="1615559321281" duration="621000" />
       <workItem from="1615788003127" duration="16244000" />
-      <workItem from="1615875193537" duration="3972000" />
+      <workItem from="1615875193537" duration="4333000" />
+      <workItem from="1615879196814" duration="709000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -187,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615372140045</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="refactoring">
+      <created>1615878343064</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1615878343064</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -241,6 +249,7 @@
     <MESSAGE value="1.06 - 05/03/21&#10;1. Список выбора типа устройства для страницы qr-кода теперь заполняется динамически из БД. При изменении в БД автоматом заполняется обновленными данными. По сути: теперь имя  устройства жестко связано со значением в БД, ситуация, когда можно ввести вручную неправильный (или несуществующий) тип устройства ИСКЛЮЧЕНА" />
     <MESSAGE value="1.07 - 09/03/21&lt;/b&gt;&#10;1. Добавлена страница для ремонтных приборов&#10;2. Добавлены методы для работы с таблицей БД для ремонтных приборов&#10;3. Реализован поиск по БД для ремонтных по их серийному номеру и имени" />
     <MESSAGE value="1.08 - 10/03/21&#10;1. Для страницы ремонтных приборов реализовано отображение результата поиска прибора в БД по его типу и серийнику (фронтенд)&#10;2. В базе данных, в таблице для ремонтных добавлена коллекция для хранения списка статусов и их даты добавления (т.е. коллекция в коллекции)&#10;3. Добавлены методы для чтения данных коллекции в коллекции&#10;4. Закомментированы лишние импорты Firebase &#10;5. Теперь при нахождении ремонтного прибора в базе, выводится таблица его статусов с датами" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.08 - 10/03/21&#10;1. Для страницы ремонтных приборов реализовано отображение результата поиска прибора в БД по его типу и серийнику (фронтенд)&#10;2. В базе данных, в таблице для ремонтных добавлена коллекция для хранения списка статусов и их даты добавления (т.е. коллекция в коллекции)&#10;3. Добавлены методы для чтения данных коллекции в коллекции&#10;4. Закомментированы лишние импорты Firebase &#10;5. Теперь при нахождении ремонтного прибора в базе, выводится таблица его статусов с датами" />
+    <MESSAGE value="refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
   </component>
 </project>

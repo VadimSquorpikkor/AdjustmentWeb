@@ -79,8 +79,6 @@ function getAllRepairUnits() {
     getAll(DBASE, TABLE_REPAIRS, dUnitConverter, addRepairDataRowToPage);
 }
 
-
-
 function getAllUnitsByParam(sp_name, sp_state) {
     let name = getValueFromSpinner(sp_name);
     let state = getValueFromSpinner(sp_state);
@@ -88,79 +86,15 @@ function getAllUnitsByParam(sp_name, sp_state) {
     if (name === ALL_UNITS && state === ALL_STATES) {
         getAllUnits();
     } else if (name === ALL_UNITS) {
-        // getAllUnitsByOneParam(PARAM_STATE, state);
         getAllByOneParam(DBASE, TABLE_UNITS, dUnitConverter, PARAM_STATE, state, addDataRowToPage);
     } else if (state === ALL_STATES) {
-        // getAllUnitsByOneParam(PARAM_NAME, name);
         getAllByOneParam(DBASE, TABLE_UNITS, dUnitConverter, PARAM_NAME, name, addDataRowToPage);
     } else {
-        // getAllUnitsByTwoParam(PARAM_NAME, name, PARAM_STATE, state);
         getAllByTwoParam(DBASE, TABLE_UNITS, dUnitConverter, PARAM_NAME, name, PARAM_STATE, state, addDataRowToPage);
     }
 }
 
-/*function getAllUnitsByOneParam(param, value) {
-    getAllByOneParam(DBASE, TABLE_UNITS, dUnitConverter, param, value, addDataRowToPage)
-}*/
-
-/*function getAllUnitsByTwoParam(param_1, value_1, param_2, value_2) {
-    getAllByTwoParam(DBASE, TABLE_UNITS, dUnitConverter, param_1, value_1, param_2, value_2, addDataRowToPage)
-}*/
-
-/*function getAllUnitsByOneParam(param, name) {
-    let unit;
-    var arr = [];
-    DBASE.collection(TABLE_UNITS).withConverter(dUnitConverter)
-        .where(param, "==", name)
-        .get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // Convert to City object
-            unit = doc.data();
-            arr.push(unit);
-        });
-        addDataRowToPage(arr);
-    });
-}
-
-function getAllUnitsByTwoParam(param, value, param_2, value_2) {
-    let unit;
-    var arr = [];
-    DBASE.collection(TABLE_UNITS).withConverter(dUnitConverter)
-        .where(param, "==", value)
-        .where(param_2, "==", value_2)
-        .get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // Convert to City object
-            unit = doc.data();
-            arr.push(unit);
-        });
-        addDataRowToPage(arr);
-    });
-}*/
-
-
-
-
-/*function insertToSpinner(arr) {
-    insertSpinnerByArray('selected_type', arr);
-    insertSpinnerByArray('search_names_spinner', arr);
-    arr.unshift('Все устройства');//для names_spinner в начало списка добавляю 'Все устройства'
-    insertSpinnerByArray('names_spinner', arr);
-}*/
-
 /** Загрузка всех статусов из БД */
-/*function getAllStates_old() {
-    var arr = [];
-    DBASE.collection(TABLE_STATES)
-        .get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            arr.push(doc.data().name);
-        });
-        arr.unshift('Все статусы');// в начало списка добавлено 'Все статусы'
-        insertSpinnerByArray('states_spinner', arr);
-    });
-}*/
-
 function getAllStates() {
     getAllObjectNames(DBASE, TABLE_STATES, function (arr) {
         arr.unshift(ALL_STATES);// в начало списка добавлено 'Все статусы'
@@ -168,6 +102,7 @@ function getAllStates() {
     });
 }
 
+/** Загрузка всех имен из БД */
 function getAllNames() {
     getAllObjectNames(DBASE, TABLE_NAMES, function (arr) {
         insertSpinnerByArray('selected_type', arr);
@@ -177,78 +112,7 @@ function getAllNames() {
     });
 }
 
-/** Загрузка всех имен из БД */
-/*function getAllNames_old() {
-    var arr = [];
-    DBASE.collection(TABLE_NAMES)
-        .get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            arr.push(doc.data().name);
-        });
-        insertSpinnerByArray('selected_type', arr);
-        insertSpinnerByArray('search_names_spinner', arr);
-        arr.unshift('Все устройства');//для names_spinner в начало списка добавляю 'Все устройства'
-        insertSpinnerByArray('names_spinner', arr);
-    });
-}*/
 
-
-
-/**
- * Лисенер для изменений юнитов БД. При изменении/добавлении юнитов в БД данные на странице автоматически обновляются
- *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
- */
-DBASE.collection(TABLE_UNITS)
-    .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-            console.log(change.doc.data());
-            // const payload = {
-            //     id: change.doc.id,
-            //     data: change.doc.data(),
-            // };
-            getAllUnits()
-        });
-    });
-
-/**
- * Лисенер для изменений юнитов БД. При изменении/добавлении юнитов в БД данные на странице автоматически обновляются
- *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
- */
-DBASE.collection(TABLE_REPAIRS)
-    .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-            console.log(change.doc.data());
-            // const payload = {
-            //     id: change.doc.id,
-            //     data: change.doc.data(),
-            // };
-            getAllRepairUnits()
-        });
-    });
-
-/**
- * Лисенер для изменений списка статусов в БД. При изменении/добавлении статусов в БД данные в спиннере автоматически обновляются
- *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
- */
-DBASE.collection(TABLE_STATES)
-    .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-            console.log(change.doc.data());
-            getAllStates();
-        });
-    });
-
-/**
- * Лисенер для изменений списка статусов в БД. При изменении/добавлении статусов в БД данные в спиннере автоматически обновляются
- *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
- */
-DBASE.collection(TABLE_NAMES)
-    .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-            console.log(change.doc.data());
-            getAllNames();
-        });
-    });
 
 function getRepairUnit(nameId, serialId) {
     let sel = document.getElementById(nameId);
