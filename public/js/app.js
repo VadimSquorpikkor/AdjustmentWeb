@@ -24,7 +24,7 @@ function getValueFromSpinner(id) {
     return sel.options[sel.selectedIndex].text;
 }
 
-/**Таблица серийных устройств. Из массива данных формирует HTML таблицы и заполняет её данными из массива*/
+/**Таблица серийных устройств. Из массива данных формирует HTML таблицу и заполняет её данными из массива*/
 function addDataRowToPage(arr) {
     let data = '<tr>' +
         '<th>Имя</th>' +
@@ -45,7 +45,7 @@ function addDataRowToPage(arr) {
     document.getElementById('row_table').innerHTML = '' + data;
 }
 
-/**Таблица ремонтных устройств. Из массива данных формирует HTML таблицы и заполняет её данными из массива*/
+/**Таблица ремонтных устройств. Из массива данных формирует HTML таблицу и заполняет её данными из массива*/
 function addRepairDataRowToPage(arr) {
     if (document.getElementById('repair_table') != null) {
         let data = '<tr>' +
@@ -66,6 +66,10 @@ function addRepairDataRowToPage(arr) {
     }
 }
 
+/**Вставляет <SPAN> "Не найдено" в выбранный по id элемент
+ *
+ * @param id - id элемента, в который будет вставлено "Не найдено"
+ */
 function insertNothing(id) {
     document.getElementById(id).innerHTML = '<span class="white_span">Не найдено</span>'
 }

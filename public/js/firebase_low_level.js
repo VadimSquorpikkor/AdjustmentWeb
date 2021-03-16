@@ -1,4 +1,8 @@
+/**Низкоуровневые методы для работы с БД. Приложение не работает с этими методами напрямую, а использует промежуточный класс (firebaseHelper).
+ * Методы ничего не знают про приложение, не знают как называется БД и из каких таблиц (коллекций) состоит. Само приложение не в курсе, как работать с БД,
+ * общается через firebaseHelper. Полная инкапсуляция. Надо будет ещё как-то с лисенерами разобраться, пока выбиваются из картинки. */
 
+/**Получить все объекты из коллекции*/
 function getAll(database, table, converter, func) {
     let obj;
     let arr = [];
@@ -13,6 +17,7 @@ function getAll(database, table, converter, func) {
     });
 }
 
+/**Получить все объекты из коллекции, совпадающие по одному параметру*/
 function getAllByOneParam(database, table, converter, param, value, func) {
     let obj;
     let arr = [];
@@ -20,7 +25,7 @@ function getAllByOneParam(database, table, converter, param, value, func) {
         .where(param, "==", value)
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            // Convert to City object
+            // Convert to object
             obj = doc.data();
             arr.push(obj);
         });
@@ -28,6 +33,7 @@ function getAllByOneParam(database, table, converter, param, value, func) {
     });
 }
 
+/**Получить все объекты из коллекции, совпадающие по двум параметрам*/
 function getAllByTwoParam(database, table, converter, param_1, value_1, param_2, value_2, func) {
     let obj;
     let arr = [];
@@ -36,7 +42,7 @@ function getAllByTwoParam(database, table, converter, param_1, value_1, param_2,
         .where(param_2, "==", value_2)
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            // Convert to City object
+            // Convert to object
             obj = doc.data();
             arr.push(obj);
         });
@@ -57,7 +63,7 @@ function getAllObjectNames(database, table, func) {
 }
 
 /**Загрузка в БД. Не используется*/
-function load() {
+/*function load() {
     const db = firebase.firestore();
     db.collection("units").doc("3509_98765").set({
         innerSerial: "98765",
@@ -65,4 +71,20 @@ function load() {
         serial: "55555",
         state: "На сборке"
     });
+}*/
+
+/**Загрузка коллекции, находящейся внутри другой коллекции*/
+function getTableOfTable(database, document_name, collection_1, collection_2, converter, func, obj) {
+    let dState;
+    let arr = [];
+    database.collection(collection_1).doc(document_name).collection(collection_2).withConverter(converter)
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                //console.log(doc.id, " => ", doc.data());
+                dState = doc.data();
+                arr.push(dState);
+            });
+            func(arr, obj);
+        });
 }

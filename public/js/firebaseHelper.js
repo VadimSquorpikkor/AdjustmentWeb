@@ -79,6 +79,11 @@ function getAllRepairUnits() {
     getAll(DBASE, TABLE_REPAIRS, dUnitConverter, addRepairDataRowToPage);
 }
 
+/**Фильтр для загрузки серийных устройств. При изменении спиннера загружаются только устройства, категории которых
+ * совпадают с выбранными в двух спиннерах — имя устройства и по его статус.
+ * Пока не знаю, как в "where" запрашивать "ВСЕ" элементы (для случаев "Все статусы" и "Все устройства"), поэтому
+ * использую разные методы для разных случаев: если и "все устройства" и "все статусы", просто загружаю всё,
+ * если "все" только одна из категорий, загружаю по одному параметру, иначе — по двум параметрам*/
 function getAllUnitsByParam(sp_name, sp_state) {
     let name = getValueFromSpinner(sp_name);
     let state = getValueFromSpinner(sp_state);
@@ -112,56 +117,24 @@ function getAllNames() {
     });
 }
 
-
-
+/**Обертка для getRepairUnitByNameAndSerial. Получает на вход ID элементов, берет из них данные и вызывает
+ * getRepairUnitByNameAndSerial используя эти данные */
 function getRepairUnit(nameId, serialId) {
-    let sel = document.getElementById(nameId);
-    let name = ''+sel.options[sel.selectedIndex].text;
-
+    let name = getValueFromSpinner(nameId);
     let serial = document.getElementById(serialId).value;
+
     getRepairUnitByNameAndSerial(name, serial);
 }
 
-
+/**По имени и серийному номеру ремонтного прибора получает список событий (статусов) этого прибора и формирует из этих
+ * данных DIV с таблицей статусов */
 function getRepairUnitByNameAndSerial(name, serial) {
-    console.log('' + name + ' ' + serial);
-    let unit;
-    var arr = [];
-    DBASE.collection(TABLE_REPAIRS).withConverter(dUnitConverter)
-        .where(PARAM_NAME, '==', name)//, '&&', "serial", '==', serial
-        .where(PARAM_SERIAL, '==', serial)
-        .get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // Convert to City object
-            unit = doc.data();
-            arr.push(unit);
-        });
-        console.log(arr.length)
-        if (arr.length === 0) {
-            insertNothing('repair_search_result');
-            console.log('юнитов не найдено')
+    getAllByTwoParam(DBASE, TABLE_REPAIRS, dUnitConverter, PARAM_NAME, name, PARAM_SERIAL, serial, function (arr) {
+        if (arr.length === 0) insertNothing('repair_search_result');
+        else {
+            let dUnit = arr[0];
+            let document = 'r_'+dUnit.id;
+            getTableOfTable(DBASE, document, TABLE_REPAIRS, TABLE_REPAIR_STATES, dStateConverter, addCollectionOfDocumentToDiv, dUnit);
         }
-        //else addRepairDataRowToPage2(arr);
-        else getCollectionOfDocument(TABLE_REPAIRS, TABLE_REPAIR_STATES, arr);
     });
 }
-
-
-function getCollectionOfDocument(collection_1,  collection_2, unitArray) {
-    let dUnit = unitArray[0];
-    let document_1 = 'r_'+dUnit.id;
-    let dstate;
-    var arr = [];
-    DBASE.collection(collection_1).doc(document_1).collection(collection_2).withConverter(dStateConverter)
-        .get()
-        .then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                //console.log(doc.id, " => ", doc.data());
-                dstate = doc.data();
-                arr.push(dstate);
-            });
-                addCollectionOfDocumentToDiv(arr, dUnit);
-        });
-}
-
-
