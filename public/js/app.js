@@ -1,42 +1,30 @@
-function load() {
-    const db = firebase.firestore();
-    db.collection("units").doc("3509_98765").set({
-        innerSerial: "98765",
-        name: "3509",
-        serial: "55555",
-        state: "На сборке"
-    });
-}
-
-function insertSpinner() {
-    document.getElementById('spinner').innerHTML = '' +
-        '   <select id="ra_spinner" onchange="nothing()">' +
-        '                    <option value="1">БДКГ-02</option>' +
-        '                    <option value="2">БДПА-01</option>' +
-        '                    <option value="3">БДМГ-2327</option>' +
-        '                </select>'
-}
 
 /** Массив имен для динамического спиннера выбора имени устройства. Потом массив будет формироваться динамически из БД*/
 let unit_names = ['Все устройства', 'БДКГ-02', 'АТ2503', 'АТ6130']; //уже не используется
 /** Массив статусов для динамического спиннера выбора статусов устройства. Потом массив будет формироваться динамически из БД*/
 let all_states = ['Все статусы', 'На сборке', 'На регулировке', 'На линейке', 'Ещё что-то']; //уже не используется
 
-/** Из массива названий формирует Спиннер */
+/** Из массива названий формирует Спиннер
+ * @param name - id пустого спиннера, в который будут добавлены данные
+ * @param arr  - массив данных, которыми будет заполняться спиннер
+ */
 function insertSpinnerByArray(name, arr) {
     if (document.getElementById(name) != null) {
-        let code = '   <select id="ra_spinner" onchange="nothing()">'; //первая строчка html (nothing() потом будет изменен на нужный метод)
+        let code = '';
         for (let i = 0; i < arr.length; i++) {
             code += '<option value=' + (i + 1) + '>' + arr[i] + '</option>' //через цикл добавляется строка спиннера (option) вида: <option value="1">БДКГ-02</option>
         }
-        document.getElementById(name).innerHTML = code + '</select>'; //добавляем закрывающий тэг и выводим всё в элемент по id
+        document.getElementById(name).innerHTML = '   <select>' + code + '</select>'; //добавляем открывающий и закрывающий тэг и выводим всё в элемент по id
     }
 }
 
-function nothing() {
-
+/**Возвращает текущее значение спиннера. Нужно, так как spinner.value возвращает номер пункта, но не его значение*/
+function getValueFromSpinner(id) {
+    let sel = document.getElementById(id);
+    return sel.options[sel.selectedIndex].text;
 }
 
+/**Таблица серийных устройств. Из массива данных формирует HTML таблицы и заполняет её данными из массива*/
 function addDataRowToPage(arr) {
     let data = '<tr>' +
         '<th>Имя</th>' +
@@ -47,7 +35,6 @@ function addDataRowToPage(arr) {
     let unit;
     for (let i = 0; i < arr.length; i++) {
         unit = arr[i];
-        // data += unit.name + ' ' + unit.innerSerial + ' ' + unit.serial + ' ' + unit.state + '<br>';
         data += '<tr>' +
             '<td>' + unit.name + '</td>' +
             '<td>' + unit.innerSerial + '</td>' +
@@ -58,45 +45,56 @@ function addDataRowToPage(arr) {
     document.getElementById('row_table').innerHTML = '' + data;
 }
 
+/**Таблица ремонтных устройств. Из массива данных формирует HTML таблицы и заполняет её данными из массива*/
 function addRepairDataRowToPage(arr) {
-    let data = '<tr>' +
-        '<th>ID</th>' +
-        '<th>Имя</th>' +
-        '<th>Серийный</th>' +
-        '</tr>';
-    let unit;
-    for (let i = 0; i < arr.length; i++) {
-        unit = arr[i];
-        // data += unit.name + ' ' + unit.innerSerial + ' ' + unit.serial + ' ' + unit.state + '<br>';
-        data += '<tr>' +
-            '<td>' + unit.id + '</td>' +
-            '<td>' + unit.name + '</td>' +
-            '<td>' + unit.serial + '</td>' +
-            '</tr>';
-    }
-    document.getElementById('repair_table').innerHTML = '' + data;
-}
-
-//todo это метод для результата поиска по имени и серийнику для ремонтных. Надо переделать, чтобы результат был в
-// виде карточки, а не таблицы. И переименовать
-function addRepairDataRowToPage2(arr) {
+    if (document.getElementById('repair_table') != null) {
         let data = '<tr>' +
             '<th>ID</th>' +
             '<th>Имя</th>' +
             '<th>Серийный</th>' +
-            '<th>Статус</th>' +
             '</tr>';
         let unit;
         for (let i = 0; i < arr.length; i++) {
             unit = arr[i];
-            // data += unit.name + ' ' + unit.innerSerial + ' ' + unit.serial + ' ' + unit.state + '<br>';
             data += '<tr>' +
                 '<td>' + unit.id + '</td>' +
                 '<td>' + unit.name + '</td>' +
                 '<td>' + unit.serial + '</td>' +
-                '<td>' + unit.state + '</td>' +
                 '</tr>';
         }
-        document.getElementById('repair_table_2').innerHTML = '' + data;
+        document.getElementById('repair_table').innerHTML = '' + data;
+    }
 }
 
+function insertNothing(id) {
+    document.getElementById(id).innerHTML = '<span class="white_span">Не найдено</span>'
+}
+
+function addCollectionOfDocumentToDiv(arr, unit) {
+    let data;
+    if (arr.length === 0) {
+        document.getElementById('repair_search_result').innerHTML =
+            '<h3>'+unit.name+' №' + unit.serial + '</h3>'+
+            '<span class="white_span">Статусов не найдено</span>';
+        //insertNothing('repair_search_result_table');
+        console.log('статусов не найдено');
+    } else {
+        let dState;
+        data =
+            '<h3>'+unit.name+' №' + unit.serial + '</h3>'+
+            '<table class="row_table" id="repair_search_result_table">'+
+            '<tr>' +
+            '<th style="width: 200px">Дата</th>' +
+            '<th style="width: 400px">Статус</th>' +
+            '</tr>';
+        for (let i = 0; i < arr.length; i++) {
+            dState = arr[i];
+            data += '<tr>' +
+                '<td>' + dState.date + '</td>' +
+                '<td>' + dState.state + '</td>' +
+                '</tr>';
+        }
+        data += '</table>';
+        document.getElementById('repair_search_result').innerHTML = '' + data;
+    }
+}

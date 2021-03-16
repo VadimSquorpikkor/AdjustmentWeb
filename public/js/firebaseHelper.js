@@ -4,6 +4,12 @@ const TABLE_REPAIRS = "repairs";
 const TABLE_NAMES = "dev_types";
 const TABLE_STATES = "states";
 const TABLE_REPAIR_STATES = "repair_states";
+const PARAM_INNER_SERIAL = "innerSerial";
+const PARAM_NAME = "name";
+const PARAM_SERIAL = "serial";
+const PARAM_STATE = "state";
+const ALL_UNITS = "Все устройства";
+const ALL_STATES = "Все статусы";
 
 /** Класс для устройства, или блока детектирования */
 class DUnit {
@@ -21,7 +27,7 @@ class DUnit {
 }
 
 /** Firestore data converter. Нужен для загрузки из БД объекта класса DUnit */
-var dUnitConverter = {
+let dUnitConverter = {
     toFirestore: function (dunit) {
         return {
             id: dunit.id,
@@ -37,6 +43,7 @@ var dUnitConverter = {
     }
 };
 
+/**Класс статусов. Содержит сам статус и его дату*/
 class DState {
     constructor(state, date) {
         this.state = state;
@@ -48,54 +55,101 @@ class DState {
     }
 }
 
-var dStateConverter = {
-    toFirestore: function (dstate) {
+/** Firestore data converter. Нужен для загрузки из БД объекта класса dState */
+let dStateConverter = {
+    toFirestore: function (dState) {
         return {
-            state: dstate.state,
-            date: dstate.date
+            state: dState.state,
+            date: dState.date
         };
     },
     fromFirestore: function (snapshot, options) {
         const data = snapshot.data(options);
         return new DState(data.state, data.date);
     }
-};
+}
 
 /** Загрузка всех юнитов из БД */
 function getAllUnits() {
-    let unit;
-    var arr = [];
-    DBASE.collection(TABLE_UNITS).withConverter(dUnitConverter)
-        .get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // Convert to City object
-            unit = doc.data();
-            // data = data + doc.data() + '<br>'; //просто стринг без объекта
-            arr.push(unit);
-        });
-        addDataRowToPage(arr);
-        // insertSpinnerByArray('name_spinner', unit_names);
-        // insertSpinnerByArray('states_spinner', states);
-    });
+    getAll(DBASE, TABLE_UNITS, dUnitConverter, addDataRowToPage);
 }
 
 /** Загрузка всех ремонтных юнитов из БД */
 function getAllRepairUnits() {
+    getAll(DBASE, TABLE_REPAIRS, dUnitConverter, addRepairDataRowToPage);
+}
+
+
+
+function getAllUnitsByParam(sp_name, sp_state) {
+    let name = getValueFromSpinner(sp_name);
+    let state = getValueFromSpinner(sp_state);
+    console.log(name+" "+state);
+    if (name === ALL_UNITS && state === ALL_STATES) {
+        getAllUnits();
+    } else if (name === ALL_UNITS) {
+        // getAllUnitsByOneParam(PARAM_STATE, state);
+        getAllByOneParam(DBASE, TABLE_UNITS, dUnitConverter, PARAM_STATE, state, addDataRowToPage);
+    } else if (state === ALL_STATES) {
+        // getAllUnitsByOneParam(PARAM_NAME, name);
+        getAllByOneParam(DBASE, TABLE_UNITS, dUnitConverter, PARAM_NAME, name, addDataRowToPage);
+    } else {
+        // getAllUnitsByTwoParam(PARAM_NAME, name, PARAM_STATE, state);
+        getAllByTwoParam(DBASE, TABLE_UNITS, dUnitConverter, PARAM_NAME, name, PARAM_STATE, state, addDataRowToPage);
+    }
+}
+
+/*function getAllUnitsByOneParam(param, value) {
+    getAllByOneParam(DBASE, TABLE_UNITS, dUnitConverter, param, value, addDataRowToPage)
+}*/
+
+/*function getAllUnitsByTwoParam(param_1, value_1, param_2, value_2) {
+    getAllByTwoParam(DBASE, TABLE_UNITS, dUnitConverter, param_1, value_1, param_2, value_2, addDataRowToPage)
+}*/
+
+/*function getAllUnitsByOneParam(param, name) {
     let unit;
     var arr = [];
-    DBASE.collection(TABLE_REPAIRS).withConverter(dUnitConverter)
+    DBASE.collection(TABLE_UNITS).withConverter(dUnitConverter)
+        .where(param, "==", name)
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // Convert to City object
             unit = doc.data();
             arr.push(unit);
         });
-        addRepairDataRowToPage(arr);
+        addDataRowToPage(arr);
     });
 }
 
+function getAllUnitsByTwoParam(param, value, param_2, value_2) {
+    let unit;
+    var arr = [];
+    DBASE.collection(TABLE_UNITS).withConverter(dUnitConverter)
+        .where(param, "==", value)
+        .where(param_2, "==", value_2)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // Convert to City object
+            unit = doc.data();
+            arr.push(unit);
+        });
+        addDataRowToPage(arr);
+    });
+}*/
+
+
+
+
+/*function insertToSpinner(arr) {
+    insertSpinnerByArray('selected_type', arr);
+    insertSpinnerByArray('search_names_spinner', arr);
+    arr.unshift('Все устройства');//для names_spinner в начало списка добавляю 'Все устройства'
+    insertSpinnerByArray('names_spinner', arr);
+}*/
+
 /** Загрузка всех статусов из БД */
-function getAllStates() {
+/*function getAllStates_old() {
     var arr = [];
     DBASE.collection(TABLE_STATES)
         .get().then((querySnapshot) => {
@@ -105,10 +159,26 @@ function getAllStates() {
         arr.unshift('Все статусы');// в начало списка добавлено 'Все статусы'
         insertSpinnerByArray('states_spinner', arr);
     });
+}*/
+
+function getAllStates() {
+    getAllObjectNames(DBASE, TABLE_STATES, function (arr) {
+        arr.unshift(ALL_STATES);// в начало списка добавлено 'Все статусы'
+        insertSpinnerByArray('states_spinner', arr);
+    });
+}
+
+function getAllNames() {
+    getAllObjectNames(DBASE, TABLE_NAMES, function (arr) {
+        insertSpinnerByArray('selected_type', arr);
+        insertSpinnerByArray('search_names_spinner', arr);
+        arr.unshift(ALL_UNITS);//для names_spinner в начало списка добавляю 'Все устройства'
+        insertSpinnerByArray('names_spinner', arr);
+    });
 }
 
 /** Загрузка всех имен из БД */
-function getAllNames() {
+/*function getAllNames_old() {
     var arr = [];
     DBASE.collection(TABLE_NAMES)
         .get().then((querySnapshot) => {
@@ -120,17 +190,9 @@ function getAllNames() {
         arr.unshift('Все устройства');//для names_spinner в начало списка добавляю 'Все устройства'
         insertSpinnerByArray('names_spinner', arr);
     });
-}
+}*/
 
-/** Загрузка данных в БД (не используется) */
-function load() {
-    DBASE.collection(TABLE_UNITS).doc("3509_98765").set({
-        innerSerial: "98765",
-        name: "3509",
-        serial: "55555",
-        state: "На сборке"
-    });
-}
+
 
 /**
  * Лисенер для изменений юнитов БД. При изменении/добавлении юнитов в БД данные на странице автоматически обновляются
@@ -184,7 +246,6 @@ DBASE.collection(TABLE_NAMES)
     .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
             console.log(change.doc.data());
-            console.log('*********РАБОТАЕТ!!!!!!');
             getAllNames();
         });
     });
@@ -203,8 +264,8 @@ function getRepairUnitByNameAndSerial(name, serial) {
     let unit;
     var arr = [];
     DBASE.collection(TABLE_REPAIRS).withConverter(dUnitConverter)
-        .where("name", '==', name)//, '&&', "serial", '==', serial
-        .where("serial", '==', serial)
+        .where(PARAM_NAME, '==', name)//, '&&', "serial", '==', serial
+        .where(PARAM_SERIAL, '==', serial)
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // Convert to City object
@@ -220,11 +281,6 @@ function getRepairUnitByNameAndSerial(name, serial) {
         else getCollectionOfDocument(TABLE_REPAIRS, TABLE_REPAIR_STATES, arr);
     });
 }
-
-function insertNothing(id) {
-    document.getElementById(id).innerHTML = '<span class="white_span">Не найдено</span>'
-}
-
 
 
 function getCollectionOfDocument(collection_1,  collection_2, unitArray) {
@@ -244,34 +300,4 @@ function getCollectionOfDocument(collection_1,  collection_2, unitArray) {
         });
 }
 
-function addCollectionOfDocumentToDiv(arr, unit) {
 
-    let data;
-    if (arr.length === 0) {
-        document.getElementById('repair_search_result').innerHTML =
-            '<h3>'+unit.name+' №' + unit.serial + '</h3>'+
-            '<span class="white_span">Статусов не найдено</span>';
-        //insertNothing('repair_search_result_table');
-        console.log('статусов не найдено');
-    } else {
-        let dState;
-        data =
-            '<h3>'+unit.name+' №' + unit.serial + '</h3>'+
-            '<table class="row_table" id="repair_search_result_table">'+
-            '<tr>' +
-            '<th style="width: 200px">Дата</th>' +
-            '<th style="width: 400px">Статус</th>' +
-            '</tr>';
-        for (let i = 0; i < arr.length; i++) {
-            dState = arr[i];
-            data += '<tr>' +
-                '<td>' + dState.date + '</td>' +
-                '<td>' + dState.state + '</td>' +
-                '</tr>';
-        }
-        data += '</table>';
-        document.getElementById('repair_search_result').innerHTML = '' + data;
-    }
-
-
-}
