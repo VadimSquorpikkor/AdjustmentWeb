@@ -34,7 +34,7 @@ DBASE.collection(TABLE_REPAIRS)
  * Лисенер для изменений списка статусов в БД. При изменении/добавлении статусов в БД данные в спиннере автоматически обновляются
  *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
  */
-DBASE.collection(TABLE_STATES)
+DBASE.collection(TABLE_SERIAL_STATES)
     .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
             console.log(change.doc.data());

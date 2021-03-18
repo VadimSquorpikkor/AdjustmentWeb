@@ -26,23 +26,25 @@ function getValueFromSpinner(id) {
 
 /**Таблица серийных устройств. Из массива данных формирует HTML таблицу и заполняет её данными из массива*/
 function addDataRowToPage(arr) {
-    let data = '<tr>' +
-        '<th>Имя</th>' +
-        '<th>Внутренний номер</th>' +
-        '<th>Серийный</th>' +
-        '<th>Статус</th>' +
-        '</tr>';
-    let unit;
-    for (let i = 0; i < arr.length; i++) {
-        unit = arr[i];
-        data += '<tr>' +
-            '<td>' + unit.name + '</td>' +
-            '<td>' + unit.innerSerial + '</td>' +
-            '<td>' + unit.serial + '</td>' +
-            '<td>' + unit.state + '</td>' +
+    if (document.getElementById('row_table') != null) {
+        let data = '<tr>' +
+            '<th>Имя</th>' +
+            '<th>Внутренний номер</th>' +
+            '<th>Серийный</th>' +
+            '<th>Статус</th>' +
             '</tr>';
+        let unit;
+        for (let i = 0; i < arr.length; i++) {
+            unit = arr[i];
+            data += '<tr>' +
+                '<td>' + unit.name + '</td>' +
+                '<td>' + unit.innerSerial + '</td>' +
+                '<td>' + unit.serial + '</td>' +
+                '<td>' + unit.state + '</td>' +
+                '</tr>';
+        }
+        document.getElementById('row_table').innerHTML = '' + data;
     }
-    document.getElementById('row_table').innerHTML = '' + data;
 }
 
 /**Таблица ремонтных устройств. Из массива данных формирует HTML таблицу и заполняет её данными из массива*/
@@ -93,8 +95,28 @@ function addCollectionOfDocumentToDiv(arr, unit) {
             '</tr>';
         for (let i = 0; i < arr.length; i++) {
             dState = arr[i];
+
+            // console.log('!1 '+new Date(dState.date).getDate()); //NaN
+            // console.log('!2 '+new Date(dState.date)); //Invalid Date
+            // console.log('!3 '+new Date(dState.date/1000000)); //Thu Jan 01 1970 03:01:03 GMT+0300 (Москва, стандартное время)
+            // console.log('!4 '+new Date(dState.date/1000)); //Thu Jan 01 1970 20:42:31 GMT+0300 (Москва, стандартное время)
+            // console.log('!5 '+dState.date); //063751644469.254000000
+            // console.log('!6 '+dState.date.date); //undefined
+            // console.log('!7 '+dState.date.dateTime); //undefined
+            // console.log('!9 '+dState.date); //063751644469.254000000
+            // console.log('!12 '+new Date(dState.date._seconds*1000)); //Invalid Date
+            // console.log('!11 '+dState.date.toDate().toDateString()); //Thu Mar 18 2021
+            // console.log('!12 '+dState.date.toDate().toLocaleTimeString('en-US')); //9:07:49 AM
+            // console.log('!13 '+dState.date.toDate().toLocaleDateString('en-US')); //3/18/2021
+            // console.log('!12 '+dState.date.toDate().toLocaleTimeString('ru-RU')); //09:07:49
+            // console.log('!14 '+dState.date.toDate().toLocaleDateString('ru-RU')); //18.03.2021
+            // console.log('!15 '+firebase.firestore.Timestamp.fromDate(new Date()).toDate()); //Thu Mar 18 2021 11:26:37 GMT+0300 (Москва, стандартное время)
+
+            let stateDate = dState.date.toDate().toLocaleDateString('ru-RU'); //Дата - 18.03.2021
+            let stateTime = dState.date.toDate().toLocaleTimeString('ru-RU'); //Время - 09:07:49
+
             data += '<tr>' +
-                '<td>' + dState.date + '</td>' +
+                '<td>' + stateDate + ' ' + stateTime + '</td>' +
                 '<td>' + dState.state + '</td>' +
                 '</tr>';
         }

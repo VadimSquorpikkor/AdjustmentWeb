@@ -1,15 +1,31 @@
+/**Имя базы данных*/
 const DBASE = firebase.firestore();
+/**------- Коллекции (таблицы) ---------------------------------------------------------------------------------------*/
+/**Коллекция серийных устройств*/
 const TABLE_UNITS = "units";
+/**Коллекция ремонтных устройств*/
 const TABLE_REPAIRS = "repairs";
+/**Коллекция имен для устройств*/
 const TABLE_NAMES = "dev_types";
-const TABLE_STATES = "states";
+/**Коллекция названий статусов для серийных устройств*/
+const TABLE_SERIAL_STATES = "serial_states";
+/**Коллекция названий статусов для ремонтных устройств*/
 const TABLE_REPAIR_STATES = "repair_states";
+/**Название коллекции статусов, которая внутри каждого устройства (и ремонтного, и серийного)*/
+const TABLE_INNER_STATES = "states";
+/**------- Параметры -------------------------------------------------------------------------------------------------*/
+/**Внутренний номер устройства*/
 const PARAM_INNER_SERIAL = "innerSerial";
+/**Имя (название) устройства*/
 const PARAM_NAME = "name";
+/**Серийный номер устройства*/
 const PARAM_SERIAL = "serial";
+/**Текущий статус устройства (нужен ли? или просто брать последний статус из коллекции статусов)*/
 const PARAM_STATE = "state";
+/**------- Другое ----------------------------------------------------------------------------------------------------*/
 const ALL_UNITS = "Все устройства";
 const ALL_STATES = "Все статусы";
+const REPAIR_UNIT = "Ремонт";
 
 /** Класс для устройства, или блока детектирования */
 class DUnit {
@@ -101,7 +117,7 @@ function getAllUnitsByParam(sp_name, sp_state) {
 
 /** Загрузка всех статусов из БД */
 function getAllStates() {
-    getAllObjectNames(DBASE, TABLE_STATES, function (arr) {
+    getAllObjectNames(DBASE, TABLE_SERIAL_STATES, function (arr) {
         arr.unshift(ALL_STATES);// в начало списка добавлено 'Все статусы'
         insertSpinnerByArray('states_spinner', arr);
     });
@@ -110,10 +126,19 @@ function getAllStates() {
 /** Загрузка всех имен из БД */
 function getAllNames() {
     getAllObjectNames(DBASE, TABLE_NAMES, function (arr) {
+        //Добавил ещё массив. В него копирую исходный массив. Теперь у меня 2 независимых массива
+        //Это нужно, так как для 'names_spinner' и для 'selected_type_for_generator' нужны немного разные массивы
+        //по составу (различаются первым элементом)
+        let arr2 = [];
+        for (let i = 0; i < arr.length; i++) {
+            arr2.push(arr[i]);
+        }
         insertSpinnerByArray('selected_type', arr);
         insertSpinnerByArray('search_names_spinner', arr);
         arr.unshift(ALL_UNITS);//для names_spinner в начало списка добавляю 'Все устройства'
         insertSpinnerByArray('names_spinner', arr);
+        arr2.unshift(REPAIR_UNIT);//для selected_type_for_generator в начало списка добавляю 'Ремонт'
+        insertSpinnerByArray('selected_type_for_generator', arr2);
     });
 }
 
@@ -134,7 +159,7 @@ function getRepairUnitByNameAndSerial(name, serial) {
         else {
             let dUnit = arr[0];
             let document = 'r_'+dUnit.id;
-            getTableOfTable(DBASE, document, TABLE_REPAIRS, TABLE_REPAIR_STATES, dStateConverter, addCollectionOfDocumentToDiv, dUnit);
+            getTableOfTable(DBASE, document, TABLE_REPAIRS, TABLE_INNER_STATES, dStateConverter, addCollectionOfDocumentToDiv, dUnit);
         }
     });
 }

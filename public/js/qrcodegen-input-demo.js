@@ -80,7 +80,7 @@ var app;
         let str = getElem('security_key').value;
         setSecurityKey(str);
 
-        var sel = getElem("selected_type");
+        var sel = getElem("selected_type_for_generator");
         var s = sel.options[sel.selectedIndex].text;
 
         // let input = getElem("selected_type").options(getElem("selected_type").selectedIndex).value + " " + getElem("text-input").value;
