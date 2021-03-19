@@ -74,10 +74,10 @@ function getAllObjectNames(database, table, func) {
 }*/
 
 /**Загрузка коллекции, находящейся внутри другой коллекции*/
-function getTableOfTable(database, document_name, collection_1, collection_2, converter, func, obj) {
+function getTableOfTable(database, document_name, collection_1, collection_2, converter, func, obj, orderBy) {
     let dState;
     let arr = [];
-    database.collection(collection_1).doc(document_name).collection(collection_2).withConverter(converter)
+    database.collection(collection_1).doc(document_name).collection(collection_2).orderBy(orderBy).withConverter(converter)
         .get()
         .then(querySnapshot => {
             querySnapshot.forEach(doc => {

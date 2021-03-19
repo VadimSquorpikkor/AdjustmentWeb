@@ -159,7 +159,7 @@ function getRepairUnitByNameAndSerial(name, serial) {
         else {
             let dUnit = arr[0];
             let document = 'r_'+dUnit.id;
-            getTableOfTable(DBASE, document, TABLE_REPAIRS, TABLE_INNER_STATES, dStateConverter, addCollectionOfDocumentToDiv, dUnit);
+            getTableOfTable(DBASE, document, TABLE_REPAIRS, TABLE_INNER_STATES, dStateConverter, addCollectionOfDocumentToDiv, dUnit, "date");
         }
     });
 }
