@@ -33,6 +33,25 @@ function getAllByOneParam(database, table, converter, param, value, func) {
     });
 }
 
+/**Получить все объекты из коллекции, совпадающие по одному параметру*/
+function getAllByOneParamOrdered(database, table, converter, param, value, func, obj, orderBy) {
+    let dState;
+    let arr = [];
+    database.collection(table)
+        .withConverter(converter)
+        .where(param, "==", value)
+        .orderBy(orderBy)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // Convert to object
+            dState = doc.data();
+            arr.push(dState);
+        });
+        console.log(arr.length);
+        func(arr, obj);
+    });
+}
+
 /**Получить все объекты из коллекции, совпадающие по двум параметрам*/
 function getAllByTwoParam(database, table, converter, param_1, value_1, param_2, value_2, func) {
     let obj;
@@ -62,6 +81,20 @@ function getAllObjectNames(database, table, func) {
     });
 }
 
+function getStates(type, location, func) {
+    let arr = [];
+    DBASE.collection(TABLE_PROFILES)
+        .where(PROFILE_LOCATION, "==", location)
+        .where(PROFILE_TYPE, 'in', [PROF_TYPE_ANY, type])
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            arr.push(doc.data().name);
+        });
+        func(arr);
+    });
+}
+
+
 /**Загрузка в БД. Не используется*/
 /*function load() {
     const db = firebase.firestore();
@@ -73,18 +106,16 @@ function getAllObjectNames(database, table, func) {
     });
 }*/
 
-/**Загрузка коллекции, находящейся внутри другой коллекции*/
-function getTableOfTable(database, document_name, collection_1, collection_2, converter, func, obj, orderBy) {
-    let dState;
-    let arr = [];
-    database.collection(collection_1).doc(document_name).collection(collection_2).orderBy(orderBy).withConverter(converter)
-        .get()
-        .then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                //console.log(doc.id, " => ", doc.data());
-                dState = doc.data();
-                arr.push(dState);
-            });
-            func(arr, obj);
-        });
+function valueOf(id) {
+    return document.getElementById(id).value
+}
+
+/**Загрузка в БД из главной страницы (там всё закомментировано)*/
+function load2(table, doc, v1, v2, v3) {
+    const db = firebase.firestore();
+    db.collection(valueOf(table)).doc(valueOf(doc)).set({
+        name : valueOf(v1),
+        location : valueOf(v2),
+        type : valueOf(v3)
+    });
 }

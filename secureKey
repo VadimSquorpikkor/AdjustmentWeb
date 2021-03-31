@@ -1,3 +1,8 @@
 128021403601110870740803301170480158
 
 cd D:\GitHub\AdjustmentWeb
+
+firebase firestore:indexes
+
+firebase firestore:indexes > firestore.indexes.json
+
