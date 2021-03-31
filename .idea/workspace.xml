@@ -3,16 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firestore.indexes.json" beforeDir="false" afterPath="$PROJECT_DIR$/firestore.indexes.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firestore.rules" beforeDir="false" afterPath="$PROJECT_DIR$/firestore.rules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebaseHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebaseHelper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebase_low_level.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/listeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/listeners.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/repair.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/repair.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/secureKey" beforeDir="false" afterPath="$PROJECT_DIR$/secureKey" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +141,7 @@
       <workItem from="1616047759390" duration="12435000" />
       <workItem from="1616133674499" duration="6607000" />
       <workItem from="1617171335074" duration="325000" />
-      <workItem from="1617174781207" duration="10879000" />
+      <workItem from="1617174781207" duration="14165000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -226,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616057175830</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="1.13 - 31/03/21&#10;1. Добавлены профили — монтаж, сборка, регулировка, приемка, градуировка.&#10;2. Вместо вложенных в каждый unit списков статусов теперь для ВСЕХ статусов используется ОДНА коллекция&#10;3. Глобально была переделана БД, следовательно, были переделаны многие методы  &#10;4. Добавил форму для загрузки данных в БД — надоело вводить вручную (load2())">
+      <created>1617192430162</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1617192430162</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -284,6 +285,7 @@
     <MESSAGE value="1.09 - 16/03/21&#10;1. Глобальный рефакторинг. Методы переделаны. Все (почти) что напрямую работают с БД перенесены в firebaseHelperNew.js, все лисенеры перенесены в listeners.js&#10;2. На главной странице спиннеры теперь работают — фильтрация по статусам и по именам. Добавлены соответствующие методы" />
     <MESSAGE value="1.10 - 16/03/21&#10;1. Рефакторинг. Продолжение" />
     <MESSAGE value="1.11 - 18/03/21&#10;1. Изменения в названиях таблиц (навел порядок) — и в AdjustmentWeb, и в FireStore &#10;2. Теперь при поиске прибора (в ремонтных) в таблице статусов выводится и статусы и время добавления статуса (дата и время)&#10;3. Исправлены мелкие ошибки" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.11 - 18/03/21&#10;1. Изменения в названиях таблиц (навел порядок) — и в AdjustmentWeb, и в FireStore &#10;2. Теперь при поиске прибора (в ремонтных) в таблице статусов выводится и статусы и время добавления статуса (дата и время)&#10;3. Исправлены мелкие ошибки" />
+    <MESSAGE value="1.13 - 31/03/21&#10;1. Добавлены профили — монтаж, сборка, регулировка, приемка, градуировка.&#10;2. Вместо вложенных в каждый unit списков статусов теперь для ВСЕХ статусов используется ОДНА коллекция&#10;3. Глобально была переделана БД, следовательно, были переделаны многие методы  &#10;4. Добавил форму для загрузки данных в БД — надоело вводить вручную (load2())" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.13 - 31/03/21&#10;1. Добавлены профили — монтаж, сборка, регулировка, приемка, градуировка.&#10;2. Вместо вложенных в каждый unit списков статусов теперь для ВСЕХ статусов используется ОДНА коллекция&#10;3. Глобально была переделана БД, следовательно, были переделаны многие методы  &#10;4. Добавил форму для загрузки данных в БД — надоело вводить вручную (load2())" />
   </component>
 </project>

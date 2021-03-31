@@ -32,6 +32,8 @@ function addDataRowToPage(arr) {
             '<th>Внутренний номер</th>' +
             '<th>Серийный</th>' +
             '<th>Статус</th>' +
+            '<th>Локация</th>' +
+            '<th>Описание</th>' +
             '</tr>';
         let unit;
         for (let i = 0; i < arr.length; i++) {
@@ -41,6 +43,8 @@ function addDataRowToPage(arr) {
                 '<td>' + unit.innerSerial + '</td>' +
                 '<td>' + unit.serial + '</td>' +
                 '<td>' + unit.state + '</td>' +
+                '<td>' + getLocationName(unit.location) + '</td>' +
+                '<td>' + unit.description + '</td>' +
                 '</tr>';
         }
         document.getElementById('row_table').innerHTML = '' + data;
@@ -54,6 +58,9 @@ function addRepairDataRowToPage(arr) {
             '<th>ID</th>' +
             '<th>Имя</th>' +
             '<th>Серийный</th>' +
+            '<th>Статус</th>' +
+            '<th>Локация</th>' +
+            '<th>Описание</th>' +
             '</tr>';
         let unit;
         for (let i = 0; i < arr.length; i++) {
@@ -62,10 +69,26 @@ function addRepairDataRowToPage(arr) {
                 '<td>' + unit.id + '</td>' +
                 '<td>' + unit.name + '</td>' +
                 '<td>' + unit.serial + '</td>' +
+                '<td>' + unit.state + '</td>' +
+                '<td>' + getLocationName(unit.location) + '</td>' +
+                '<td>' + unit.description + '</td>' +
                 '</tr>';
         }
         document.getElementById('repair_table').innerHTML = '' + data;
     }
+}
+
+function getLocationName(text) {
+    let name;
+    switch (text) {
+        case PROFILE_ADJUSTMENT: name = "Регулировка"; break;
+        case PROFILE_ASSEMBLY: name = "Сборка"; break;
+        case PROFILE_GRADUATION: name = "Градуировка"; break;
+        case PROFILE_SOLDERING: name = "Монтаж"; break;
+        case PROFILE_REPAIR_AREA: name = "Уч. ремонта"; break;
+        default: name = " — ";
+    }
+    return name;
 }
 
 /**Вставляет <SPAN> "Не найдено" в выбранный по id элемент

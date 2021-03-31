@@ -112,10 +112,24 @@ function valueOf(id) {
 
 /**Загрузка в БД из главной страницы (там всё закомментировано)*/
 function load2(table, doc, v1, v2, v3) {
-    const db = firebase.firestore();
-    db.collection(valueOf(table)).doc(valueOf(doc)).set({
-        name : valueOf(v1),
-        location : valueOf(v2),
-        type : valueOf(v3)
-    });
+
+    if (valueOf(doc) === '') {
+        console.log('EMPTY');
+        const db = firebase.firestore();
+        db.collection(valueOf(table)).doc().set({
+            name: valueOf(v1),
+            location: valueOf(v2),
+            type: valueOf(v3)
+        });
+    } else {
+        const db = firebase.firestore();
+        db.collection(valueOf(table)).doc(valueOf(doc)).set({
+            name : valueOf(v1),
+            location : valueOf(v2),
+            type : valueOf(v3)
+        });
+    }
+
+
+
 }

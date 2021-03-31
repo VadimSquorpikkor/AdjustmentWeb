@@ -41,16 +41,18 @@ const REPAIR_UNIT = "Ремонт";
 
 /** Класс для устройства, или блока детектирования */
 class DUnit {
-    constructor(id, name, innerSerial, serial, state) {
+    constructor(id, name, innerSerial, serial, state, location, description) {
         this.id = id;
         this.name = name;
         this.innerSerial = innerSerial;
         this.serial = serial;
         this.state = state;
+        this.location = location;
+        this.description = description;
     }
 
     toString() {
-        return this.id + ', ' + this.name + ', ' + this.innerSerial + ', ' + this.serial + ', ' + this.state;
+        return this.id + ', ' + this.name + ', ' + this.innerSerial + ', ' + this.serial + ', ' + this.state + ', ' + this.location + ', ' + this.description;
     }
 }
 
@@ -62,24 +64,28 @@ let dUnitConverter = {
             name: dunit.name,
             innerSerial: dunit.innerSerial,
             serial: dunit.serial,
-            state: dunit.state
+            state: dunit.state,
+            location: dunit.location,
+            description: dunit.description
         };
     },
     fromFirestore: function (snapshot, options) {
         const data = snapshot.data(options);
-        return new DUnit(data.id, data.name, data.innerSerial, data.serial, data.state);
+        return new DUnit(data.id, data.name, data.innerSerial, data.serial, data.state, data.location, data.description);
     }
 };
 
 /**Класс статусов. Содержит сам статус и его дату*/
 class DState {
-    constructor(state, date) {
+    constructor(state, date, description, location) {
         this.state = state;
         this.date = date;
+        this.description = description;
+        this.location = location;
     }
 
     toString() {
-        return this.state + ', ' + this.date;
+        return this.state + ', ' + this.date + ', ' + this.description + ', ' + this.location;
     }
 }
 
@@ -88,12 +94,14 @@ let dStateConverter = {
     toFirestore: function (dState) {
         return {
             state: dState.state,
-            date: dState.date
+            date: dState.date,
+            description: dState.description,
+            location: dState.location
         };
     },
     fromFirestore: function (snapshot, options) {
         const data = snapshot.data(options);
-        return new DState(data.state, data.date);
+        return new DState(data.state, data.date, data.description, data.location);
     }
 }
 
