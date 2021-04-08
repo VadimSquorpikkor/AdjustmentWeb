@@ -6,3 +6,4 @@ firebase firestore:indexes
 
 firebase firestore:indexes > firestore.indexes.json
 
+firebase deploy

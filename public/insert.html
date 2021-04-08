@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdjustmentWeb</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.2.9/firebase-app.js"></script>
+    <script defer src="/__/firebase/8.2.9/firebase-firestore.js"></script>
+      to avoid connecting the SDK to running emulators. -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script defer src="js/app.js"></script>
+    <script defer src="js/firebaseHelper.js"></script>
+    <script defer src="js/firebase_low_level.js"></script>
+    <script defer src="js/listeners.js"></script>
+
+</head>
+
+<body class="body">
+
+<br>
+
+<div class="main_div" id="main_div">
+
+    <a href="index.html">Главная</a>
+    <a href="repair.html">Ремонт</a>
+    <a href="qr_page.html">QR-генератор</a>
+
+    <h1>AdjustmentInsertData</h1>
+    <hr>
+    <h3>States</h3>
+    <select id="v2_input" style="width:170px">
+        <option value="adjustment">Регулировка</option>
+        <option value="assembly">Сборка</option>
+        <option value="graduation">Градуировка</option>
+        <option value="repair_area">Уч. ремонта</option>
+        <option value="soldering">Монтаж</option>
+    </select><br>
+    <select id="v3_input" style="width:170px">
+        <option value="serial_type">serial_type</option>
+        <option value="repair_type">repair_type</option>
+        <option value="any_type">any_type</option>
+    </select><br>
+    <input type="text" placeholder="id" id="v4_input" style="width:150px"><br>
+    <input type="text" placeholder="имя" id="v1_input" style="width:150px"><br>
+    <input type="button" onclick="loadStates('v1_input', 'v2_input', 'v3_input', 'v4_input')" value="Добавить">
+
+    <hr>
+    <h3>Devises</h3>
+    <input type="text" placeholder="id" id="dev_v1" style="width:150px"><br>
+    <input type="text" placeholder="name" id="dev_v2" style="width:150px"><br>
+    <input type="text" placeholder="type" id="dev_v3" style="width:150px"><br>
+    <input type="button" onclick="loadDevices('dev_v1', 'dev_v2', 'dev_v3')" value="Добавить">
+
+    <hr>
+    <h3>Employees</h3>
+    <input type="text" placeholder="id" id="emp_v1" style="width:150px"><br>
+    <input type="text" placeholder="name" id="emp_v2" style="width:150px"><br>
+    <input type="text" placeholder="email" id="emp_v3" style="width:150px"><br>
+    <select id="emp_v4" style="width:170px">
+        <option value="adjustment">Регулировка</option>
+        <option value="assembly">Сборка</option>
+        <option value="graduation">Градуировка</option>
+        <option value="repair_area">Уч. ремонта</option>
+        <option value="soldering">Монтаж</option>
+    </select><br>
+    <input type="button" onclick="loadEmployees('emp_v1', 'emp_v2', 'emp_v3', 'emp_v4')" value="Добавить">
+
+    <hr>
+    <h3>Locations</h3>
+    <input type="text" placeholder="id" id="loc_v1" style="width:150px"><br>
+    <input type="text" placeholder="name" id="loc_v2" style="width:150px"><br>
+    <input type="button" onclick="loadLocations('loc_v1', 'loc_v2')" value="Добавить">
+
+    <hr>
+
+</div>
+</body>
+</html>

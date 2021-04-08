@@ -27,7 +27,7 @@
     margin-top: 20px;
     /*margin-right: auto;*/
     box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.23);
-    padding: 3px;
+    padding: 2px;
 }
 
 .row_table tr {
@@ -35,7 +35,10 @@
 }
 
 .row_table td {
-    background: darkseagreen;
+    /*background: darkseagreen;*/
+    background: #666666;
+    /*background: #919191;*/
+    /*background: grey;*/
     color: #ECEFF1;
     /*color: darkorange;*/
     width: 150px;

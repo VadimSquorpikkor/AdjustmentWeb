@@ -95,41 +95,42 @@ function getStates(type, location, func) {
 }
 
 
-/**Загрузка в БД. Не используется*/
-/*function load() {
-    const db = firebase.firestore();
-    db.collection("units").doc("3509_98765").set({
-        innerSerial: "98765",
-        name: "3509",
-        serial: "55555",
-        state: "На сборке"
-    });
-}*/
-
 function valueOf(id) {
     return document.getElementById(id).value
 }
 
+const db = firebase.firestore();
 /**Загрузка в БД из главной страницы (там всё закомментировано)*/
-function load2(table, doc, v1, v2, v3) {
 
-    if (valueOf(doc) === '') {
-        console.log('EMPTY');
-        const db = firebase.firestore();
-        db.collection(valueOf(table)).doc().set({
-            name: valueOf(v1),
-            location: valueOf(v2),
-            type: valueOf(v3)
+/*function loadStates(table, name, location, type, id) {
+        db.collection('states').doc(valueOf(id)).set({
+            name: valueOf(name),
+            location_id: valueOf(location),
+            type_id: valueOf(type),
+            id: valueOf(id)
         });
-    } else {
-        const db = firebase.firestore();
-        db.collection(valueOf(table)).doc(valueOf(doc)).set({
-            name : valueOf(v1),
-            location : valueOf(v2),
-            type : valueOf(v3)
-        });
-    }
-
-
-
 }
+
+function loadDevices(id, name, type) {
+    db.collection('devices').doc(valueOf(id)).set({
+        name: valueOf(name),
+        type: valueOf(type),
+        id: valueOf(id)
+    });
+}
+
+function loadEmployees(id, name, email, location) {
+    db.collection('employees').doc(valueOf(id)).set({
+        id: valueOf(id),
+        name: valueOf(name),
+        email: valueOf(email),
+        location_id: valueOf(location)
+    });
+}
+
+function loadLocations(id, name) {
+    db.collection('locations').doc(valueOf(id)).set({
+        id: valueOf(id),
+        name: valueOf(name)
+    });
+}*/

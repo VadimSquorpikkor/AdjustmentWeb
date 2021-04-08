@@ -5,17 +5,17 @@
       "queryScope": "COLLECTION_GROUP",
       "fields": [
         {
-          "fieldPath": "unit_id",
+          "fieldPath": "location_id",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "date",
+          "fieldPath": "type_id",
           "order": "ASCENDING"
         }
       ]
     },
     {
-      "collectionGroup": "states",
+      "collectionGroup": "events",
       "queryScope": "COLLECTION",
       "fields": [
         {
