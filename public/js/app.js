@@ -1,10 +1,4 @@
-
-/** Массив имен для динамического спиннера выбора имени устройства. Потом массив будет формироваться динамически из БД*/
-let unit_names = ['Все устройства', 'БДКГ-02', 'АТ2503', 'АТ6130']; //уже не используется
-/** Массив статусов для динамического спиннера выбора статусов устройства. Потом массив будет формироваться динамически из БД*/
-let all_states = ['Все статусы', 'На сборке', 'На регулировке', 'На линейке', 'Ещё что-то']; //уже не используется
-
-/** Из массива названий формирует Спиннер
+/** Из массива названий формирует строки для Спиннера
  * @param name - id пустого спиннера, в который будут добавлены данные
  * @param arr  - массив данных, которыми будет заполняться спиннер
  */
@@ -25,7 +19,7 @@ function getValueFromSpinner(id) {
 }
 
 /**Таблица серийных устройств. Из массива данных формирует HTML таблицу и заполняет её данными из массива*/
-function addDataRowToPage(arr) {
+function addSerialDataRowToPage(arr) {
     if (arr.length === 0) insertNothing('row_table');
     else if (document.getElementById('row_table') != null) {
 
@@ -36,7 +30,6 @@ function addDataRowToPage(arr) {
             '<th>Серийный</th>' +
             '<th>Статус</th>' +
             '<th>Локация</th>' +
-            '<th>Описание</th>' +
             '</tr>';
         let unit;
         for (let i = 0; i < arr.length; i++) {
@@ -48,7 +41,6 @@ function addDataRowToPage(arr) {
                 '<td>' + unit.serial + '</td>' +
                 '<td>' + unit.state_id + '</td>' +
                 '<td>' + getLocationName(unit.location_id) + '</td>' +
-                '<td>' + unit.description + '</td>' +
                 '</tr>'
             ;
         }
@@ -84,17 +76,9 @@ function addRepairDataRowToPage(arr) {
     }
 }
 
-function getLocationName(text) {
-    let name;
-    switch (text) {
-        case PROFILE_ADJUSTMENT: name = "Регулировка"; break;
-        case PROFILE_ASSEMBLY: name = "Сборка"; break;
-        case PROFILE_GRADUATION: name = "Градуировка"; break;
-        case PROFILE_SOLDERING: name = "Монтаж"; break;
-        case PROFILE_REPAIR_AREA: name = "Уч. ремонта"; break;
-        default: name = " — ";
-    }
-    return name;
+/**По id локации возвращает её имя. (Данные предварительно загружены лисенером из БД в Map)*/
+function getLocationName(location_id) {
+    return locationMap.get(location_id);
 }
 
 /**Вставляет <SPAN> "Не найдено" в выбранный по id элемент
@@ -102,21 +86,20 @@ function getLocationName(text) {
  * @param id - id элемента, в который будет вставлено "Не найдено"
  */
 function insertNothing(id) {
-    document.getElementById(id).innerHTML = '<span class="white_span">Не найдено</span>'
+    document.getElementById(id).innerHTML = '<span class="white_span">'+FOUND_NOTHING+'</span>'
 }
 
+/**Формирует таблицу событий для выбранного юнита*/
 function addCollectionOfDocumentToDiv(arr, unit) {
     let data;
     if (arr.length === 0) {
         document.getElementById('repair_search_result').innerHTML =
             '<h3>'+unit.name+' №' + unit.serial + '</h3>'+
             '<span class="white_span">Статусов не найдено</span>';
-        //insertNothing('repair_search_result_table');
-        console.log('статусов не найдено');
     } else {
         let dState;
         data =
-            '<h3>'+unit.name+' №' + unit.serial + '</h3>'+
+            //'<h3>'+unit.device_id+' №' + unit.serial + '</h3>'+
             '<table class="row_table" id="repair_search_result_table">'+
             '<tr>' +
             '<th style="width: 200px">Дата</th>' +
@@ -146,7 +129,7 @@ function addCollectionOfDocumentToDiv(arr, unit) {
 
             data += '<tr>' +
                 '<td>' + stateDate + ' ' + stateTime + '</td>' +
-                '<td>' + dState.state + '</td>' +
+                '<td>' + dState.state_id + '</td>' +
                 '</tr>';
         }
         data += '</table>';

@@ -52,6 +52,28 @@ function getAllByOneParamOrdered(database, table, converter, param, value, func,
     });
 }
 
+function getAllEventsByUnitId(param, value, func, obj, orderBy){
+    let arr = [];
+    DBASE.collection(TABLE_EVENTS)
+        .where(param, "==", value)
+        .orderBy(orderBy)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            let event = new DEvent(doc.data().date, doc.data().description, doc.data().location_id, doc.data().state_id, doc.data().unit_id);
+            arr.push(event);
+        });
+        console.log(arr.length);
+        func(arr, obj);
+    });
+}
+
+/*function getName(table, id) {
+    DBASE.collection(table).doc(id).get().then((doc) => {
+        if (doc.exists) return  doc.data().name;
+        else return "not found";
+    });
+}*/
+
 /**Получить все объекты из коллекции, совпадающие по двум параметрам*/
 function getAllByTwoParam(database, table, converter, param_1, value_1, param_2, value_2, func) {
     let obj;
@@ -124,13 +146,38 @@ function getStates(type, func) {
     });
 }
 
+function getAllLocations(func) {
+    let map = new Map();
+    DBASE.collection(TABLE_LOCATIONS)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            map.set(doc.data().id, doc.data().name);
+            console.log(doc.data().id+' '+doc.data().name);
+        });
+        func(map);
+    });
+}
+
+function getAllEmployees(func) {
+    let map = new Map();
+    DBASE.collection(TABLE_EMPLOYEES)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            map.set(doc.data().id, doc.data().name);
+            // console.log(doc.data().id+' '+doc.data().name);
+            // console.log(getName(TABLE_EMPLOYEES, '1'));
+        });
+        func(map);
+    });
+}
+
 
 function valueOf(id) {
     return document.getElementById(id).value
 }
 
 const db = firebase.firestore();
-/**Загрузка в БД из главной страницы (там всё закомментировано)*/
+/**Загрузка в БД из insert.html (там всё закомментировано)*/
 
 /*function loadStates(table, name, location, type, id) {
         db.collection('states').doc(valueOf(id)).set({

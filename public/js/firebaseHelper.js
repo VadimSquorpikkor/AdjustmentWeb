@@ -1,21 +1,10 @@
-/**-------------------------------------------------------------------------------------------------------------------*/
-const PROFILE_ADJUSTMENT = "adjustment";
-const PROFILE_ASSEMBLY = "assembly";
-const PROFILE_GRADUATION = "graduation";
-const PROFILE_SOLDERING = "soldering";
-const PROFILE_REPAIR_AREA = "repair_area";
-
-//**********************************************************************************************************************
 /**Имя базы данных*/
 const DBASE = firebase.firestore();
-
 
 const ALL_UNITS = "Все устройства";
 const ALL_STATES = "Все статусы";
 const REPAIR_UNIT = "Ремонт";
-
-
-//**********************************************************************************************************************
+const FOUND_NOTHING = "Ничего не найдено";
 
 //Новые const для новой БД:
 const TABLE_UNITS = "units";
@@ -60,16 +49,8 @@ const TYPE_ANY = "any_type";
 const TYPE_REPAIR = "repair_type";
 const TYPE_SERIAL = "serial_type";
 
-const EMPTY_LOCATION_ID = "empty_location_id";
-const EMPTY_LOCATION_NAME = "Локация не найдена";
-//--------------------------------------------------------------------------------------------------
 const SERIAL_TYPE = "serial_type";
 const REPAIR_TYPE = "repair_type";
-
-
-//**********************************************************************************************************************
-
-
 
 /** Класс для устройства, или блока детектирования */
 class DUnit {
@@ -155,9 +136,17 @@ let dEventConverter = {
     }
 }
 
+//**********************************************************************************************************************
+
+/**Map для локаций. Лисенер отслеживает изменения в БД для локаций и при изменениях обновляет locationMap*/
+let locationMap = new Map();
+
+/**Map для сотрудников. Лисенер отслеживает изменения в БД для сотрудников и при изменениях обновляет locationMap*/
+let employeesMap = new Map();
+
 /** Загрузка всех юнитов из БД */
 function getAllSerialUnits() {
-    getAllByOneParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_TYPE, SERIAL_TYPE, addDataRowToPage);
+    getAllByOneParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_TYPE, SERIAL_TYPE, addSerialDataRowToPage);
 }
 
 /** Загрузка всех ремонтных юнитов из БД */
@@ -187,11 +176,11 @@ function getAllSerialUnitsByParam(sp_name, sp_state) {
     if (name === ALL_UNITS && state === ALL_STATES) {
         getAllSerialUnits();
     } else if (name === ALL_UNITS) {
-        getAllUnitsByOneParam(SERIAL_TYPE, UNIT_STATE, state, addDataRowToPage);
+        getAllUnitsByOneParam(SERIAL_TYPE, UNIT_STATE, state, addSerialDataRowToPage);
     } else if (state === ALL_STATES) {
-        getAllUnitsByOneParam(SERIAL_TYPE, UNIT_DEVICE, name, addDataRowToPage);
+        getAllUnitsByOneParam(SERIAL_TYPE, UNIT_DEVICE, name, addSerialDataRowToPage);
     } else {
-        getAllUnitsByTwoParam(SERIAL_TYPE, UNIT_DEVICE, name, UNIT_STATE, state, addDataRowToPage);
+        getAllUnitsByTwoParam(SERIAL_TYPE, UNIT_DEVICE, name, UNIT_STATE, state, addSerialDataRowToPage);
     }
 }
 
@@ -244,25 +233,35 @@ function getAllDeviceNames() {
     });
 }
 
+function getLocations() {
+    getAllLocations(function (map) {
+        locationMap = map;
+    });
+}
+
+function getEmployees() {
+    getAllEmployees(function (map) {
+        employeesMap = map;
+    });
+}
+
 /**Обертка для getRepairUnitByNameAndSerial. Получает на вход ID элементов, берет из них данные и вызывает
  * getRepairUnitByNameAndSerial используя эти данные */
 function getRepairUnit(nameId, serialId) {
     let name = getValueFromSpinner(nameId);
     let serial = document.getElementById(serialId).value;
-
     getRepairUnitByNameAndSerial(name, serial);
 }
 
 /**По имени и серийному номеру ремонтного прибора получает список событий (статусов) этого прибора и формирует из этих
  * данных DIV с таблицей статусов */
 function getRepairUnitByNameAndSerial(name, serial) {
-    // getAllByTwoParam(DBASE, TABLE_REPAIRS, dUnitConverter, PARAM_NAME, name, PARAM_SERIAL, serial, function (arr) {
-    // getAllByThreeParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_TYPE, REPAIR_TYPE, UNIT_DEVICE, name, UNIT_SERIAL, serial, function (arr) {
     getAllUnitsByTwoParam(REPAIR_TYPE, UNIT_DEVICE, name, UNIT_SERIAL, serial, function (arr) {
         if (arr.length === 0) insertNothing('repair_search_result');
         else {
             let dUnit = arr[0];
-            getAllByOneParamOrdered(DBASE, TABLE_EVENTS, dEventConverter, EVENT_UNIT, dUnit.id, addCollectionOfDocumentToDiv, dUnit, EVENT_DATE);
+            // getAllByOneParamOrdered(DBASE, TABLE_EVENTS, dEventConverter, EVENT_UNIT, dUnit.id, addCollectionOfDocumentToDiv, dUnit, EVENT_DATE);
+            getAllEventsByUnitId(EVENT_UNIT, dUnit.id, addCollectionOfDocumentToDiv, dUnit, EVENT_DATE);
         }
     });
 }

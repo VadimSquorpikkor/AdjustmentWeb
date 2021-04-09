@@ -51,3 +51,27 @@ DBASE.collection(TABLE_DEVICES)
             getAllDeviceNames();
         });
     });
+
+/**
+ * Лисенер для изменений списка локаций в БД. При изменении/добавлении локаций в БД данные автоматически обновляются
+ *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
+ */
+DBASE.collection(TABLE_LOCATIONS)
+    .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            console.log(change.doc.data());
+            getLocations();
+        });
+    });
+
+/**
+ * Лисенер для изменений списка сотрудников в БД. При изменении/добавлении сотрудников в БД данные автоматически обновляются
+ *  БЕЗ ПЕРЕЗАГРУЗКИ страницы
+ */
+DBASE.collection(TABLE_EMPLOYEES)
+    .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            console.log(change.doc.data());
+            getEmployees();
+        });
+    });
