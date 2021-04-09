@@ -35,7 +35,6 @@
 
 <body class="body">
 
-<br>
 <a id="output_a"></a>
 
 <div class="main_div" id="main_div">
@@ -47,12 +46,12 @@
     <h1>AdjustmentWeb</h1>
     <h3>База данных УРиР</h3>
 
-    <select id="names_spinner" onchange="getAllUnitsByParam('names_spinner', 'serial_states_spinner')"></select>
-    <select id="serial_states_spinner" onchange="getAllUnitsByParam('names_spinner', 'serial_states_spinner')"></select>
+    <select id="names_spinner" onchange="getAllSerialUnitsByParam('names_spinner', 'serial_states_spinner')"></select>
+    <select id="serial_states_spinner" onchange="getAllSerialUnitsByParam('names_spinner', 'serial_states_spinner')"></select>
 
-    <table class="row_table" id="row_table"></table>
+    <div class="main_div" id="row_table" style="box-shadow: none; padding-top: 0px"></div>
 
-    <br><span class="version">Версия — 1.15</span>
+    <br><span class="version">Версия — 1.16</span>
 </div>
 </body>
 </html>

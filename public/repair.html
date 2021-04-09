@@ -34,7 +34,6 @@
 
 <body class="body">
 
-<br>
 <a id="output_a"></a>
 
 <div class="main_div" id="main_div">
@@ -45,12 +44,13 @@
     <h1>AdjustmentRepair</h1>
     <h3>База данных ремонтов</h3>
 
-    <select id="names_spinner"></select>
-    <select id="repair_states_spinner"></select>
+    <select id="names_spinner" onchange="getAllRepairUnitsByParam('names_spinner', 'repair_states_spinner')"></select>
+    <select id="repair_states_spinner" onchange="getAllRepairUnitsByParam('names_spinner', 'repair_states_spinner')"></select>
 
     <br>
 
-    <table class="row_table" id="repair_table"></table>
+<!--    <table class="row_table" id="repair_table"></table>-->
+    <div class="main_div" id="repair_table" style="box-shadow: none; padding-top: 0px"></div>
 
     <h3>Поиск прибора по базе</h3>
 

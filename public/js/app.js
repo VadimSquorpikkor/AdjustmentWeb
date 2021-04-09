@@ -26,8 +26,11 @@ function getValueFromSpinner(id) {
 
 /**Таблица серийных устройств. Из массива данных формирует HTML таблицу и заполняет её данными из массива*/
 function addDataRowToPage(arr) {
-    if (document.getElementById('row_table') != null) {
-        let data = '<tr>' +
+    if (arr.length === 0) insertNothing('row_table');
+    else if (document.getElementById('row_table') != null) {
+
+        let data ='<table class="row_table"' +
+            '<tr>' +
             '<th>Имя</th>' +
             '<th>Внутренний номер</th>' +
             '<th>Серийный</th>' +
@@ -37,43 +40,46 @@ function addDataRowToPage(arr) {
             '</tr>';
         let unit;
         for (let i = 0; i < arr.length; i++) {
+            console.log(i);
             unit = arr[i];
             data += '<tr>' +
-                '<td>' + unit.name + '</td>' +
-                '<td>' + unit.innerSerial + '</td>' +
+                '<td>' + unit.device_id + '</td>' +
+                '<td>' + unit.inner_serial + '</td>' +
                 '<td>' + unit.serial + '</td>' +
-                '<td>' + unit.state + '</td>' +
-                '<td>' + getLocationName(unit.location) + '</td>' +
+                '<td>' + unit.state_id + '</td>' +
+                '<td>' + getLocationName(unit.location_id) + '</td>' +
                 '<td>' + unit.description + '</td>' +
-                '</tr>';
+                '</tr>'
+            ;
         }
+        data += '</table>';
         document.getElementById('row_table').innerHTML = '' + data;
     }
 }
 
 /**Таблица ремонтных устройств. Из массива данных формирует HTML таблицу и заполняет её данными из массива*/
 function addRepairDataRowToPage(arr) {
-    if (document.getElementById('repair_table') != null) {
-        let data = '<tr>' +
-            '<th>ID</th>' +
+    if (arr.length === 0) insertNothing('repair_table');
+    else if (document.getElementById('repair_table') != null) {
+        let data = '<table class="row_table"' +
+            '<tr>' +
             '<th>Имя</th>' +
             '<th>Серийный</th>' +
             '<th>Статус</th>' +
             '<th>Локация</th>' +
-            '<th>Описание</th>' +
             '</tr>';
         let unit;
         for (let i = 0; i < arr.length; i++) {
             unit = arr[i];
             data += '<tr>' +
-                '<td>' + unit.id + '</td>' +
-                '<td>' + unit.name + '</td>' +
+                '<td>' + unit.device_id + '</td>' +
                 '<td>' + unit.serial + '</td>' +
-                '<td>' + unit.state + '</td>' +
-                '<td>' + getLocationName(unit.location) + '</td>' +
-                '<td>' + unit.description + '</td>' +
-                '</tr>';
+                '<td>' + unit.state_id + '</td>' +
+                '<td>' + getLocationName(unit.location_id) + '</td>' +
+                '</tr>'
+            ;
         }
+        data += '</table>';
         document.getElementById('repair_table').innerHTML = '' + data;
     }
 }

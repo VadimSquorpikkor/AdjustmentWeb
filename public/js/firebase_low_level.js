@@ -69,6 +69,24 @@ function getAllByTwoParam(database, table, converter, param_1, value_1, param_2,
     });
 }
 
+/**Получить все объекты из коллекции, совпадающие по двум параметрам*/
+function getAllByThreeParam(database, table, converter, param_1, value_1, param_2, value_2, param_3, value_3, func) {
+    let obj;
+    let arr = [];
+    database.collection(table).withConverter(converter)
+        .where(param_1, "==", value_1)
+        .where(param_2, "==", value_2)
+        .where(param_3, "==", value_3)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // Convert to object
+            obj = doc.data();
+            arr.push(obj);
+        });
+        func(arr);
+    });
+}
+
 /**В отличии от getAll добавляет в массив не сам объект, а его параметр .name*/
 function getAllObjectNames(database, table, func) {
     let arr = [];
@@ -81,11 +99,23 @@ function getAllObjectNames(database, table, func) {
     });
 }
 
-function getStates(type, location, func) {
+function getStatesInLocation(type, location, func) {
     let arr = [];
-    DBASE.collection(TABLE_PROFILES)
-        .where(PROFILE_LOCATION, "==", location)
-        .where(PROFILE_TYPE, 'in', [PROF_TYPE_ANY, type])
+    DBASE.collection(TABLE_STATES)
+        .where(STATE_LOCATION, "==", location)
+        .where(STATE_TYPE, 'in', [TYPE_ANY, type])
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            arr.push(doc.data().name);
+        });
+        func(arr);
+    });
+}
+
+function getStates(type, func) {
+    let arr = [];
+    DBASE.collection(TABLE_STATES)
+        .where(STATE_TYPE, 'in', [TYPE_ANY, type]) //или type или any_type
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             arr.push(doc.data().name);
