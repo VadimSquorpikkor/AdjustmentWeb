@@ -107,7 +107,7 @@ var app;
             var scale = parseInt(getInput("scale-input").value, 10);
             if (scale <= 0 || scale > 30)
                 return;
-            qr.drawCanvas(scale, border, canvas);
+            qr.drawCanvas(scale, border, canvas, input);
             canvas.style.removeProperty("display");
         }
         else {

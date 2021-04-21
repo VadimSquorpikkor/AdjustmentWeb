@@ -204,7 +204,7 @@ var qrcodegen;
         // canvas element. The canvas's width and height is resized to (this.size + border * 2) * scale.
         // The drawn image is be purely black and white, and fully opaque.
         // The scale must be a positive integer and the border must be a non-negative integer.
-        QrCode.prototype.drawCanvas = function (scale, border, canvas) {
+        QrCode.prototype.drawCanvas = function (scale, border, canvas, input) {
             if (scale <= 0 || border < 0)
                 throw "Value out of range";
             var width = (this.size + border * 2) * scale;
@@ -217,6 +217,20 @@ var qrcodegen;
                     ctx.fillRect((x + border) * scale, (y + border) * scale, scale, scale);
                 }
             }
+            ctx.font = "20px Arial";
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            ctx.fillText(input, canvas.width/2, 22);
+
+            // ctx.fillText("Hello World", 10, 5);
+
+            // ctx.font = "30px Comic Sans MS";
+            // ctx.fillStyle = "red";
+            // ctx.textAlign = "center";
+            // ctx.fillText("Hello World", canvas.width/2, canvas.height/2);
+
+            canvas.toBlob(blob => navigator.clipboard.write([new ClipboardItem({'image/png': blob})]));
+
         };
         // Returns a string of SVG code for an image depicting this QR Code, with the given number
         // of border modules. The string always uses Unix newlines (\n), regardless of the platform.
