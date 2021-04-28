@@ -67,13 +67,6 @@ function getAllEventsByUnitId(param, value, func, obj, orderBy){
     });
 }
 
-/*function getName(table, id) {
-    DBASE.collection(table).doc(id).get().then((doc) => {
-        if (doc.exists) return  doc.data().name;
-        else return "not found";
-    });
-}*/
-
 /**Получить все объекты из коллекции, совпадающие по двум параметрам*/
 function getAllByTwoParam(database, table, converter, param_1, value_1, param_2, value_2, func) {
     let obj;
@@ -109,6 +102,35 @@ function getAllByThreeParam(database, table, converter, param_1, value_1, param_
     });
 }
 
+/**Получить все объекты из коллекции, совпадающие по параметрам. Если значение параметра равно ANY_VALUE,
+ * то этот параметр будет проигнорирован при поиске*/
+function getAllUnitsByParam(database, table, converter,
+                            param_1, value_1,
+                            param_2, value_2,
+                            param_3, value_3,
+                            param_4, value_4,
+                            param_5, value_5,
+                            param_6, value_6,
+                            func) {
+    let query = database.collection(table).withConverter(converter);
+    if (value_1 !== ANY_VALUE) query = query.where(param_1, "==", value_1)
+    if (value_2 !== ANY_VALUE) query = query.where(param_2, "==", value_2)
+    if (value_3 !== ANY_VALUE) query = query.where(param_3, "==", value_3)
+    if (value_4 !== ANY_VALUE) query = query.where(param_4, "==", value_4)
+    if (value_5 !== ANY_VALUE) query = query.where(param_5, "==", value_5)
+    if (value_6 !== ANY_VALUE) query = query.where(param_6, "==", value_6)
+
+    let arr = [];
+    query.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // Convert to object
+            obj = doc.data();
+            arr.push(obj);
+        });
+        func(arr);
+    });
+}
+
 /**В отличии от getAll добавляет в массив не сам объект, а его параметр .name*/
 function getAllObjectNames(database, table, func) {
     let arr = [];
@@ -134,6 +156,7 @@ function getStatesInLocation(type, location, func) {
     });
 }
 
+/**Загружает статусы выбранного типа и статусы "любой", при выборе, например "ремонта" загрузятся все ремонтные статуты и статусы, у которых общий тип*/
 function getStates(type, func) {
     let arr = [];
     DBASE.collection(TABLE_STATES)
@@ -146,7 +169,21 @@ function getStates(type, func) {
     });
 }
 
-function getAllLocations(func) {
+function getPairedCollectionFromDB(table, func) {
+    let arr_id = [];
+    let arr_name = [];
+    DBASE.collection(table)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            arr_id.push(doc.data().id);
+            arr_name.push(doc.data().name);
+            //console.log(doc.data().id+' '+doc.data().name);
+        });
+        func(arr_id, arr_name);
+    });
+}
+
+function getAllLocationsMap(func) {
     let map = new Map();
     DBASE.collection(TABLE_LOCATIONS)
         .get().then((querySnapshot) => {
@@ -158,7 +195,7 @@ function getAllLocations(func) {
     });
 }
 
-function getAllEmployees(func) {
+function getAllEmployeesMap(func) {
     let map = new Map();
     DBASE.collection(TABLE_EMPLOYEES)
         .get().then((querySnapshot) => {
@@ -179,7 +216,7 @@ function valueOf(id) {
 const db = firebase.firestore();
 /**Загрузка в БД из insert.html (там всё закомментировано)*/
 
-/*function loadStates(table, name, location, type, id) {
+function loadStates(table, name, location, type, id) {
         db.collection('states').doc(valueOf(id)).set({
             name: valueOf(name),
             location_id: valueOf(location),
@@ -210,4 +247,4 @@ function loadLocations(id, name) {
         id: valueOf(id),
         name: valueOf(name)
     });
-}*/
+}

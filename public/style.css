@@ -116,6 +116,19 @@ input[type="number"] {
     margin-left: 9px;
 }
 
+input[type="radio"] {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 16px;
+    color: darkorange;
+    border: 0;
+    border-radius: 6px;
+    box-shadow: inset 5px 10px 5px -9px rgba(0, 0, 0, 0.55);
+    -moz-box-shadow: inset 10px 10px 3px -7px rgba(0, 0, 0, 0.55);
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 9px;
+}
+
 input[type="text"], input[type="date"], select {
     font-family: "Trebuchet MS", sans-serif;
     font-size: 14px;

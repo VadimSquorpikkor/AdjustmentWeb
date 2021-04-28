@@ -1,8 +1,10 @@
 /**Имя базы данных*/
 const DBASE = firebase.firestore();
 
-const ALL_UNITS = "Все устройства";
+const ALL_DEVICES = "Все устройства";
 const ALL_STATES = "Все статусы";
+const ALL_LOCATIONS = "Все локации";
+const ALL_EMPLOYEES = "Все сотрудники";
 const REPAIR_UNIT = "Ремонт";
 const FOUND_NOTHING = "Ничего не найдено";
 
@@ -51,6 +53,8 @@ const TYPE_SERIAL = "serial_type";
 
 const SERIAL_TYPE = "serial_type";
 const REPAIR_TYPE = "repair_type";
+
+const ANY_VALUE = "any_value";
 
 /** Класс для устройства, или блока детектирования */
 class DUnit {
@@ -138,12 +142,6 @@ let dEventConverter = {
 
 //**********************************************************************************************************************
 
-/**Map для локаций. Лисенер отслеживает изменения в БД для локаций и при изменениях обновляет locationMap*/
-let locationMap = new Map();
-
-/**Map для сотрудников. Лисенер отслеживает изменения в БД для сотрудников и при изменениях обновляет locationMap*/
-let employeesMap = new Map();
-
 /** Загрузка всех юнитов из БД */
 function getAllSerialUnits() {
     getAllByOneParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_TYPE, SERIAL_TYPE, addSerialDataRowToPage);
@@ -164,33 +162,46 @@ function getAllUnitsByTwoParam(type, param, value, param2, value2, func) {
     getAllByThreeParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_TYPE, type, param, value, param2, value2, func);
 }
 
-/**Фильтр для загрузки серийных устройств. При изменении спиннера загружаются только устройства, категории которых
- * совпадают с выбранными в двух спиннерах — имя устройства и по его статус.
- * Пока не знаю, как в "where" запрашивать "ВСЕ" элементы (для случаев "Все статусы" и "Все устройства"), поэтому
- * использую разные методы для разных случаев: если и "все устройства" и "все статусы", просто загружаю всё,
- * если "все" только одна из категорий, загружаю по одному параметру, иначе — по двум параметрам*/
-function getAllSerialUnitsByParam(sp_name, sp_state) {
-    let name = getValueFromSpinner(sp_name);
-    let state = getValueFromSpinner(sp_state);
-    console.log(name+" "+state);
-    if (name === ALL_UNITS && state === ALL_STATES) {
-        getAllSerialUnits();
-    } else if (name === ALL_UNITS) {
-        getAllUnitsByOneParam(SERIAL_TYPE, UNIT_STATE, state, addSerialDataRowToPage);
-    } else if (state === ALL_STATES) {
-        getAllUnitsByOneParam(SERIAL_TYPE, UNIT_DEVICE, name, addSerialDataRowToPage);
-    } else {
-        getAllUnitsByTwoParam(SERIAL_TYPE, UNIT_DEVICE, name, UNIT_STATE, state, addSerialDataRowToPage);
-    }
+function startSearch(devName_id, location_id, state_id, employee_id, serial_id, serial_radio_id) {
+    let deviceName = getValueFromSpinner(devName_id);
+    let location = getValueFromSpinner(location_id);
+    let state = getValueFromSpinner(state_id);
+    let employee = getValueFromSpinner(employee_id);
+    let serial = valueOfElement(serial_id);
+    let type = document.getElementById(serial_radio_id).checked?TYPE_SERIAL:TYPE_REPAIR;
+
+    console.log("name="+deviceName+" loc="+location+" state="+state+" empl="+employee+" serial="+serial+" type="+type);
+
+    if (deviceName === ALL_DEVICES) deviceName = ANY_VALUE;
+    if (location === ALL_LOCATIONS) location = ANY_VALUE;
+    if (state === ALL_STATES) state = ANY_VALUE;
+    if (employee === ALL_EMPLOYEES) employee = ANY_VALUE;
+
+    if (serial === "") getUnitListFromBD(deviceName, location, employee, type, state, ANY_VALUE);
+    else getUnitListFromBD(ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE, serial);
+
 }
+
+/**По выбранным параметрам получает из БД список юнитов*/
+function getUnitListFromBD(deviceName, location, employee, type, state, serial) {
+    //Если параметр не "any", то имя параметра переводим в его идентификатор ("Диагностика" -> "adj_r_diagnostica")
+    //Если "any", то так и оставляем
+    if (deviceName !== ANY_VALUE) deviceName = getIdByName(deviceName, deviceNameList, deviceIdList);
+    if (location !== ANY_VALUE) location = getIdByName(location, locationNameList, locationIdList);
+    if (state !== ANY_VALUE) state = getIdByName(state, stateNameList, stateIdList);
+    if (employee !== ANY_VALUE) employee = getIdByName(employee, employeeNameList, employeeIdList);
+
+    getAllUnitsByParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_DEVICE, deviceName, UNIT_LOCATION, location, UNIT_EMPLOYEE, employee, UNIT_TYPE, type, UNIT_STATE, state, UNIT_SERIAL, serial, addSerialDataRowToPage);
+}
+
 
 function getAllRepairUnitsByParam(sp_name, sp_state) {
     let name = getValueFromSpinner(sp_name);
     let state = getValueFromSpinner(sp_state);
     console.log(name+" "+state);
-    if (name === ALL_UNITS && state === ALL_STATES) {
+    if (name === ALL_DEVICES && state === ALL_STATES) {
         getAllRepairUnits();
-    } else if (name === ALL_UNITS) {
+    } else if (name === ALL_DEVICES) {
         getAllUnitsByOneParam(REPAIR_TYPE, UNIT_STATE, state, addRepairDataRowToPage);
     } else if (state === ALL_STATES) {
         getAllUnitsByOneParam(REPAIR_TYPE, UNIT_DEVICE, name, addRepairDataRowToPage);
@@ -199,51 +210,6 @@ function getAllRepairUnitsByParam(sp_name, sp_state) {
     }
 }
 
-/** Загрузка всех статусов из БД */
-function getAllStatesInLocation(location, type, id) {
-    getStatesInLocation(type, location, function (arr) {
-        arr.unshift(ALL_STATES);// в начало списка добавлено 'Все статусы'
-        insertSpinnerByArray(id, arr);
-    });
-}
-
-function getAllStates(type, id) {
-    getStates(type, function (arr) {
-        arr.unshift(ALL_STATES);// в начало списка добавлено 'Все статусы'
-        insertSpinnerByArray(id, arr);
-    });
-}
-
-/** Загрузка всех имен устройств из БД */
-function getAllDeviceNames() {
-    getAllObjectNames(DBASE, TABLE_DEVICES, function (arr) {
-        //Добавил ещё массив. В него копирую исходный массив. Теперь у меня 2 независимых массива
-        //Это нужно, так как для 'names_spinner' и для 'selected_type_for_generator' нужны немного разные массивы
-        //по составу (различаются первым элементом)
-        let arr2 = [];
-        for (let i = 0; i < arr.length; i++) {
-            arr2.push(arr[i]);
-        }
-        insertSpinnerByArray('selected_type', arr);
-        insertSpinnerByArray('search_names_spinner', arr);
-        arr.unshift(ALL_UNITS);//для names_spinner в начало списка добавляю 'Все устройства'
-        insertSpinnerByArray('names_spinner', arr);
-        arr2.unshift(REPAIR_UNIT);//для selected_type_for_generator в начало списка добавляю 'Ремонт'
-        insertSpinnerByArray('selected_type_for_generator', arr2);
-    });
-}
-
-function getLocations() {
-    getAllLocations(function (map) {
-        locationMap = map;
-    });
-}
-
-function getEmployees() {
-    getAllEmployees(function (map) {
-        employeesMap = map;
-    });
-}
 
 /**Обертка для getRepairUnitByNameAndSerial. Получает на вход ID элементов, берет из них данные и вызывает
  * getRepairUnitByNameAndSerial используя эти данные */
