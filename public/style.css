@@ -6,7 +6,7 @@
 }
 
 .main_div {
-    background-color: #666666;
+    background-color: #555555;
     max-width: 1000px;
     /*margin: auto;*/
     box-shadow: 2px 1px 12px 1px rgba(0, 0, 0, 0.23);
@@ -161,4 +161,42 @@ input[type="button"]:hover {
 
 input[type="button"]:active {
     background: linear-gradient(to bottom, #ffa86c 5%, #dc0d0c 100%);
+}
+
+.found_unit_item {
+    /*background-color: #f57506;*/
+    background: #666666;
+    box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.55);
+    border-radius: 5px;
+    font-size: 14px;
+    max-width: 500px;
+    padding: 4px 12px 4px 12px;
+    margin: 2px auto;
+    text-align: left;
+    overflow:auto;
+}
+
+.middle_white {
+    font-size: 16px;
+    color: #ECEFF1;
+}
+
+.small_white {
+    font-size: 12px;
+    color: #ECEFF1;
+    font-style: italic;
+}
+
+.big_orange {
+    font-size: 14px;
+    color: orange;
+}
+
+.day_count_div {
+    float: right;
+    margin-top: 10px;
+}
+
+.item_info_div {
+    float: left;
 }
