@@ -15,11 +15,64 @@ function insertSpinnerByArray(name, arr) {
 /**Возвращает текущее значение спиннера. Нужно, так как spinner.value возвращает номер пункта, но не его значение*/
 function getValueFromSpinner(id) {
     let sel = document.getElementById(id);
-    return sel.options[sel.selectedIndex].text;
+    if (sel!=null) return sel.options[sel.selectedIndex].text;
+    else console.log("------- НЕТ ЭЛЕМЕНТА С ID = "+id);
+}
+
+function valueOfElement(id) {
+    return document.getElementById(id).value
+}
+
+function addSerialDataRowToPage(arr) {
+    if (arr.length === 0) insertNothing('row_table');
+    else if (document.getElementById('row_table') != null) {
+
+        let unit;
+        let data = '';
+        for (let i = 0; i < arr.length; i++) {
+            console.log(i);
+            unit = arr[i];
+
+            let now_date = new Date();
+            let daysCount = (now_date.getTime() - unit.date.toDate().getTime()) / (1000*60*60*24);
+            daysCount = Math.round(daysCount);
+
+            let stateDate = unit.date.toDate().toLocaleDateString('ru-RU'); //Дата - 18.03.2021
+            let stateTime = unit.date.toDate().toLocaleTimeString('ru-RU'); //Время - 09:07:49
+            let deviceName = unit.device_id;
+            let serial = unit.serial;
+            let innerSerial = unit.inner_serial;
+            let date = stateDate + " " + stateTime;
+            let state = unit.state_id;
+            let location = unit.location_id;
+
+            deviceName = getNameById(deviceName, deviceNameList, deviceIdList);
+            state = getNameById(state, stateNameList, stateIdList);
+            location = getNameById(location, locationNameList, locationIdList);
+
+            data +=
+            '<div class="found_unit_item">'+
+            '    <div class="item_info_div">'+
+            '        <span class="big_orange">'+ deviceName +'</span>'+
+            '        <span class="small_white">№ '+ serial +'</span>'+
+            '        <span class="small_white">(вн. '+ innerSerial +')</span><br>'+
+            '        <span class="big_orange">'+ location +'</span><br>'+
+            '        <span class="small_white">'+ date +'</span>'+
+            '        <span class="small_white">'+ state +'</span>'+
+            '    </div>'+
+            '    <div class="day_count_div">'+
+            '        <span class="big_orange">'+ daysCount +'</span><br>'+
+            '        <span class="small_white">дней</span>'+
+            '    </div>'+
+            '</div>';
+        }
+
+        document.getElementById('row_table').innerHTML = '' + data;
+    }
 }
 
 /**Таблица серийных устройств. Из массива данных формирует HTML таблицу и заполняет её данными из массива*/
-function addSerialDataRowToPage(arr) {
+function addSerialDataRowToPage_old(arr) {
     if (arr.length === 0) insertNothing('row_table');
     else if (document.getElementById('row_table') != null) {
 
@@ -36,11 +89,11 @@ function addSerialDataRowToPage(arr) {
             console.log(i);
             unit = arr[i];
             data += '<tr>' +
-                '<td>' + unit.device_id + '</td>' +
+                '<td>' + getNameById(unit.device_id, deviceNameList, deviceIdList) + '</td>' +
                 '<td>' + unit.inner_serial + '</td>' +
                 '<td>' + unit.serial + '</td>' +
-                '<td>' + unit.state_id + '</td>' +
-                '<td>' + getLocationName(unit.location_id) + '</td>' +
+                '<td>' + getNameById(unit.state_id, stateNameList, stateIdList) + '</td>' +
+                '<td>' + getNameById(unit.location_id, locationNameList, locationIdList) + '</td>' +
                 '</tr>'
             ;
         }
@@ -64,21 +117,16 @@ function addRepairDataRowToPage(arr) {
         for (let i = 0; i < arr.length; i++) {
             unit = arr[i];
             data += '<tr>' +
-                '<td>' + unit.device_id + '</td>' +
+                '<td>' + getNameById(unit.device_id, deviceNameList, deviceIdList) + '</td>' +
                 '<td>' + unit.serial + '</td>' +
-                '<td>' + unit.state_id + '</td>' +
-                '<td>' + getLocationName(unit.location_id) + '</td>' +
+                '<td>' + getNameById(unit.state_id, stateNameList, stateIdList) + '</td>' +
+                '<td>' + getNameById(unit.location_id, locationNameList, locationIdList) + '</td>' +
                 '</tr>'
             ;
         }
         data += '</table>';
         document.getElementById('repair_table').innerHTML = '' + data;
     }
-}
-
-/**По id локации возвращает её имя. (Данные предварительно загружены лисенером из БД в Map)*/
-function getLocationName(location_id) {
-    return locationMap.get(location_id);
 }
 
 /**Вставляет <SPAN> "Не найдено" в выбранный по id элемент

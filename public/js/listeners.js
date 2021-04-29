@@ -24,6 +24,8 @@ function getNameById(id, nameList, idList) {
     if (position===-1) return EMPTY_VALUE;
     else return nameList[position];
 }
+
+
 // ---------------------------------------------------------------------------------------------------------------------
 let deviceIdList = [];
 let deviceNameList = [];
