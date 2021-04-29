@@ -27,6 +27,8 @@ function addSerialDataRowToPage(arr) {
     if (arr.length === 0) insertNothing('row_table');
     else if (document.getElementById('row_table') != null) {
 
+        document.getElementById('main_logo').style.display = "none";
+
         let unit;
         let data = '';
         for (let i = 0; i < arr.length; i++) {

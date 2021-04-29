@@ -200,3 +200,18 @@ input[type="button"]:active {
 .item_info_div {
     float: left;
 }
+
+.search_filter_div {
+    background: #666666;
+    box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.55);
+    border-radius: 5px;
+    font-size: 14px;
+    /*color: #f5a208;*/
+    color: darkorange;
+    text-shadow: 2px 2px 2px #444444;
+    max-width: 700px;
+    padding: 4px 12px 4px 12px;
+    margin: 2px auto;
+    text-align: center;
+    overflow:auto;
+}

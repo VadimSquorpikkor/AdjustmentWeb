@@ -54,10 +54,11 @@ function insertDevNames(arr) {
     for (let i = 0; i < arr.length; i++) {
         arr2.push(arr[i]);
     }
-    insertSpinnerByArray('selected_type', arr);
-    insertSpinnerByArray('search_names_spinner', arr);
-    arr.unshift(ALL_DEVICES);//для names_spinner в начало списка добавляю 'Все устройства'
-    insertSpinnerByArray('names_spinner', arr);
+    let arr3 = getNewArrayFromArray(arr);
+    insertSpinnerByArray('selected_type', arr3);
+    insertSpinnerByArray('search_names_spinner', arr3);
+    arr3.unshift(ALL_DEVICES);//для names_spinner в начало списка добавляю 'Все устройства'
+    insertSpinnerByArray('names_spinner', arr3);
     arr2.unshift(REPAIR_UNIT);//для selected_type_for_generator в начало списка добавляю 'Ремонт'
     insertSpinnerByArray('selected_type_for_generator', arr2);
 }

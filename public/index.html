@@ -47,25 +47,34 @@
     <h1>AdjustmentWeb</h1>
     <h3>База данных УРиР</h3>
 
-    <div>
-    <input type="radio" id="serial_radio" name="type" checked="checked" value="serial_type"  onchange="getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner')"">
-    <label for="serial_radio">Серия</label>
-    <input type="radio" id="repair_radio" name="type" value="repair_type" onchange="getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner')">
-    <label for="repair_radio">Ремонт</label>
+    <div class="search_filter_div">
+
+<!--        <img width="168" src="logoBig.png" style="float: right; margin-left: 40px; margin-right: 20px">-->
+
+        <!-- style="text-align: center"-->
+     <div>
+     <input type="radio" id="serial_radio" name="type" checked="checked" value="serial_type"  onchange="getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner')">
+     <label for="serial_radio">Серия</label>
+     <input type="radio" id="repair_radio" name="type" value="repair_type" onchange="getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner')">
+     <label for="repair_radio">Ремонт</label>
+     </div>
+
+     <br>
+
+        <span style="width: 150px; display: inline-block; text-align: right">Серийный номер: </span><input type="text" placeholder="Серийный №" id="serial" style="width:150px; margin-bottom: 4px"></span>
+
+     <br>
+
+
+        <span style="width: 150px; display: inline-block; text-align: right">Название устройства: </span><select id="names_spinner" style="width:165px; margin-bottom: 4px"></select><br>
+        <span style="width: 150px; display: inline-block; text-align: right">Местонахождение: </span><select id="location_spinner" onchange="getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner')" style="width:165px; margin-bottom: 4px"></select><br>
+        <span style="width: 150px; display: inline-block; text-align: right">Статус устройства: </span><select id="states_spinner" style="width:165px; margin-bottom: 4px"></select><br>
+        <span style="width: 150px; display: inline-block; text-align: right">Ответственный: </span><select id="employee_spinner" style="width:165px; margin-bottom: 4px"></select><br>
+        <input type="button" onclick="startSearch('names_spinner', 'location_spinner', 'states_spinner', 'employee_spinner', 'serial', 'serial_radio')" style="width:100px" value="Найти">
+
+
     </div>
 
-    <br>
-
-    <input type="text" placeholder="Серийный №" id="serial" style="width:150px">
-
-    <br>
-    <br>
-
-    <select id="names_spinner" style="width:150px"></select>
-    <select id="location_spinner" onchange="getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner')" style="width:150px"></select>
-    <select id="states_spinner" style="width:150px"></select>
-    <select id="employee_spinner" style="width:150px"></select>
-    <input type="button" onclick="startSearch('names_spinner', 'location_spinner', 'states_spinner', 'employee_spinner', 'serial', 'serial_radio')" value="Найти">
 
     <div class="main_div" id="row_table" style="box-shadow: none; padding-top: 0px"></div>
 
@@ -85,8 +94,10 @@
         </div>
     </div>-->
 
+    <img id="main_logo" src="logo_big_grayscale.png" width="400px">
 
-    <br><span class="version">Версия — 1.18</span>
+
+    <br><span class="version">Версия — 1.20</span>
 </div>
 </body>
 </html>

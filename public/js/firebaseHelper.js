@@ -194,6 +194,8 @@ function getUnitListFromBD(deviceName, location, employee, type, state, serial) 
     if (state !== ANY_VALUE) state = getIdByName(state, stateNameList, stateIdList);
     if (employee !== ANY_VALUE) employee = getIdByName(employee, employeeNameList, employeeIdList);
 
+    console.log("name="+deviceName+" loc="+location+" state="+state+" empl="+employee+" serial="+serial+" type="+type);
+
     getAllUnitsByParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_DEVICE, deviceName, UNIT_LOCATION, location, UNIT_EMPLOYEE, employee, UNIT_TYPE, type, UNIT_STATE, state, UNIT_SERIAL, serial, addSerialDataRowToPage);
 }
 
