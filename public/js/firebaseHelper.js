@@ -232,7 +232,7 @@ function getRepairUnitByNameAndSerial(name, serial) {
         else {
             let dUnit = arr[0];
             // getAllByOneParamOrdered(DBASE, TABLE_EVENTS, dEventConverter, EVENT_UNIT, dUnit.id, addCollectionOfDocumentToDiv, dUnit, EVENT_DATE);
-            getAllEventsByUnitId(EVENT_UNIT, dUnit.id, addCollectionOfDocumentToDiv, dUnit, EVENT_DATE);
+            getAllEventsByUnitId(DBASE, TABLE_EVENTS, EVENT_UNIT, dUnit.id, addCollectionOfDocumentToDiv, dUnit, EVENT_DATE);
         }
     });
 }

@@ -23,6 +23,17 @@ function valueOfElement(id) {
     return document.getElementById(id).value
 }
 
+function rightDayString(i) {
+    if (i===11||i===12||i===13||i===14)return "дней";
+    switch (i%10) {
+        case 1:return "день";
+        case 2:
+        case 3:
+        case 4:return "дня";
+        default:return "дней";
+    }
+}
+
 function addSerialDataRowToPage(arr) {
     if (arr.length === 0) insertNothing('row_table');
     else if (document.getElementById('row_table') != null) {
@@ -47,6 +58,7 @@ function addSerialDataRowToPage(arr) {
             let date = stateDate + " " + stateTime;
             let state = unit.state_id;
             let location = unit.location_id;
+            let dayString = rightDayString(daysCount);
 
             deviceName = getNameById(deviceName, deviceNameList, deviceIdList);
             state = getNameById(state, stateNameList, stateIdList);
@@ -64,7 +76,7 @@ function addSerialDataRowToPage(arr) {
             '    </div>'+
             '    <div class="day_count_div">'+
             '        <span class="big_orange">'+ daysCount +'</span><br>'+
-            '        <span class="small_white">дней</span>'+
+            '        <span class="small_white">'+ dayString +'</span>'+
             '    </div>'+
             '</div>';
         }

@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/logo_big_grayscale.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebaseHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebaseHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebase_low_level.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/listeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/listeners.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +163,7 @@
       <workItem from="1619170150756" duration="1200000" />
       <workItem from="1619523803077" duration="8960000" />
       <workItem from="1619589075527" duration="17935000" />
-      <workItem from="1619675016433" duration="10284000" />
+      <workItem from="1619675016433" duration="17143000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -305,7 +305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619678134290</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="1.20 - 29/04/21&#10;1. Переделан внешний вид фильтра: теперь красиво в виде плитки&#10;2. Если список найденных не отображается, то на месте списка отображается логотип (по аналогии с Android приложением AdjustmentDB)&#10;3. Исправлена ошибка перевода списков имен устройств">
+      <created>1619687501001</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1619687501001</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -372,6 +379,7 @@
     <MESSAGE value="1.18 - 28/04/21&#10;1. Глобально переписан JS. Лисенеры теперь загружают пары списков -- список для имен и список для идентификаторов. На странице будут выводиться имена, в БД будут передаваться идентификаторы&#10;2. Перерисована главная страница: теперь здесь сделан глобальный поиск устройств по БД, размещен фильтр для поиска. Поиск по: типу (серия/ремонт), по имени устройства, по локации, по статусу, по фамилии ответственного&#10;3. Если в параметре поиска написать серийный номер, то поиск будет везтись ТОЛЬКО по серийному номеру, все другие параметры будут игнорироваться&#10;4. Содержимое спиннера для статусов зависит от выбранного типа (серия/ремонт) и от выбранной локации, если выбрать &quot;Все локации&quot;, то будут отображаться все существующие статусы&#10;5. Все списки загружаются лисенерами, а значит любое изменение в соответствующей коллекции в БД немедленно приведет к обновлению соответствующего списка и спиннера без перезагрузки страницы&#10;6. Реализован переводчик из id в имя и из имени в id (для списков данных)&#10;7. В списке найденных устройств теперь все данные показываются правильно (раньше вместо названия указывался его идентификатор)" />
     <MESSAGE value="на дом" />
     <MESSAGE value="1.19 - 28/04/21&#10;1. Перерисовал элемент списка найденных элементов: теперь список не в виде таблицы, каждый элемент отдельной плиткой. Отображается для каждого элемента: название устройства, серийный и внутренний номер, локация, дата/время последнего события, статус, количество дней в последней локации" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.19 - 28/04/21&#10;1. Перерисовал элемент списка найденных элементов: теперь список не в виде таблицы, каждый элемент отдельной плиткой. Отображается для каждого элемента: название устройства, серийный и внутренний номер, локация, дата/время последнего события, статус, количество дней в последней локации" />
+    <MESSAGE value="1.20 - 29/04/21&#10;1. Переделан внешний вид фильтра: теперь красиво в виде плитки&#10;2. Если список найденных не отображается, то на месте списка отображается логотип (по аналогии с Android приложением AdjustmentDB)&#10;3. Исправлена ошибка перевода списков имен устройств" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.20 - 29/04/21&#10;1. Переделан внешний вид фильтра: теперь красиво в виде плитки&#10;2. Если список найденных не отображается, то на месте списка отображается логотип (по аналогии с Android приложением AdjustmentDB)&#10;3. Исправлена ошибка перевода списков имен устройств" />
   </component>
 </project>

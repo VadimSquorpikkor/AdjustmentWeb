@@ -1,6 +1,3 @@
-function proverka() {
-    console.log('********* Работает!')
-}
 
 const EMPTY_VALUE = "- - -";
 
@@ -14,7 +11,6 @@ function getNewArrayFromArray(arr) {
 
 function getIdByName(name, nameList, idList) {
     let position = nameList.indexOf(name);
-    console.log(position);
     if (position===-1) return EMPTY_VALUE;
     else return idList[position];
 }
@@ -24,7 +20,6 @@ function getNameById(id, nameList, idList) {
     if (position===-1) return EMPTY_VALUE;
     else return nameList[position];
 }
-
 
 // ---------------------------------------------------------------------------------------------------------------------
 let deviceIdList = [];
@@ -37,24 +32,17 @@ let employeeIdList = [];
 let employeeNameList = [];
 // ---------------------------------------------------------------------------------------------------------------------
 /**Лисенер для списка имен устройств*/
-DBASE.collection(TABLE_DEVICES)
-    .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-            console.log(change.doc.data());
-            getPairedCollectionFromDB(TABLE_DEVICES, function (arr_id, arr_name) {
-                deviceIdList = arr_id;
-                deviceNameList = arr_name;
-                insertDevNames(arr_name)
-            });
-        });
-    });
+listen(DBASE, TABLE_DEVICES, insertDevNames);
 
-function insertDevNames(arr) {
+function insertDevNames(arr_name, arr_id) {
+    deviceNameList = arr_name;
+    deviceIdList = arr_id;
+
     let arr2 = [];
-    for (let i = 0; i < arr.length; i++) {
-        arr2.push(arr[i]);
+    for (let i = 0; i < arr_name.length; i++) {
+        arr2.push(arr_name[i]);
     }
-    let arr3 = getNewArrayFromArray(arr);
+    let arr3 = getNewArrayFromArray(arr_name);
     insertSpinnerByArray('selected_type', arr3);
     insertSpinnerByArray('search_names_spinner', arr3);
     arr3.unshift(ALL_DEVICES);//для names_spinner в начало списка добавляю 'Все устройства'
@@ -64,39 +52,25 @@ function insertDevNames(arr) {
 }
 // ---------------------------------------------------------------------------------------------------------------------
 /**Лисенер для локаций*/
-DBASE.collection(TABLE_LOCATIONS)
-    .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-            console.log(change.doc.data());
-            getPairedCollectionFromDB(TABLE_LOCATIONS, function (arr_id, arr_name) {
-                locationIdList = arr_id;
-                locationNameList = arr_name;
-                insertLocationsNames(arr_name)
-            });
-        });
-    });
+listen(DBASE, TABLE_LOCATIONS, insertLocationsNames);
 
-function insertLocationsNames(arr) {
-    let arr2 = getNewArrayFromArray(arr);
+function insertLocationsNames(arr_name, arr_id) {
+    locationNameList = arr_name;
+    locationIdList = arr_id;
+
+    let arr2 = getNewArrayFromArray(arr_name);
     arr2.unshift(ALL_LOCATIONS);
     insertSpinnerByArray('location_spinner', arr2);
 }
 // ---------------------------------------------------------------------------------------------------------------------
 /**Лисенер для статусов*/
-DBASE.collection(TABLE_STATES)
-    .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-            console.log(change.doc.data());
-            getPairedCollectionFromDB(TABLE_STATES, function (arr_id, arr_name) {
-                stateIdList = arr_id;
-                stateNameList = arr_name;
-                insertStatesNames(arr_name)
-            });
-        });
-    });
+listen(DBASE, TABLE_STATES, insertStatesNames);
 
-function insertStatesNames(arr) {
-    let arr2 = getNewArrayFromArray(arr);
+function insertStatesNames(arr_name, arr_id) {
+    stateNameList = arr_name;
+    stateIdList = arr_id;
+
+    let arr2 = getNewArrayFromArray(arr_name);
     arr2.unshift(ALL_STATES);
     insertSpinnerByArray('states_spinner', arr2);
 }
@@ -125,21 +99,26 @@ function getAllStates(type, id) {
 }
 // ---------------------------------------------------------------------------------------------------------------------
 /**Лисенер для сотрудников*/
-DBASE.collection(TABLE_EMPLOYEES)
-    .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-            console.log(change.doc.data());
-            getPairedCollectionFromDB(TABLE_EMPLOYEES, function (arr_id, arr_name) {
-                employeeIdList = arr_id;
-                employeeNameList = arr_name;
-                insertEmployeesNames(arr_name)
-            });
-        });
-    });
+listen(DBASE, TABLE_EMPLOYEES, insertEmployeesNames);
 
-function insertEmployeesNames(arr) {
-    let arr2 = getNewArrayFromArray(arr);
+function insertEmployeesNames(arr_name, arr_id) {
+    employeeNameList = arr_name;
+    employeeIdList = arr_id;
+
+    let arr2 = getNewArrayFromArray(arr_name);
     arr2.unshift(ALL_EMPLOYEES);
     insertSpinnerByArray('employee_spinner', arr2);
 }
 // ---------------------------------------------------------------------------------------------------------------------
+/**Старый вариант лисенера*/
+/*DBASE.collection(TABLE_LOCATIONS)
+    .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            console.log(change.doc.data());
+            getPairedCollectionFromDB(TABLE_LOCATIONS, function (arr_id, arr_name) {
+                locationIdList = arr_id;
+                locationNameList = arr_name;
+                insertLocationsNames(arr_name)
+            });
+        });
+    });*/
