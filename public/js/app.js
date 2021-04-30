@@ -65,7 +65,7 @@ function addSerialDataRowToPage(arr) {
             location = getNameById(location, locationNameList, locationIdList);
 
             data +=
-            '<div class="found_unit_item">'+
+            '<div class="found_unit_item" onclick=getAllEventsByUnitIdSmall("'+unit.id+'")>'+
             '    <div class="item_info_div">'+
             '        <span class="big_orange">'+ deviceName +'</span>'+
             '        <span class="small_white">№ '+ serial +'</span>'+
@@ -78,6 +78,7 @@ function addSerialDataRowToPage(arr) {
             '        <span class="big_orange">'+ daysCount +'</span><br>'+
             '        <span class="small_white">'+ dayString +'</span>'+
             '    </div>'+
+            '    <div id="'+STATE_PREF+unit.id+'" class="state_host"></div>'+
             '</div>';
         }
 
@@ -196,5 +197,40 @@ function addCollectionOfDocumentToDiv(arr, unit) {
         }
         data += '</table>';
         document.getElementById('repair_search_result').innerHTML = '' + data;
+    }
+}
+
+function addCollectionOfDocumentToDiv_new(arr, host) {
+    let data;
+    if (arr.length === 0) {
+        document.getElementById(host).innerHTML =
+            '<span class="white_span">Статусов не найдено</span>';
+    } else {
+        let event;
+        data = '';
+        for (let i = 0; i < arr.length; i++) {
+            event = arr[i];
+
+            let stateDate = event.date.toDate().toLocaleDateString('ru-RU'); //Дата - 18.03.2021
+            let stateTime = event.date.toDate().toLocaleTimeString('ru-RU'); //Время - 09:07:49
+            let state = event.state_id;
+            let location = event.location_id;
+
+            state = getNameById(state, stateNameList, stateIdList);
+            location = getNameById(location, locationNameList, locationIdList);
+
+            data +=
+                '<div class="state_div">'+
+                '    <div class="item_info_div">'+
+                '        <span class="big_orange">'+ location +'</span><br>'+
+                '        <span class="small_white">'+ state +'</span>'+
+                '    </div>'+
+                '    <div class="date_div">'+
+                '        <span class="small_white">'+ stateDate +'</span><br>'+
+                '        <span class="small_white">'+ stateTime +'</span>'+
+                '    </div>'+
+                '</div>';
+        }
+        document.getElementById(host).innerHTML = '' + data;
     }
 }

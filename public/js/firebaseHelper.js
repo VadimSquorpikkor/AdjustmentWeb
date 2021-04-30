@@ -55,6 +55,8 @@ const SERIAL_TYPE = "serial_type";
 const REPAIR_TYPE = "repair_type";
 
 const ANY_VALUE = "any_value";
+const STATE_PREF = "state_";
+const DESCENDING = "desc";
 
 /** Класс для устройства, или блока детектирования */
 class DUnit {
@@ -235,4 +237,16 @@ function getRepairUnitByNameAndSerial(name, serial) {
             getAllEventsByUnitId(DBASE, TABLE_EVENTS, EVENT_UNIT, dUnit.id, addCollectionOfDocumentToDiv, dUnit, EVENT_DATE);
         }
     });
+}
+
+/**Показывает/скрывает список всех событий для выбранного юнита*/
+function getAllEventsByUnitIdSmall(unit_id) {
+    let host = STATE_PREF + unit_id;
+    let size = document.getElementById(host).innerHTML.length;
+    console.log(size);
+    //если список событий не показан, то показать, если уже показывается (size!==0), то очищаем (удаляем) список
+    if (size === 0) getAllEventsByUnitId_new(DBASE, TABLE_EVENTS, EVENT_UNIT, unit_id, addCollectionOfDocumentToDiv_new, EVENT_DATE, DESCENDING, host);
+    else document.getElementById(host).innerHTML = '';
+
+
 }

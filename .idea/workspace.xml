@@ -3,13 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebaseHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebaseHelper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebase_low_level.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/listeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/listeners.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +163,9 @@
       <workItem from="1619170150756" duration="1200000" />
       <workItem from="1619523803077" duration="8960000" />
       <workItem from="1619589075527" duration="17935000" />
-      <workItem from="1619675016433" duration="17143000" />
+      <workItem from="1619675016433" duration="19055000" />
+      <workItem from="1619700544004" duration="5707000" />
+      <workItem from="1619768932772" duration="6743000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -312,7 +314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619687501001</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="1.21 - 29/04/21&#10;1. Переписаны лисенеры. Сокращение кода&#10;2. Слово &quot;день&quot; в элементе списка теперь выводится в нужном падеже, в зависимости от количества дней">
+      <created>1619695937029</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1619695937029</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -380,6 +389,7 @@
     <MESSAGE value="на дом" />
     <MESSAGE value="1.19 - 28/04/21&#10;1. Перерисовал элемент списка найденных элементов: теперь список не в виде таблицы, каждый элемент отдельной плиткой. Отображается для каждого элемента: название устройства, серийный и внутренний номер, локация, дата/время последнего события, статус, количество дней в последней локации" />
     <MESSAGE value="1.20 - 29/04/21&#10;1. Переделан внешний вид фильтра: теперь красиво в виде плитки&#10;2. Если список найденных не отображается, то на месте списка отображается логотип (по аналогии с Android приложением AdjustmentDB)&#10;3. Исправлена ошибка перевода списков имен устройств" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.20 - 29/04/21&#10;1. Переделан внешний вид фильтра: теперь красиво в виде плитки&#10;2. Если список найденных не отображается, то на месте списка отображается логотип (по аналогии с Android приложением AdjustmentDB)&#10;3. Исправлена ошибка перевода списков имен устройств" />
+    <MESSAGE value="1.21 - 29/04/21&#10;1. Переписаны лисенеры. Сокращение кода&#10;2. Слово &quot;день&quot; в элементе списка теперь выводится в нужном падеже, в зависимости от количества дней" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.21 - 29/04/21&#10;1. Переписаны лисенеры. Сокращение кода&#10;2. Слово &quot;день&quot; в элементе списка теперь выводится в нужном падеже, в зависимости от количества дней" />
   </component>
 </project>

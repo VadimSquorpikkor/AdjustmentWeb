@@ -1,22 +1,23 @@
 /**Низкоуровневые методы для работы с БД. Приложение не работает с этими методами напрямую, а использует промежуточный класс (firebaseHelper).
  * Методы ничего не знают про приложение, не знают как называется БД и из каких таблиц (коллекций) состоит. Само приложение не в курсе, как работать с БД,
- * общается через firebaseHelper. Полная инкапсуляция. Надо будет ещё как-то с лисенерами разобраться, пока выбиваются из картинки. */
+ * общается через firebaseHelper. Полная инкапсуляция. */
 
-/***/
+/**Лисенер для коллекции БД. Суть такого лисенера: следит за изменениями в коллекции, при ивенте загружает из коллекции
+ * список всех имен и список всех идентификаторов. Оба списка передает через "этой функции", которая уже занимается
+ * сохранением списков и формированием из них спинеров*/
 function listen(database, table, func) {
     database.collection(table)
         .onSnapshot((snapshot) => {
             snapshot.docChanges().forEach((change) => {
                 console.log(change.doc.data());
                 getPairedCollectionFromDB(table, function (arr_id, arr_name) {
-                    // nameList = arr_name;
-                    // idList = arr_id;
-                    func(arr_name, arr_id);
+                    func(arr_name, arr_id); //Эта функция
                 });
             });
         });
 }
 
+/**Получение всех событий выбранного юнита по его идентификатору (unit.id)*/
 function getAllEventsByUnitId(database, table, param, value, func, obj, orderBy){
     let arr = [];
     database.collection(table)
@@ -32,6 +33,22 @@ function getAllEventsByUnitId(database, table, param, value, func, obj, orderBy)
     });
 }
 
+function getAllEventsByUnitId_new(database, table, param, value, func, orderBy, order, host){
+    let arr = [];
+    database.collection(table)
+        .where(param, "==", value)
+        .orderBy(orderBy, order)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            let event = new DEvent(doc.data().date, doc.data().description, doc.data().location_id, doc.data().state_id, doc.data().unit_id);
+            arr.push(event);
+        });
+        console.log(arr.length);
+        func(arr, host);
+    });
+}
+
+//todo кроме ANY_VALUE добавить ещё null и ""
 /**Получить все объекты из коллекции, совпадающие по параметрам. Если значение параметра равно ANY_VALUE,
  * то этот параметр будет проигнорирован при поиске*/
 function getAllUnitsByParam(database, table, converter,

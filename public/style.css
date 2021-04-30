@@ -46,7 +46,7 @@
 
 .states {
     background: #444444;
-    margin-left: 100px;
+    margin-left: 100px;+/
     text-align: end;
     float: left;
     margin-right: 0px;
@@ -195,6 +195,13 @@ input[type="button"]:active {
 .day_count_div {
     float: right;
     margin-top: 10px;
+    text-align: center;
+}
+
+.date_div {
+    float: right;
+    margin-top: 0px;
+    text-align: right;
 }
 
 .item_info_div {
@@ -214,4 +221,29 @@ input[type="button"]:active {
     margin: 2px auto;
     text-align: center;
     overflow:auto;
+}
+
+.state_host {
+    box-shadow: none;
+    padding-top: 0px;
+    clear: both;
+    /*display: none;*/
+}
+
+.state_div {
+    background: #777777;
+    box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.55);
+    border-radius: 5px;
+    font-size: 14px;
+    max-width: 400px;
+    padding: 4px 12px 4px 12px;
+    margin: 2px auto;
+    text-align: left;
+    overflow:auto;
+}
+
+.label_filter {
+    width: 150px;
+    display: inline-block;
+    text-align: right
 }

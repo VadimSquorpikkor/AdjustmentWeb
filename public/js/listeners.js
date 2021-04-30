@@ -70,9 +70,11 @@ function insertStatesNames(arr_name, arr_id) {
     stateNameList = arr_name;
     stateIdList = arr_id;
 
-    let arr2 = getNewArrayFromArray(arr_name);
-    arr2.unshift(ALL_STATES);
-    insertSpinnerByArray('states_spinner', arr2);
+    // let arr2 = getNewArrayFromArray(arr_name);
+    // arr2.unshift(ALL_STATES);
+    // insertSpinnerByArray('states_spinner', arr2);
+
+    getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner');
 }
 /** Загрузка всех статусов из БД в текущей локации и выбранного типа*/
 function getAllStatesInLocation(sp_location, serial_radio, id) {
