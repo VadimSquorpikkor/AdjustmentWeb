@@ -85,7 +85,7 @@ function getStatesInLocation(type, location, func) {
         .where(STATE_TYPE, 'in', [TYPE_ANY, type])
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            arr.push(doc.data().name);
+            arr.push(doc.data().name_ru);
         });
         func(arr);
     });
@@ -98,7 +98,7 @@ function getStates(type, func) {
         .where(STATE_TYPE, 'in', [TYPE_ANY, type]) //или type или any_type
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            arr.push(doc.data().name);
+            arr.push(doc.data().name_ru);
         });
         func(arr);
     });
@@ -111,7 +111,7 @@ function getPairedCollectionFromDB(table, func) {
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             arr_id.push(doc.data().id);
-            arr_name.push(doc.data().name);
+            arr_name.push(doc.data().name_ru);
         });
         func(arr_id, arr_name);
     });
@@ -123,37 +123,51 @@ function valueOf(id) {
 
 const db = firebase.firestore();
 /**Загрузка в БД из insert.html (там всё закомментировано)*/
-/*function loadStates(table, name, location, type, id) {
+/*function loadStates(name_ru, name_en, name_zh, name_it, location, type, id) {
         db.collection('states').doc(valueOf(id)).set({
-            name: valueOf(name),
+            name_ru: valueOf(name_ru),
+            name_en: valueOf(name_en),
+            name_zh: valueOf(name_zh),
+            name_it: valueOf(name_it),
             location_id: valueOf(location),
             type_id: valueOf(type),
             id: valueOf(id)
-        });
-}
+        }, { merge: true });
+}*/
 
-function loadDevices(id, name, type) {
+/**Для всех языков кроме русского загружается вариант как для английского*/
+/*function loadDevices(id, name_ru, name_en, type) {
     db.collection('devices').doc(valueOf(id)).set({
-        name: valueOf(name),
+        name_ru: valueOf(name_ru),
+        name_en: valueOf(name_en),
+        name_zh: valueOf(name_en),
+        name_it: valueOf(name_en),
         type: valueOf(type),
         id: valueOf(id)
-    });
-}
+    }, { merge: true });
+}*/
 
-function loadEmployees(id, name, email, location) {
+/**Для всех языков кроме русского загружается вариант как для английского (на китайском всё равно будет "Serikov")*/
+/*function loadEmployees(id, name_ru, name_en, email, location) {
     db.collection('employees').doc(valueOf(id)).set({
         id: valueOf(id),
-        name: valueOf(name),
+        name_ru: valueOf(name_ru),
+        name_en: valueOf(name_en),
+        name_zh: valueOf(name_en),
+        name_it: valueOf(name_en),
         email: valueOf(email),
         location_id: valueOf(location)
-    });
-}
+    }, { merge: true });
+}*/
 
-function loadLocations(id, name) {
+/*function loadLocations(id, name_ru, name_en, name_zh, name_it) {
     db.collection('locations').doc(valueOf(id)).set({
         id: valueOf(id),
-        name: valueOf(name)
-    });
+        name_ru: valueOf(name_ru),
+        name_en: valueOf(name_en),
+        name_zh: valueOf(name_zh),
+        name_it: valueOf(name_it)
+    }, { merge: true });
 }*/
 
 
@@ -244,7 +258,7 @@ function getAllObjectNames(database, table, func) {
     database.collection(table)
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            arr.push(doc.data().name);
+            arr.push(doc.data().name_ru);
         });
         func(arr);
     });

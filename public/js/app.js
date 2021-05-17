@@ -157,7 +157,7 @@ function addCollectionOfDocumentToDiv(arr, unit) {
     let data;
     if (arr.length === 0) {
         document.getElementById('repair_search_result').innerHTML =
-            '<h3>'+unit.name+' №' + unit.serial + '</h3>'+
+            '<h3>'+unit.name_ru+' №' + unit.serial + '</h3>'+
             '<span class="white_span">Статусов не найдено</span>';
     } else {
         let dState;

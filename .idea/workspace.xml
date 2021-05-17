@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/about_library" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/insert.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/insert.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebase_low_level.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +166,10 @@
       <workItem from="1620040326071" duration="1233000" />
       <workItem from="1620129581673" duration="888000" />
       <workItem from="1620280705375" duration="134000" />
-      <workItem from="1620377948366" duration="5079000" />
+      <workItem from="1620377948366" duration="5102000" />
+      <workItem from="1620973316132" duration="9887000" />
+      <workItem from="1621079215820" duration="1386000" />
+      <workItem from="1621258676120" duration="682000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -326,7 +332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619780033259</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="на дом">
+      <created>1620396674804</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1620396674804</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -391,11 +404,11 @@
     <MESSAGE value="1.16 - 09/04/21 на дом" />
     <MESSAGE value="1.17 - 21/04/21&#10;1. Теперь на сгенерированном коде в самом изображении отображается тип устройства и его номер&#10;2. Добавлено для ввода номера кнопки &quot;+&quot; &quot;-&quot; (увеличивать / уменьшать номер)&#10;3. Только для Chrome: сгенерированное изображение автоматом помещается в буфер обмена" />
     <MESSAGE value="1.18 - 28/04/21&#10;1. Глобально переписан JS. Лисенеры теперь загружают пары списков -- список для имен и список для идентификаторов. На странице будут выводиться имена, в БД будут передаваться идентификаторы&#10;2. Перерисована главная страница: теперь здесь сделан глобальный поиск устройств по БД, размещен фильтр для поиска. Поиск по: типу (серия/ремонт), по имени устройства, по локации, по статусу, по фамилии ответственного&#10;3. Если в параметре поиска написать серийный номер, то поиск будет везтись ТОЛЬКО по серийному номеру, все другие параметры будут игнорироваться&#10;4. Содержимое спиннера для статусов зависит от выбранного типа (серия/ремонт) и от выбранной локации, если выбрать &quot;Все локации&quot;, то будут отображаться все существующие статусы&#10;5. Все списки загружаются лисенерами, а значит любое изменение в соответствующей коллекции в БД немедленно приведет к обновлению соответствующего списка и спиннера без перезагрузки страницы&#10;6. Реализован переводчик из id в имя и из имени в id (для списков данных)&#10;7. В списке найденных устройств теперь все данные показываются правильно (раньше вместо названия указывался его идентификатор)" />
-    <MESSAGE value="на дом" />
     <MESSAGE value="1.19 - 28/04/21&#10;1. Перерисовал элемент списка найденных элементов: теперь список не в виде таблицы, каждый элемент отдельной плиткой. Отображается для каждого элемента: название устройства, серийный и внутренний номер, локация, дата/время последнего события, статус, количество дней в последней локации" />
     <MESSAGE value="1.20 - 29/04/21&#10;1. Переделан внешний вид фильтра: теперь красиво в виде плитки&#10;2. Если список найденных не отображается, то на месте списка отображается логотип (по аналогии с Android приложением AdjustmentDB)&#10;3. Исправлена ошибка перевода списков имен устройств" />
     <MESSAGE value="1.21 - 29/04/21&#10;1. Переписаны лисенеры. Сокращение кода&#10;2. Слово &quot;день&quot; в элементе списка теперь выводится в нужном падеже, в зависимости от количества дней" />
     <MESSAGE value="1.23 - 30/04/21&#10;1. Добавлено: при клике на элементе списка найденных устройств раскрывается список событий этого устройства. При повторном клике — список исчезает" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.23 - 30/04/21&#10;1. Добавлено: при клике на элементе списка найденных устройств раскрывается список событий этого устройства. При повторном клике — список исчезает" />
+    <MESSAGE value="на дом" />
+    <option name="LAST_COMMIT_MESSAGE" value="на дом" />
   </component>
 </project>
