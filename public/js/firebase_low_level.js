@@ -17,6 +17,20 @@ function listen(database, table, func) {
         });
 }
 
+
+
+
+
+
+/*DBASE.collection(TABLE_STATES)
+    .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            console.log(change.doc.data());
+            getAllStates();
+        });
+    });*/
+
+
 /**Получение всех событий выбранного юнита по его идентификатору (unit.id)*/
 function getAllEventsByUnitId(database, table, param, value, func, obj, orderBy){
     let arr = [];
@@ -48,6 +62,10 @@ function getAllEventsByUnitId_new(database, table, param, value, func, orderBy, 
     });
 }
 
+/**Обертка для getAllUnitsByParam*/
+function getUnitListFromBD(deviceName, location, employee, type, state, serial) {
+    getAllUnitsByParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_DEVICE, deviceName, UNIT_LOCATION, location, UNIT_EMPLOYEE, employee, UNIT_TYPE, type, UNIT_STATE, state, UNIT_SERIAL, serial, addSerialDataRowToPage);
+}
 //todo кроме ANY_VALUE добавить ещё null и ""
 /**Получить все объекты из коллекции, совпадающие по параметрам. Если значение параметра равно ANY_VALUE,
  * то этот параметр будет проигнорирован при поиске*/
@@ -170,6 +188,30 @@ const db = firebase.firestore();
     }, { merge: true });
 }*/
 
+function loadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
+    /*db.collection('names').doc(valueOf(id)).set({
+        ru: valueOf(name_ru),
+        en: valueOf(name_en),
+        zh: valueOf(name_it),
+        it: valueOf(name_de),
+        de: valueOf(name_fr)
+    }, { merge: true });*/
+
+    /*if (valueOf(name_ru)!=="")db.collection('names').doc(valueOf(id)).set({ ru: valueOf(name_ru)}, { merge: true });
+    if (valueOf(name_en)!=="")db.collection('names').doc(valueOf(id)).set({ en: valueOf(name_en)}, { merge: true });
+    if (valueOf(name_it)!=="")db.collection('names').doc(valueOf(id)).set({ it: valueOf(name_it)}, { merge: true });
+    if (valueOf(name_de)!=="")db.collection('names').doc(valueOf(id)).set({ de: valueOf(name_de)}, { merge: true });
+    if (valueOf(name_fr)!=="")db.collection('names').doc(valueOf(id)).set({ fr: valueOf(name_fr)}, { merge: true });*/
+}
+
+function clearInput(id1, id2, id3, id4, id5, id6) {
+    document.getElementById(id1).value = "";
+    document.getElementById(id2).value = "";
+    document.getElementById(id3).value = "";
+    document.getElementById(id4).value = "";
+    document.getElementById(id5).value = "";
+    document.getElementById(id6).value = "";
+}
 
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -247,6 +289,20 @@ function getAllByThreeParam(database, table, converter, param_1, value_1, param_
             arr.push(obj);
         });
         func(arr);
+    });
+}
+
+
+function getAllRuMapNames(database, table, func) {
+    let map = new Map();
+    database.collection(table)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            map.set(doc.id(), doc.data().ru)
+            console.log(doc.id()+' - '+doc.data().ru);
+            // arr.push(doc.data().name_ru);
+        });
+        func(map);
     });
 }
 

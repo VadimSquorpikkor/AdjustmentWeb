@@ -1,5 +1,7 @@
 /**Имя базы данных*/
 const DBASE = firebase.firestore();
+const TABLE_NAMES = "names";
+
 
 const ALL_DEVICES = "Все устройства";
 const ALL_STATES = "Все статусы";
@@ -177,28 +179,22 @@ function startSearch(devName_id, location_id, state_id, employee_id, serial_id, 
 
     console.log("name="+deviceName+" loc="+location+" state="+state+" empl="+employee+" serial="+serial+" type="+type);
 
+    //Если параметр не "any", то имя параметра переводим в его идентификатор ("Диагностика" -> "adj_r_diagnostica")
+    //Если "any", то так и оставляем
     if (deviceName === ALL_DEVICES) deviceName = ANY_VALUE;
+    else deviceName = getIdByName(deviceName, deviceNameList, deviceIdList);
     if (location === ALL_LOCATIONS) location = ANY_VALUE;
+    else location = getIdByName(location, locationNameList, locationIdList);
     if (state === ALL_STATES) state = ANY_VALUE;
+    else state = getIdByName(state, stateNameList, stateIdList);
     if (employee === ALL_EMPLOYEES) employee = ANY_VALUE;
+    else employee = getIdByName(employee, employeeNameList, employeeIdList);
 
+    //Если поле номера пустое, то ищем по параметрам, если поле содержит значение, то ищем по этому значению, игнорируя
+    // все остальные параметры. Т.е. ищем или по параметрам, или по номеру
     if (serial === "") getUnitListFromBD(deviceName, location, employee, type, state, ANY_VALUE);
     else getUnitListFromBD(ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE, serial);
 
-}
-
-/**По выбранным параметрам получает из БД список юнитов*/
-function getUnitListFromBD(deviceName, location, employee, type, state, serial) {
-    //Если параметр не "any", то имя параметра переводим в его идентификатор ("Диагностика" -> "adj_r_diagnostica")
-    //Если "any", то так и оставляем
-    if (deviceName !== ANY_VALUE) deviceName = getIdByName(deviceName, deviceNameList, deviceIdList);
-    if (location !== ANY_VALUE) location = getIdByName(location, locationNameList, locationIdList);
-    if (state !== ANY_VALUE) state = getIdByName(state, stateNameList, stateIdList);
-    if (employee !== ANY_VALUE) employee = getIdByName(employee, employeeNameList, employeeIdList);
-
-    console.log("name="+deviceName+" loc="+location+" state="+state+" empl="+employee+" serial="+serial+" type="+type);
-
-    getAllUnitsByParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_DEVICE, deviceName, UNIT_LOCATION, location, UNIT_EMPLOYEE, employee, UNIT_TYPE, type, UNIT_STATE, state, UNIT_SERIAL, serial, addSerialDataRowToPage);
 }
 
 

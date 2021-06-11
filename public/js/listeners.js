@@ -21,6 +21,9 @@ function getNameById(id, nameList, idList) {
     else return nameList[position];
 }
 
+
+
+
 // ---------------------------------------------------------------------------------------------------------------------
 let deviceIdList = [];
 let deviceNameList = [];
@@ -30,6 +33,50 @@ let stateIdList = [];
 let stateNameList = [];
 let employeeIdList = [];
 let employeeNameList = [];
+
+
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+let loadedIdDictionary = new Map();
+let loadedNameDictionary = new Map();
+
+function getIdInDictionary(name) {
+    return loadedNameDictionary.get(name);
+}
+
+function getNameInDictionary(id) {
+    return loadedIdDictionary.get(id);
+}
+
+function insertMapToDictionary(id_map, name_map) {
+    loadedIdDictionary = id_map;
+    loadedNameDictionary = name_map;
+    console.log(loadedIdDictionary.size);
+}
+
+function showDictionary(map) {
+    for (let [key, value] of map) {
+        console.log(key + " = " + value);
+    }
+}
+
+function listenDictionary(database, table, func) {
+    let ids = new Map();
+    let names = new Map();
+    database.collection(table)
+        .onSnapshot((snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+                console.log(change.doc.id+' - '+change.doc.data().ru);
+                ids.set(change.doc.id, change.doc.data().ru);
+                names.set(change.doc.data().ru, change.doc.id);
+            });
+            func(ids, names);
+        });
+}
+
+listenDictionary(DBASE, TABLE_NAMES, insertMapToDictionary)
+
 // ---------------------------------------------------------------------------------------------------------------------
 /**Лисенер для списка имен устройств*/
 listen(DBASE, TABLE_DEVICES, insertDevNames);

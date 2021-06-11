@@ -30,7 +30,23 @@
     <a href="qr_page.html">QR-генератор</a>
 
     <h1>AdjustmentInsertData</h1>
+
+
     <hr>
+    <h3>Names</h3>
+    <input type="text" placeholder="id" id="n_id" style="width:150px"><br>
+    <input type="text" placeholder="en" id="n2" style="width:100px">
+    <input type="text" placeholder="fr" id="n5" style="width:100px">
+    <input type="text" placeholder="de" id="n4" style="width:100px">
+    <input type="text" placeholder="it" id="n3" style="width:100px">
+    <input type="text" placeholder="ru" id="n1" style="width:100px">
+    <br>
+    <input type="button" onclick="loadNames('n_id', 'n1', 'n2', 'n3', 'n4', 'n5')" value="Добавить">
+    <input type="button" onclick="clearInput('n_id', 'n1', 'n2', 'n3', 'n4', 'n5')" value="Очистить">
+
+
+
+    <!--<hr>
     <h3>States</h3>
     <select id="v2_input" style="width:170px">
         <option value="adjustment">Регулировка</option>
@@ -87,7 +103,7 @@
     <br>
     <input type="button" onclick="loadLocations('loc_v1', 'loc_name_ru', 'loc_name_en', 'loc_name_zh', 'loc_name_it')" value="Добавить">
 
-    <hr>
+    <hr>-->
 
 </div>
 </body>
