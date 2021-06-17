@@ -1,10 +1,3 @@
-function getNewArrayFromArray(arr) {
-    let arr2 = [];
-    for (let i = 0; i < arr.length; i++) {
-        arr2.push(arr[i]);
-    }
-    return arr2;
-}
 
 function getNamesFromObjectList(arr) {
     let newArr = [];
@@ -24,15 +17,10 @@ function joinNamesRu(name_id, obj, func) {
     let docRef = DBASE.collection(TABLE_NAMES).doc(name_id);
     docRef.get().then((doc) => {
         if (doc.exists) {
-            // console.log("Document data:", doc.data().ru);
             obj.setNameRu(doc.data().ru);
-            // console.log(location.getNameRu);
             func();
         } else {
             console.log("No such document!");
-            //это не нужно, если значение не будет найдено, то останется, как и было, а при вызове конструктора было записано в имя name_id, оно и останется!
-            // location.setNameRu(name_id);
-            // updateLocationSpinner();
         }
     }).catch((error) => {
         console.log("Error getting document:", error);
@@ -48,16 +36,6 @@ let devices = [];
 //----------------------------------------------------------------------------------------------------------------------
 /**Добавления списка локаций в спиннер*/
 function updateLocationSpinner() {
-
-
-    // locations = [];
-    // locations.unshift(new Location(ALL_LOCATIONS, ANY_VALUE, ALL_LOCATIONS))
-    // let arr = getNamesFromObjectList(locations);
-
-    // let arr2 = getNewArrayFromArray(getNamesFromObjectList(locations));
-    // arr2.unshift(ALL_LOCATIONS);
-
-
     let arr = getNamesFromObjectList(locations);
     insertSpinnerByArray_new(locationSpinner, arr);
 }
@@ -75,14 +53,13 @@ function loadLocation() {
             let id = doc.data().id;
             let name_id = doc.data().name_id;
             let name_ru = doc.data().name_id;
-            console.log(id+" "+name_id+" "+name_ru);
+            //console.log(id+" "+name_id+" "+name_ru);
             let location = new Location(id, name_id, name_ru);
 
             joinNamesRu(name_id, location, updateLocationSpinner);
 
             loc_arr.push(location);
         });
-        // locations = loc_arr;
         setLocations(loc_arr);
         updateLocationSpinner();
     });
@@ -91,9 +68,6 @@ function loadLocation() {
 //----------------------------------------------------------------------------------------------------------------------
 /**Добавления списка сотрудников в спиннер*/
 function updateEmployeeSpinner() {
-    // let arr2 = getNewArrayFromArray(getNamesFromObjectList(employees));
-    // arr2.unshift(ALL_EMPLOYEES);
-    // insertSpinnerByArray('employee_spinner', arr2);
     let arr = getNamesFromObjectList(employees);
     insertSpinnerByArray_new(employeeSpinner, arr);
 }
@@ -121,25 +95,19 @@ function loadEmployees() {
             let name_ru = doc.data().name_id;
             let email = doc.data().email;
             let location_id = doc.data().location_id;
-            console.log(id+" "+name_id+" "+name_ru+" "+email+" "+location_id);
+            //console.log(id+" "+name_id+" "+name_ru+" "+email+" "+location_id);
             let employee = new Employee(id, name_id, name_ru, email, location_id);
 
             joinNamesRu(name_id, employee, updateEmployeeSpinner);
 
             emp_arr.push(employee);
         });
-        // employees = emp_arr;
         setEmployees(emp_arr);
         updateEmployeeSpinner();
     });
 }
 //----------------------------------------------------------------------------------------------------------------------
 function updateStatesSpinner() {
-    // let arr2 = getNewArrayFromArray(getNamesFromObjectList(states));
-    // arr2.unshift(ALL_STATES);
-    // insertSpinnerByArray('states_spinner', arr2);
-    //////////insertSpinnerByArray_new(statesSpinner, arr2);
-
     let arr = getNamesFromObjectList(states);
     insertSpinnerByArray_new(statesSpinner, arr);
 }
@@ -159,14 +127,13 @@ function loadStates() {
             let name_ru = doc.data().name_id;
             let type = doc.data().type_id;
             let location_id = doc.data().location_id;
-            console.log(id+" "+name_id+" "+name_ru+" "+type+" "+location_id);
+            //console.log(id+" "+name_id+" "+name_ru+" "+type+" "+location_id);
             let state = new State(id, name_id, name_ru, type, location_id);
 
             joinNamesRu(name_id, state, updateStatesSpinner);
 
             sta_arr.push(state);
         });
-        // states = sta_arr;
         setStates(sta_arr);
         updateStatesSpinner();
     });
@@ -194,10 +161,6 @@ function loadStates() {
 // }
 //----------------------------------------------------------------------------------------------------------------------
 function updateDeviceSpinner() {
-    // let arr2 = getNewArrayFromArray(getNamesFromObjectList(devices));
-    // arr2.unshift(ALL_DEVICES);
-    // insertSpinnerByArray('names_spinner', arr2);
-
     let arr = getNamesFromObjectList(devices);
     insertSpinnerByArray_new(namesSpinner, arr);
 }
@@ -215,19 +178,27 @@ function loadDevices() {
             let id = doc.data().id;
             let name_id = doc.data().name_id;
             let name_ru = doc.data().name_id;
-            console.log(id+" "+name_id+" "+name_ru);
+            //console.log(id+" "+name_id+" "+name_ru);
             let device = new Device(id, name_id, name_ru);
 
             joinNamesRu(name_id, device, updateDeviceSpinner);
 
             dev_arr.push(device);
         });
-        // devices = dev_arr;
         setDevices(dev_arr);
         updateDeviceSpinner();
     });
 }
 //----------------------------------------------------------------------------------------------------------------------
+/**Показывает/скрывает список всех событий для выбранного юнита*/
+function getAllEventsByUnitIdSmall(unit_id) {
+    let host = STATE_PREF + unit_id;
+    let size = document.getElementById(host).innerHTML.length;
+    //если список событий не показан, то показать, если уже показывается (size!==0), то очищаем (удаляем) список
+    if (size === 0) getAllEventsByUnitId_new(DBASE, TABLE_EVENTS, EVENT_UNIT, unit_id, addCollectionOfDocumentToDiv_new, EVENT_DATE, DESCENDING, host);
+    else document.getElementById(host).innerHTML = '';
+
+}
 
 function startSearch_new() {
     //В чём вся магия получения id имени из спиннеров, в которых содержаться только имена (без идентификаторов): в
@@ -239,10 +210,6 @@ function startSearch_new() {
     // оба списка всегда совпадают, по позиции имени в спиннере в списке объектов всегда лежит объект с таким же именем)
     // берем объект локации, а у этого объекта берем значение name_id.
 
-    // console.log("!!! "+namesSpinner.selectedIndex);
-    // console.log("!!! "+devices[namesSpinner.selectedIndex].getNameId);
-
-
     let deviceName_id = devices[namesSpinner.selectedIndex].getNameId;
     let location_id =   locations[locationSpinner.selectedIndex].getNameId;
     let state_id =      states[statesSpinner.selectedIndex].getNameId;
@@ -252,27 +219,12 @@ function startSearch_new() {
 
     console.log("name="+deviceName_id+" loc="+location_id+" state="+state_id+" empl="+employee_id+" serial="+serial+" type="+type_id);
 
-    //Если параметр не "any", то имя параметра переводим в его идентификатор ("Диагностика" -> "adj_r_diagnostica")
-    //Если "any", то так и оставляем
-    // if (deviceName === ALL_DEVICES) deviceName = ANY_VALUE;
-    // else deviceName = getIdByName(deviceName, deviceNameList, deviceIdList);
-    // if (location === ALL_LOCATIONS) location = ANY_VALUE;
-    // else location = getIdByName(location, locationNameList, locationIdList);
-    // if (state === ALL_STATES) state = ANY_VALUE;
-    // else state = getIdByName(state, stateNameList, stateIdList);
-    // if (employee === ALL_EMPLOYEES) employee = ANY_VALUE;
-    // else employee = getIdByName(employee, employeeNameList, employeeIdList);
-
     //Если поле номера пустое, то ищем по параметрам, если поле содержит значение, то ищем по этому значению, игнорируя
     // все остальные параметры. Т.е. ищем или по параметрам, или по номеру
     if (serial === "") getUnitListFromBD(deviceName_id, location_id, employee_id, type_id, state_id, ANY_VALUE);
     else getUnitListFromBD(ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE, serial);
 }
 
-
-function getNameByIdFromObjectList(id) {
-
-}
 
 function getEmployeeById(id) {
     for (let i = 0; i < employees.length; i++) {
@@ -310,8 +262,6 @@ const statesSpinner = document.getElementById('states_spinner');
 const employeeSpinner = document.getElementById('employee_spinner');
 const searchButton = document.getElementById('search_button');
 
-//let type = document.getElementById(serial_radio).checked?TYPE_SERIAL:TYPE_REPAIR;
-
 serialRadio.addEventListener('click', function () {
     //todo on change getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner')
     isSerial = true;
@@ -335,48 +285,3 @@ listen_new(DBASE, TABLE_LOCATIONS, loadLocation);
 listen_new(DBASE, TABLE_EMPLOYEES, loadEmployees);
 listen_new(DBASE, TABLE_STATES, loadStates);
 listen_new(DBASE, TABLE_DEVICES, loadDevices);
-
-
-//----------------------------------------------------------------------------------------------------------------------
-
-/*
-ДЛЯ ПОНИМАНИЯ РАБОТЫ JOIN ОСТАВИЛ МЕТОД БЕЗ joinNamesRu, ЭТО ТО ЖЕ САМОЕ, ТОЛЬКО МЕТОД НЕ ВЫНЕСЕН ОТДЕЛЬНО
-function loadLocation() {
-    let loc_arr = [];
-    DBASE.collection(TABLE_LOCATIONS)
-        .get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            let id = doc.data().id;
-            let name_id = doc.data().name_id;
-            let name_ru = doc.data().name_id;
-            console.log(id+" "+name_id+" "+name_ru);
-            let location = new Location(id, name_id, name_ru);
-
-            //--- JOIN -------------------------------------------------------------------------------------------------
-            let docRef = DBASE.collection(TABLE_NAMES).doc(name_id);
-            docRef.get().then((doc) => {
-                if (doc.exists) {
-                    console.log("Document data:", doc.data().ru);
-                    location.setNameRu(doc.data().ru);
-                    console.log(location.getNameRu);
-                    updateLocationSpinner();
-                } else {
-                    console.log("No such document!");
-                    //это не нужно, если значение не будет найдено, то останется, как и было, а при вызове конструктора было записано в имя name_id, оно и останется!
-                    // location.setNameRu(name_id);
-                    // updateLocationSpinner();
-                }
-            }).catch((error) => {
-                console.log("Error getting document:", error);
-            });
-            //----------------------------------------------------------------------------------------------------------
-
-
-            loc_arr.push(location);
-        });
-        locations = loc_arr;
-        updateLocationSpinner();
-        // insertLocationsNamesNew(getNamesFromObjectList(loc_arr))
-        // func(arr_id, arr_name);
-    });
-}*/

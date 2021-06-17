@@ -145,3 +145,91 @@ class Device {
         this._name_ru = value;
     }
 }
+
+
+/** Класс для устройства, или блока детектирования */
+class DUnit {
+    constructor(id, description, device_id, employee_id, inner_serial, location_id, serial, state_id, type_id, date) {
+        this.id = id;
+        this.description = description;
+        this.device_id = device_id;
+        this.employee_id = employee_id;
+        this.inner_serial = inner_serial;
+        this.location_id = location_id;
+        this.serial = serial;
+        this.state_id = state_id;
+        this.type_id = type_id;
+        this.date = date;
+    }
+
+    toString() {
+        return this.id + ', ' +
+            this.description + ', ' +
+            this.device_id + ', ' +
+            this.employee_id + ', ' +
+            this.inner_serial + ', ' +
+            this.location_id + ', ' +
+            this.serial + ', ' +
+            this.state_id + ', ' +
+            this.type_id + ', ' +
+            this.date;
+    }
+}
+
+/** Firestore data converter. Нужен для загрузки из БД объекта класса DUnit */
+let dUnitConverter = {
+    toFirestore: function (dunit) {
+        return {
+            id: dunit.id,
+            description: dunit.description,
+            device_id: dunit.device_id,
+            employee_id: dunit.employee_id,
+            inner_serial: dunit.inner_serial,
+            location_id: dunit.location_id,
+            serial: dunit.serial,
+            state_id: dunit.state_id,
+            type_id: dunit.type_id,
+            date: dunit.date
+        };
+    },
+    fromFirestore: function (snapshot, options) {
+        const data = snapshot.data(options);
+        return new DUnit(data.id, data.description, data.device_id, data.employee_id, data.inner_serial, data.location_id, data.serial, data.state_id, data.type_id, data.date);
+    }
+};
+
+/**Класс статусов. Содержит сам статус и его дату*/
+class DEvent {
+    constructor(date, description, location_id, state_id, unit_id) {
+        this.date = date;
+        this.description = description;
+        this.location_id = location_id;
+        this.state_id = state_id;
+        this.unit_id = unit_id;
+    }
+
+    toString() {
+        return this.date + ', ' +
+            this.description + ', ' +
+            this.location_id + ', ' +
+            this.state_id + ', ' +
+            this.unit_id;
+    }
+}
+
+/** Firestore data converter. Нужен для загрузки из БД объекта класса dState */
+let dEventConverter = {
+    toFirestore: function (dEvent) {
+        return {
+            date: dEvent.date,
+            description: dEvent.description,
+            location_id: dEvent.location_id,
+            state_id: dEvent.state_id,
+            unit_id: dEvent.unit_id
+        };
+    },
+    fromFirestore: function (snapshot, options) {
+        const data = snapshot.data(options);
+        return new DEvent(data.date, data.description, data.location_id, data.state_id, data.unit_id);
+    }
+}

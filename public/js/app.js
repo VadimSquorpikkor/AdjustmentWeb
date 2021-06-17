@@ -29,10 +29,6 @@ function getValueFromSpinner(id) {
     else console.log("------- НЕТ ЭЛЕМЕНТА С ID = "+id);
 }
 
-function valueOfElement(id) {
-    return document.getElementById(id).value
-}
-
 function rightDayString(i) {
     if (i===11||i===12||i===13||i===14)return "дней";
     switch (i%10) {
@@ -70,11 +66,6 @@ function addSerialDataRowToPage(arr) {
             let location = unit.location_id;
             let dayString = rightDayString(daysCount);
 
-
-            // deviceName = getNameById(deviceName, deviceNameList, deviceIdList);
-            // state = getNameById(state, stateNameList, stateIdList);
-            // location = getNameById(location, locationNameList, locationIdList);
-
             deviceName = getDeviceById(deviceName).getNameRu;
             state = getStateById(state).getNameRu;
             location = getLocationById(location).getNameRu;
@@ -101,118 +92,12 @@ function addSerialDataRowToPage(arr) {
     }
 }
 
-/**Таблица серийных устройств. Из массива данных формирует HTML таблицу и заполняет её данными из массива*/
-function addSerialDataRowToPage_old(arr) {
-    if (arr.length === 0) insertNothing('row_table');
-    else if (document.getElementById('row_table') != null) {
-
-        let data ='<table class="row_table"' +
-            '<tr>' +
-            '<th>Имя</th>' +
-            '<th>Внутренний номер</th>' +
-            '<th>Серийный</th>' +
-            '<th>Статус</th>' +
-            '<th>Локация</th>' +
-            '</tr>';
-        let unit;
-        for (let i = 0; i < arr.length; i++) {
-            console.log(i);
-            unit = arr[i];
-            data += '<tr>' +
-                '<td>' + getNameById(unit.device_id, deviceNameList, deviceIdList) + '</td>' +
-                '<td>' + unit.inner_serial + '</td>' +
-                '<td>' + unit.serial + '</td>' +
-                '<td>' + getNameById(unit.state_id, stateNameList, stateIdList) + '</td>' +
-                '<td>' + getNameById(unit.location_id, locationNameList, locationIdList) + '</td>' +
-                '</tr>'
-            ;
-        }
-        data += '</table>';
-        document.getElementById('row_table').innerHTML = '' + data;
-    }
-}
-
-/**Таблица ремонтных устройств. Из массива данных формирует HTML таблицу и заполняет её данными из массива*/
-function addRepairDataRowToPage(arr) {
-    if (arr.length === 0) insertNothing('repair_table');
-    else if (document.getElementById('repair_table') != null) {
-        let data = '<table class="row_table"' +
-            '<tr>' +
-            '<th>Имя</th>' +
-            '<th>Серийный</th>' +
-            '<th>Статус</th>' +
-            '<th>Локация</th>' +
-            '</tr>';
-        let unit;
-        for (let i = 0; i < arr.length; i++) {
-            unit = arr[i];
-            data += '<tr>' +
-                '<td>' + getDeviceById(unit.device_id).getNameRu + '</td>' +
-                '<td>' + unit.serial + '</td>' +
-                '<td>' + getStateById(unit.state_id).getNameRu + '</td>' +
-                '<td>' + getLocationById(unit.location_id).getNameRu + '</td>' +
-                '</tr>'
-            ;
-        }
-        data += '</table>';
-        document.getElementById('repair_table').innerHTML = '' + data;
-    }
-}
-
-/**Вставляет <SPAN> "Не найдено" в выбранный по id элемент
- *
+/**
+ * Вставляет <SPAN> "Не найдено" в выбранный по id элемент
  * @param id - id элемента, в который будет вставлено "Не найдено"
  */
 function insertNothing(id) {
     document.getElementById(id).innerHTML = '<span class="white_span">'+FOUND_NOTHING+'</span>'
-}
-
-/**Формирует таблицу событий для выбранного юнита*/
-function addCollectionOfDocumentToDiv(arr, unit) {
-    let data;
-    if (arr.length === 0) {
-        document.getElementById('repair_search_result').innerHTML =
-            '<h3>'+unit.name_ru+' №' + unit.serial + '</h3>'+
-            '<span class="white_span">Статусов не найдено</span>';
-    } else {
-        let dState;
-        data =
-            //'<h3>'+unit.device_id+' №' + unit.serial + '</h3>'+
-            '<table class="row_table" id="repair_search_result_table">'+
-            '<tr>' +
-            '<th style="width: 200px">Дата</th>' +
-            '<th style="width: 400px">Статус</th>' +
-            '</tr>';
-        for (let i = 0; i < arr.length; i++) {
-            dState = arr[i];
-
-            // console.log('!1 '+new Date(dState.date).getDate()); //NaN
-            // console.log('!2 '+new Date(dState.date)); //Invalid Date
-            // console.log('!3 '+new Date(dState.date/1000000)); //Thu Jan 01 1970 03:01:03 GMT+0300 (Москва, стандартное время)
-            // console.log('!4 '+new Date(dState.date/1000)); //Thu Jan 01 1970 20:42:31 GMT+0300 (Москва, стандартное время)
-            // console.log('!5 '+dState.date); //063751644469.254000000
-            // console.log('!6 '+dState.date.date); //undefined
-            // console.log('!7 '+dState.date.dateTime); //undefined
-            // console.log('!9 '+dState.date); //063751644469.254000000
-            // console.log('!12 '+new Date(dState.date._seconds*1000)); //Invalid Date
-            // console.log('!11 '+dState.date.toDate().toDateString()); //Thu Mar 18 2021
-            // console.log('!12 '+dState.date.toDate().toLocaleTimeString('en-US')); //9:07:49 AM
-            // console.log('!13 '+dState.date.toDate().toLocaleDateString('en-US')); //3/18/2021
-            // console.log('!12 '+dState.date.toDate().toLocaleTimeString('ru-RU')); //09:07:49
-            // console.log('!14 '+dState.date.toDate().toLocaleDateString('ru-RU')); //18.03.2021
-            // console.log('!15 '+firebase.firestore.Timestamp.fromDate(new Date()).toDate()); //Thu Mar 18 2021 11:26:37 GMT+0300 (Москва, стандартное время)
-
-            let stateDate = dState.date.toDate().toLocaleDateString('ru-RU'); //Дата - 18.03.2021
-            let stateTime = dState.date.toDate().toLocaleTimeString('ru-RU'); //Время - 09:07:49
-
-            data += '<tr>' +
-                '<td>' + stateDate + ' ' + stateTime + '</td>' +
-                '<td>' + dState.state_id + '</td>' +
-                '</tr>';
-        }
-        data += '</table>';
-        document.getElementById('repair_search_result').innerHTML = '' + data;
-    }
 }
 
 function addCollectionOfDocumentToDiv_new(arr, host) {
@@ -230,9 +115,6 @@ function addCollectionOfDocumentToDiv_new(arr, host) {
             let stateTime = event.date.toDate().toLocaleTimeString('ru-RU'); //Время - 09:07:49
             let state = event.state_id;
             let location = event.location_id;
-
-            // state = getNameById(state, stateNameList, stateIdList);
-            // location = getNameById(location, locationNameList, locationIdList);
 
             state = getStateById(state).getNameRu;
             location = getLocationById(location).getNameRu;
@@ -252,3 +134,20 @@ function addCollectionOfDocumentToDiv_new(arr, host) {
         document.getElementById(host).innerHTML = '' + data;
     }
 }
+
+// Для времени варианты
+// console.log('!1 '+new Date(dState.date).getDate()); //NaN
+// console.log('!2 '+new Date(dState.date)); //Invalid Date
+// console.log('!3 '+new Date(dState.date/1000000)); //Thu Jan 01 1970 03:01:03 GMT+0300 (Москва, стандартное время)
+// console.log('!4 '+new Date(dState.date/1000)); //Thu Jan 01 1970 20:42:31 GMT+0300 (Москва, стандартное время)
+// console.log('!5 '+dState.date); //063751644469.254000000
+// console.log('!6 '+dState.date.date); //undefined
+// console.log('!7 '+dState.date.dateTime); //undefined
+// console.log('!9 '+dState.date); //063751644469.254000000
+// console.log('!12 '+new Date(dState.date._seconds*1000)); //Invalid Date
+// console.log('!11 '+dState.date.toDate().toDateString()); //Thu Mar 18 2021
+// console.log('!12 '+dState.date.toDate().toLocaleTimeString('en-US')); //9:07:49 AM
+// console.log('!13 '+dState.date.toDate().toLocaleDateString('en-US')); //3/18/2021
+// console.log('!12 '+dState.date.toDate().toLocaleTimeString('ru-RU')); //09:07:49
+// console.log('!14 '+dState.date.toDate().toLocaleDateString('ru-RU')); //18.03.2021
+// console.log('!15 '+firebase.firestore.Timestamp.fromDate(new Date()).toDate()); //Thu Mar 18 2021 11:26:37 GMT+0300 (Москва, стандартное время)
