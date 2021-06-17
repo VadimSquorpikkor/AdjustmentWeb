@@ -28,7 +28,9 @@
     <script defer src="js/app.js"></script>
     <script defer src="js/firebaseHelper.js"></script>
     <script defer src="js/firebase_low_level.js"></script>
-    <script defer src="js/listeners.js"></script>
+    <script defer src="js/entities.js"></script>
+    <script defer src="js/bis_logic.js"></script>
+<!--    <script defer src="js/listeners.js"></script>-->
     <script defer src="js/qr_code.js"></script>
 
 </head>
@@ -46,14 +48,13 @@
     <h1>AdjustmentWeb</h1>
     <h3>База данных УРиР</h3>
 
+<!--    <input type="button" id="test_button" style="width:100px" value="Найти">-->
     <div class="search_filter_div">
 
         <div>
-            <input type="radio" id="serial_radio" name="type" checked="checked" value="serial_type"
-                   onchange="getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner')">
+            <input type="radio" id="serial_radio" name="type" checked="checked" value="serial_type">
             <label for="serial_radio">Серия</label>
-            <input type="radio" id="repair_radio" name="type" value="repair_type"
-                   onchange="getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner')">
+            <input type="radio" id="repair_radio" name="type" value="repair_type">
             <label for="repair_radio">Ремонт</label>
         </div>
 
@@ -63,19 +64,22 @@
         <span class="label_filter">Название устройства: </span>
         <select id="names_spinner" style="width:165px; margin-bottom: 4px"></select><br>
         <span class="label_filter">Местонахождение: </span>
-        <select id="location_spinner" onchange="getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner')" style="width:165px; margin-bottom: 4px"></select><br>
+<!--        <select id="location_spinner" onchange="getAllStatesInLocation('location_spinner', 'serial_radio', 'states_spinner')" style="width:165px; margin-bottom: 4px"></select><br>-->
+        <select id="location_spinner" style="width:165px; margin-bottom: 4px"></select><br>
         <span class="label_filter">Статус устройства: </span>
         <select id="states_spinner" style="width:165px; margin-bottom: 4px"></select><br>
         <span class="label_filter">Ответственный: </span>
         <select id="employee_spinner" style="width:165px; margin-bottom: 4px"></select><br>
-        <input type="button" onclick="startSearch('names_spinner', 'location_spinner', 'states_spinner', 'employee_spinner', 'serial', 'serial_radio')" style="width:100px" value="Найти">
+<!--        <input type="button" id="search_button" onclick="startSearch('names_spinner', 'location_spinner', 'states_spinner', 'employee_spinner', 'serial', 'serial_radio')" style="width:100px" value="Найти">-->
+        <input type="button" id="search_button" style="width:100px" value="Найти">
     </div>
 
     <div class="main_div" id="row_table" style="box-shadow: none; padding-top: 0px"></div>
 
+
     <img id="main_logo" src="logo_big_grayscale.png" width="400px" style="margin: auto"><br>
 
-    <span class="version">Версия — 1.23</span>
+    <span class="version">Версия — 1.25</span>
 </div>
 </body>
 </html>

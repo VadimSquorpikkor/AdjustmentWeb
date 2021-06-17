@@ -12,6 +12,16 @@ function insertSpinnerByArray(name, arr) {
     }
 }
 
+function insertSpinnerByArray_new(spinner, arr) {
+    if (spinner != null) {
+        let code = '';
+        for (let i = 0; i < arr.length; i++) {
+            code += '<option value=' + (i + 1) + '>' + arr[i] + '</option>' //через цикл добавляется строка спиннера (option) вида: <option value="1">БДКГ-02</option>
+        }
+        spinner.innerHTML = '   <select>' + code + '</select>'; //добавляем открывающий и закрывающий тэг и выводим всё в элемент по id
+    }
+}
+
 /**Возвращает текущее значение спиннера. Нужно, так как spinner.value возвращает номер пункта, но не его значение*/
 function getValueFromSpinner(id) {
     let sel = document.getElementById(id);
@@ -60,9 +70,14 @@ function addSerialDataRowToPage(arr) {
             let location = unit.location_id;
             let dayString = rightDayString(daysCount);
 
-            deviceName = getNameById(deviceName, deviceNameList, deviceIdList);
-            state = getNameById(state, stateNameList, stateIdList);
-            location = getNameById(location, locationNameList, locationIdList);
+
+            // deviceName = getNameById(deviceName, deviceNameList, deviceIdList);
+            // state = getNameById(state, stateNameList, stateIdList);
+            // location = getNameById(location, locationNameList, locationIdList);
+
+            deviceName = getDeviceById(deviceName).getNameRu;
+            state = getStateById(state).getNameRu;
+            location = getLocationById(location).getNameRu;
 
             data +=
             '<div class="found_unit_item" onclick=getAllEventsByUnitIdSmall("'+unit.id+'")>'+
@@ -132,10 +147,10 @@ function addRepairDataRowToPage(arr) {
         for (let i = 0; i < arr.length; i++) {
             unit = arr[i];
             data += '<tr>' +
-                '<td>' + getNameById(unit.device_id, deviceNameList, deviceIdList) + '</td>' +
+                '<td>' + getDeviceById(unit.device_id).getNameRu + '</td>' +
                 '<td>' + unit.serial + '</td>' +
-                '<td>' + getNameById(unit.state_id, stateNameList, stateIdList) + '</td>' +
-                '<td>' + getNameById(unit.location_id, locationNameList, locationIdList) + '</td>' +
+                '<td>' + getStateById(unit.state_id).getNameRu + '</td>' +
+                '<td>' + getLocationById(unit.location_id).getNameRu + '</td>' +
                 '</tr>'
             ;
         }
@@ -216,8 +231,11 @@ function addCollectionOfDocumentToDiv_new(arr, host) {
             let state = event.state_id;
             let location = event.location_id;
 
-            state = getNameById(state, stateNameList, stateIdList);
-            location = getNameById(location, locationNameList, locationIdList);
+            // state = getNameById(state, stateNameList, stateIdList);
+            // location = getNameById(location, locationNameList, locationIdList);
+
+            state = getStateById(state).getNameRu;
+            location = getLocationById(location).getNameRu;
 
             data +=
                 '<div class="state_div">'+

@@ -60,6 +60,9 @@ const ANY_VALUE = "any_value";
 const STATE_PREF = "state_";
 const DESCENDING = "desc";
 
+
+
+
 /** Класс для устройства, или блока детектирования */
 class DUnit {
     constructor(id, description, device_id, employee_id, inner_serial, location_id, serial, state_id, type_id, date) {

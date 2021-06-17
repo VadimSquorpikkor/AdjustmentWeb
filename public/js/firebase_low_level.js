@@ -2,6 +2,22 @@
  * Методы ничего не знают про приложение, не знают как называется БД и из каких таблиц (коллекций) состоит. Само приложение не в курсе, как работать с БД,
  * общается через firebaseHelper. Полная инкапсуляция. */
 
+
+function listen_new(database, table, func) {
+    database.collection(table)
+        .onSnapshot((snapshot) => {
+            snapshot.docChanges().forEach(() => func());
+        });
+}
+
+
+
+
+
+
+
+
+
 /**Лисенер для коллекции БД. Суть такого лисенера: следит за изменениями в коллекции, при ивенте загружает из коллекции
  * список всех имен и список всех идентификаторов. Оба списка передает через "этой функции", которая уже занимается
  * сохранением списков и формированием из них спинеров*/
@@ -77,7 +93,7 @@ function getAllUnitsByParam(database, table, converter,
                             param_5, value_5,
                             param_6, value_6,
                             func) {
-    let query = database.collection(table).withConverter(converter);
+    let query = database.collection(table).withConverter(converter);//todo убрать конвертер?
     if (value_1 !== ANY_VALUE) query = query.where(param_1, "==", value_1)
     if (value_2 !== ANY_VALUE) query = query.where(param_2, "==", value_2)
     if (value_3 !== ANY_VALUE) query = query.where(param_3, "==", value_3)

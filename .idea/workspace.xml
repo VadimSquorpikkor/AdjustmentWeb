@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/js/dictionary.js" afterDir="false" />
+    <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="1.24 - 11/06/21 (версия не меняется)&#10;1. Начал переделывать логику перевода (идентификаторы -&gt; имена, и обратно). Теперь лисенер отслеживает таблицу имен и при событиях загружает в Map идентификатор+имя. Во второй Map: имя+идентификатор (для обратного перевода). Когда то же самое будет доделано для AdjustmentDB, БД станет ещё ближе к нормальной форме, во всех таблицах будут убраны имена, остануться только идентификаторы">
+      <change afterPath="$PROJECT_DIR$/public/js/bis_logic.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/entities.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/insert.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/insert.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebaseHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebaseHelper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebase_low_level.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/listeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/listeners.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +180,9 @@
       <workItem from="1623131647813" duration="63000" />
       <workItem from="1623143614300" duration="2789000" />
       <workItem from="1623217570174" duration="621000" />
-      <workItem from="1623414000630" duration="7133000" />
+      <workItem from="1623414000630" duration="7570000" />
+      <workItem from="1623831050924" duration="18919000" />
+      <workItem from="1623908848514" duration="11766000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -355,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621259379521</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="1.24 - 11/06/21 (версия не меняется)&#10;1. Начал переделывать логику перевода (идентификаторы -&gt; имена, и обратно). Теперь лисенер отслеживает таблицу имен и при событиях загружает в Map идентификатор+имя. Во второй Map: имя+идентификатор (для обратного перевода). Когда то же самое будет доделано для AdjustmentDB, БД станет ещё ближе к нормальной форме, во всех таблицах будут убраны имена, остануться только идентификаторы">
+      <created>1623421563396</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1623421563396</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -426,6 +437,7 @@
     <MESSAGE value="1.23 - 30/04/21&#10;1. Добавлено: при клике на элементе списка найденных устройств раскрывается список событий этого устройства. При повторном клике — список исчезает" />
     <MESSAGE value="на дом" />
     <MESSAGE value="1.24 - 17/05/21&#10;1. Изменения в БД: теперь вместо одного русского языка для названий (name) добавлены 4 языка: Русский, Английский, Китайский, Итальянский, соответственно изменен код загружающий имена (name -&gt; name_ru).&#10;2. На странице загрузки (insert.html) добавлены поля для 4-х языков. Исправлено: раньше в случае загрузки не полного списка параметров для таблицы, проигнорированные параметры удалялись из таблицы (т.е. при сохранении по id сохранялись параметры, переданные в методе сохранения, если в таблице по этому id были ещё какие-то параметры, то они удалялись из таблицы). Теперь параметры добавляются (merge: true) (см. firebase_low_level)" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.24 - 17/05/21&#10;1. Изменения в БД: теперь вместо одного русского языка для названий (name) добавлены 4 языка: Русский, Английский, Китайский, Итальянский, соответственно изменен код загружающий имена (name -&gt; name_ru).&#10;2. На странице загрузки (insert.html) добавлены поля для 4-х языков. Исправлено: раньше в случае загрузки не полного списка параметров для таблицы, проигнорированные параметры удалялись из таблицы (т.е. при сохранении по id сохранялись параметры, переданные в методе сохранения, если в таблице по этому id были ещё какие-то параметры, то они удалялись из таблицы). Теперь параметры добавляются (merge: true) (см. firebase_low_level)" />
+    <MESSAGE value="1.24 - 11/06/21 (версия не меняется)&#10;1. Начал переделывать логику перевода (идентификаторы -&gt; имена, и обратно). Теперь лисенер отслеживает таблицу имен и при событиях загружает в Map идентификатор+имя. Во второй Map: имя+идентификатор (для обратного перевода). Когда то же самое будет доделано для AdjustmentDB, БД станет ещё ближе к нормальной форме, во всех таблицах будут убраны имена, остануться только идентификаторы" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.24 - 11/06/21 (версия не меняется)&#10;1. Начал переделывать логику перевода (идентификаторы -&gt; имена, и обратно). Теперь лисенер отслеживает таблицу имен и при событиях загружает в Map идентификатор+имя. Во второй Map: имя+идентификатор (для обратного перевода). Когда то же самое будет доделано для AdjustmentDB, БД станет ещё ближе к нормальной форме, во всех таблицах будут убраны имена, остануться только идентификаторы" />
   </component>
 </project>
