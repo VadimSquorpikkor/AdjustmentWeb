@@ -12,15 +12,7 @@ function insertSpinnerByArray(name, arr) {
     }
 }
 
-function insertSpinnerByArray_new(spinner, arr) {
-    if (spinner != null) {
-        let code = '';
-        for (let i = 0; i < arr.length; i++) {
-            code += '<option value=' + (i + 1) + '>' + arr[i] + '</option>' //через цикл добавляется строка спиннера (option) вида: <option value="1">БДКГ-02</option>
-        }
-        spinner.innerHTML = '   <select>' + code + '</select>'; //добавляем открывающий и закрывающий тэг и выводим всё в элемент по id
-    }
-}
+
 
 /**Возвращает текущее значение спиннера. Нужно, так как spinner.value возвращает номер пункта, но не его значение*/
 function getValueFromSpinner(id) {

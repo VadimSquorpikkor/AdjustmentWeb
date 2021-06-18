@@ -70,12 +70,12 @@ function loadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
     db.collection('names').doc(valueOf(id)).set({
         ru: valueOf(name_ru),
         en: valueOf(name_en),
-        zh: valueOf(name_it),
-        it: valueOf(name_de),
-        de: valueOf(name_fr)
-    }, { merge: true });*/
+        it: valueOf(name_it),
+        de: valueOf(name_de),
+        fr: valueOf(name_fr)
+    }, { merge: true });
 
-    /*if (valueOf(name_ru)!=="")db.collection('names').doc(valueOf(id)).set({ ru: valueOf(name_ru)}, { merge: true });
+    if (valueOf(name_ru)!=="")db.collection('names').doc(valueOf(id)).set({ ru: valueOf(name_ru)}, { merge: true });
     if (valueOf(name_en)!=="")db.collection('names').doc(valueOf(id)).set({ en: valueOf(name_en)}, { merge: true });
     if (valueOf(name_it)!=="")db.collection('names').doc(valueOf(id)).set({ it: valueOf(name_it)}, { merge: true });
     if (valueOf(name_de)!=="")db.collection('names').doc(valueOf(id)).set({ de: valueOf(name_de)}, { merge: true });

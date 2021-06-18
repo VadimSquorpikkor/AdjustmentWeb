@@ -14,9 +14,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script defer src="js/app.js"></script>
-    <script defer src="js/firebaseHelper.js"></script>
     <script defer src="js/firebase_low_level.js"></script>
-    <script defer src="js/listeners.js"></script>
 
 </head>
 
@@ -34,76 +32,19 @@
 
     <hr>
     <h3>Names</h3>
-    <input type="text" placeholder="id" id="n_id" style="width:150px"><br>
+    <input type="text" placeholder="id" id="n_id" style="width:150px"><br><br>
     <input type="text" placeholder="en" id="n2" style="width:100px">
     <input type="text" placeholder="fr" id="n5" style="width:100px">
     <input type="text" placeholder="de" id="n4" style="width:100px">
     <input type="text" placeholder="it" id="n3" style="width:100px">
     <input type="text" placeholder="ru" id="n1" style="width:100px">
-    <br>
+    <br><br>
     <input type="button" onclick="loadNames('n_id', 'n1', 'n2', 'n3', 'n4', 'n5')" value="Добавить">
     <input type="button" onclick="clearInput('n_id', 'n1', 'n2', 'n3', 'n4', 'n5')" value="Очистить">
 
 
 
-    <!--<hr>
-    <h3>States</h3>
-    <select id="v2_input" style="width:170px">
-        <option value="adjustment">Регулировка</option>
-        <option value="assembly">Сборка</option>
-        <option value="graduation">Градуировка</option>
-        <option value="repair_area">Уч. ремонта</option>
-        <option value="soldering">Монтаж</option>
-    </select><br>
-    <select id="v3_input" style="width:170px">
-        <option value="serial_type">serial_type</option>
-        <option value="repair_type">repair_type</option>
-        <option value="any_type">any_type</option>
-    </select><br>
-    <input type="text" placeholder="id" id="v4_input" style="width:150px"><br>
-    <input type="text" placeholder="name_ru" id="event_name_ru" style="width:100px">
-    <input type="text" placeholder="name_en" id="event_name_en" style="width:100px">
-    <input type="text" placeholder="name_zh" id="event_name_zh" style="width:100px">
-    <input type="text" placeholder="name_it" id="event_name_it" style="width:100px">
-    <br>
-    <input type="button" onclick="loadStates('event_name_ru', 'event_name_en', 'event_name_zh', 'event_name_it', 'v2_input', 'v3_input', 'v4_input')" value="Добавить">
 
-    <hr>
-    <h3>Devises</h3>
-    <input type="text" placeholder="id" id="dev_v1" style="width:150px"><br>
-    <input type="text" placeholder="name_ru" id="dev_name_ru" style="width:150px">
-    <input type="text" placeholder="name_en" id="dev_name_en" style="width:150px">
-    <br>
-    <input type="text" placeholder="type" id="dev_v3" style="width:150px"><br>
-    <input type="button" onclick="loadDevices('dev_v1', 'dev_name_ru', 'dev_name_en', 'dev_v3')" value="Добавить">
-
-    <hr>
-    <h3>Employees</h3>
-    <input type="text" placeholder="id" id="emp_v1" style="width:150px"><br>
-    <input type="text" placeholder="name_ru" id="emp_name_ru" style="width:150px">
-    <input type="text" placeholder="name_en" id="emp_name_en" style="width:150px">
-    <br>
-    <input type="text" placeholder="email" id="emp_v3" style="width:150px"><br>
-    <select id="emp_v4" style="width:170px">
-        <option value="adjustment">Регулировка</option>
-        <option value="assembly">Сборка</option>
-        <option value="graduation">Градуировка</option>
-        <option value="repair_area">Уч. ремонта</option>
-        <option value="soldering">Монтаж</option>
-    </select><br>
-    <input type="button" onclick="loadEmployees('emp_v1', 'emp_name_ru', 'emp_name_en', 'emp_v3', 'emp_v4')" value="Добавить">
-
-    <hr>
-    <h3>Locations</h3>
-    <input type="text" placeholder="id" id="loc_v1" style="width:150px"><br>
-    <input type="text" placeholder="name_ru" id="loc_name_ru" style="width:100px">
-    <input type="text" placeholder="name_en" id="loc_name_en" style="width:100px">
-    <input type="text" placeholder="name_zh" id="loc_name_zh" style="width:100px">
-    <input type="text" placeholder="name_it" id="loc_name_it" style="width:100px">
-    <br>
-    <input type="button" onclick="loadLocations('loc_v1', 'loc_name_ru', 'loc_name_en', 'loc_name_zh', 'loc_name_it')" value="Добавить">
-
-    <hr>-->
 
 </div>
 </body>
