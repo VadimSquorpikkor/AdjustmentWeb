@@ -1,36 +1,3 @@
-/** Из массива названий формирует строки для Спиннера
- * @param name - id пустого спиннера, в который будут добавлены данные
- * @param arr  - массив данных, которыми будет заполняться спиннер
- */
-function insertSpinnerByArray(name, arr) {
-    if (document.getElementById(name) != null) {
-        let code = '';
-        for (let i = 0; i < arr.length; i++) {
-            code += '<option value=' + (i + 1) + '>' + arr[i] + '</option>' //через цикл добавляется строка спиннера (option) вида: <option value="1">БДКГ-02</option>
-        }
-        document.getElementById(name).innerHTML = '   <select>' + code + '</select>'; //добавляем открывающий и закрывающий тэг и выводим всё в элемент по id
-    }
-}
-
-
-
-/**Возвращает текущее значение спиннера. Нужно, так как spinner.value возвращает номер пункта, но не его значение*/
-function getValueFromSpinner(id) {
-    let sel = document.getElementById(id);
-    if (sel!=null) return sel.options[sel.selectedIndex].text;
-    else console.log("------- НЕТ ЭЛЕМЕНТА С ID = "+id);
-}
-
-function rightDayString(i) {
-    if (i===11||i===12||i===13||i===14)return "дней";
-    switch (i%10) {
-        case 1:return "день";
-        case 2:
-        case 3:
-        case 4:return "дня";
-        default:return "дней";
-    }
-}
 
 function addSerialDataRowToPage(arr) {
     if (arr.length === 0) insertNothing('row_table');

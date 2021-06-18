@@ -1,4 +1,24 @@
 /**
+ * Принцип хранения/загрузки данных
+ * 1. Данные загружаются из БД; сущности (локация, статус, сотрудник, устройство) не имеют имен, только идентификаторы имени
+ * 2. Сами имена для всех сущностей хранятся в отдельной таблице "names", у каждого имени есть варианты на других языках
+ * (исключая имена устройств — для них только варианты на русском и английском)
+ * 3. В приложении есть соответствующие массивы объектов для каждого вида сущностей: locations, states, employees, devices.
+ * В объекте хранятся и имена, и их идентификаторы (и ещё разные данные)
+ * 4. Эти массивы заполняются только при сработке соответствующих лисенеров, каждый из которых отслеживает изменения в
+ * соответствующей сущности таблице в БД ("devices", "locations", "employees", "states"). Таким образов данные в массивы
+ * загружаются из БД только при изменении данных (лисенер для локаций срабатывает только при изменениях в таблице "locations",
+ * на другие не обращает внимания) или при старте приложения — загрузке страницы (срабатывают все лисенеры)
+ * 4. Массивы играют роль словарей и источников данных, из них формируются спиннеры, с их помощью переводятся идентификаторы
+ * в имена и обратно, это всё происходит БЕЗ обращения в БД
+ * 5. Для заполнения спинеров данными, получения идентификаторов по выбранным пунктам и др, осуществляется через SpinnerAdapter
+ * 6. В load методах в массивы загружаются объекты с данными из таблицы, в самих методах используется квази JOIN, чтобы
+ * после получения идентификаторов имен сразу же получить из таблицы "names" имена на нужном языке
+ * 7. При загрузке юнитов и событий JOIN уже не нужен, данные для имен берутся в соответствующем объекте (locations[i].getNameRu)
+ * */
+
+
+/**
  *
  * @param name_id этот идентификатор будет заменен именем из таблицы имен
  * @param obj объект в котором поле name_ru будет заменено с идентификатора, заданного в конструкторе, на нормальное имя
@@ -19,15 +39,20 @@ function joinNamesRu(name_id, obj, func) {
 }
 //----------------------------------------------------------------------------------------------------------------------
 
+/**Массив объектов всех локаций*/
 let locations = [];
+/**Массив объектов всех сотрудников*/
 let employees = [];
+/**Массив объектов всех статусов*/
 let states = [];
+/**Массив объектов всех устройств*/
 let devices = [];
 
 //----------------------------------------------------------------------------------------------------------------------
 /**Добавления списка локаций в спиннер*/
 function updateLocationSpinner() {
-    locationSpinnerAdapter.setDataObj(locations);
+    let selectedLocations = getLocationsByParam(locations, getType());
+    locationSpinnerAdapter.setDataObj(selectedLocations);
     locationSpinnerAdapter.addFirstLineObj(new Location(null, ANY_VALUE, ALL_LOCATIONS));
 }
 
@@ -48,6 +73,16 @@ function loadLocation() {
         locations = loc_arr;
         updateLocationSpinner();
     });
+}
+
+/**Если ремонт, то добавляем всё, если серия, то всё, кроме "Группа сервиса" */
+function getLocationsByParam(locations, type_id) {
+    if (type_id===REPAIR_TYPE) return locations;
+    let new_arr = [];
+    for (let i = 0; i < locations.length; i++) {
+        if (locations[i].getNameId!=="repair_area") new_arr.push(locations[i]);
+    }
+    return new_arr;
 }
 //----------------------------------------------------------------------------------------------------------------------
 /**Добавления списка сотрудников в спиннер*/
@@ -86,8 +121,8 @@ function loadEmployees() {
 }
 //----------------------------------------------------------------------------------------------------------------------
 function updateStatesSpinner() {
-    //todo getStatesByParam(type, location)
-    stateSpinnerAdapter.setDataObj(states);
+    let selectedStates = getStatesByParam(states, getType(), locationSpinnerAdapter.getSelectedNameId());
+    stateSpinnerAdapter.setDataObj(selectedStates);
     stateSpinnerAdapter.addFirstLineObj(new State(null, ANY_VALUE, ALL_STATES, null, null));
 }
 
@@ -110,6 +145,20 @@ function loadStates() {
         states = sta_arr;
         updateStatesSpinner();
     });
+}
+
+function getStatesByParam(states, type_id, location_id) {
+    let new_arr = [];
+    if (location_id === ANY_VALUE) {
+        for (let i = 0; i < states.length; i++) {
+            if (states[i].getType===TYPE_ANY || states[i].getType===type_id) new_arr.push(states[i]);
+        }
+    } else {
+        for (let i = 0; i < states.length; i++) {
+            if ((states[i].getType===TYPE_ANY || states[i].getType===type_id) && states[i].getLocation===location_id) new_arr.push(states[i]);
+        }
+    }
+    return new_arr;
 }
 //----------------------------------------------------------------------------------------------------------------------
 function updateDeviceSpinner() {
@@ -157,7 +206,7 @@ function startSearch_new() {
     let employee_id =   employeeSpinnerAdapter.getSelectedNameId();
 
     let serial =        serialText.value;
-    let type_id =       serialRadio.checked?TYPE_SERIAL:TYPE_REPAIR;//todo isSerial
+    let type_id =       getType();
 
     console.log("name="+deviceName_id+" loc="+location_id+" state="+state_id+" empl="+employee_id+" serial="+serial+" type="+type_id);
 
@@ -204,14 +253,20 @@ const searchButton = document.getElementById('search_button');
 
 let isSerial = serialRadio.checked;
 
+function getType() {
+    return isSerial?SERIAL_TYPE:REPAIR_TYPE;
+}
+
 serialRadio.addEventListener('click', function () {
     isSerial = true;
     updateStatesSpinner();
+    updateLocationSpinner();
 });
 
 repairRadio.addEventListener('click', function () {
     isSerial = false;
     updateStatesSpinner();
+    updateLocationSpinner();
 });
 
 locationSpinner.addEventListener('change', function () {
@@ -220,6 +275,24 @@ locationSpinner.addEventListener('change', function () {
 
 searchButton.addEventListener('click', function () {
     startSearch_new(namesSpinner, locationSpinner, statesSpinner, employeeSpinner, serialText, serialRadio);
+});
+
+/**Лисенер изменений поля ввода серийного номера. Если поле не пустое, все спиннеры не активны, если пустое — активны.
+ * Так надо, так как если ввести серийный номер и нажать поиск, то поиск будет идти ТОЛЬКО по серийному номеру, игнорируя
+ * спиннеры. Сделано, чтобы не путать пользователя (уже набрав номер, он может пытаться выбрать параметры в спиннерах,
+ * которые всё равно будут проигнорированы при поиске)*/
+serialText.addEventListener('input', function () {
+    if (serialText.value.length !== 0) {
+        namesSpinner.disabled = true;
+        locationSpinner.disabled = true;
+        employeeSpinner.disabled = true;
+        statesSpinner.disabled = true;
+    } else {
+        namesSpinner.disabled = false;
+        locationSpinner.disabled = false;
+        employeeSpinner.disabled = false;
+        statesSpinner.disabled = false;
+    }
 });
 
 let locationSpinnerAdapter = new SpinnerAdapter(locationSpinner);

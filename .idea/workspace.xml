@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="1.26 - 17/06/21&#10;1. Удалены неиспользуемые методы, удален dictionary.js, firebaseHelper.js, listeners.js, repair.html, добавлена ссылка на AtomtexRepair">
-      <change afterPath="$PROJECT_DIR$/public/js/spinner_adapter.js" afterDir="false" />
+    <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/insert.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/insert.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/bis_logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bis_logic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebase_low_level.js" afterDir="false" />
     </list>
@@ -183,7 +179,7 @@
       <workItem from="1623414000630" duration="7570000" />
       <workItem from="1623831050924" duration="18919000" />
       <workItem from="1623908848514" duration="24134000" />
-      <workItem from="1623996137839" duration="7273000" />
+      <workItem from="1623996137839" duration="16624000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -381,7 +377,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623926767366</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="1.27 - 18/06/21&#10;1. Изменения в БД: удалены поля вариантов переводов имен из states, location, employees, devices. Теперь все переводы в &quot;names&quot;&#10;2. Добавлен класс SpinnerAdapter для удобства работы со спинерами, код стал короче и понятнее. Добавление &quot;любого значения&quot; отвязано от массивов объектов, а добавляется в SpinnerAdapter">
+      <created>1624003759920</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1624003759920</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -428,7 +431,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.04 - 03/03/21&#10;1. Добавлен динамически связанный с БД спиннер для имен устройств. При изменении/добавлении имен в БД (отдельная таблица имен) данные в спиннере автоматически обновляются  &#10;2. Добавлен динамически связанный с БД спиннер для названий статусов. При изменении/добавлении статусов в БД (отдельная таблица статусов) данные в спиннере автоматически обновляются" />
     <MESSAGE value="1.05 - 05/03/21&#10;1. Добавлена страница для генерации QR-кода: тип устройства выбирается из выпадающего спиннера (пока статический, потом будет динамически подгружаться данными из БД) и вводится внутренний серийник. Строка для qr-кода шифруется. Для безопасности добавлено поле ввода ключа для шифрования, без него полученный qr-код будет некорректным и не будет распознаваться в приложении для телефона. Потом для получения графического ключа будет отдельное приложение, пока так — из странички." />
     <MESSAGE value="1.06 - 05/03/21&#10;1. Список выбора типа устройства для страницы qr-кода теперь заполняется динамически из БД. При изменении в БД автоматом заполняется обновленными данными. По сути: теперь имя  устройства жестко связано со значением в БД, ситуация, когда можно ввести вручную неправильный (или несуществующий) тип устройства ИСКЛЮЧЕНА" />
     <MESSAGE value="1.07 - 09/03/21&lt;/b&gt;&#10;1. Добавлена страница для ремонтных приборов&#10;2. Добавлены методы для работы с таблицей БД для ремонтных приборов&#10;3. Реализован поиск по БД для ремонтных по их серийному номеру и имени" />
@@ -453,6 +455,7 @@
     <MESSAGE value="1.24 - 11/06/21 (версия не меняется)&#10;1. Начал переделывать логику перевода (идентификаторы -&gt; имена, и обратно). Теперь лисенер отслеживает таблицу имен и при событиях загружает в Map идентификатор+имя. Во второй Map: имя+идентификатор (для обратного перевода). Когда то же самое будет доделано для AdjustmentDB, БД станет ещё ближе к нормальной форме, во всех таблицах будут убраны имена, остануться только идентификаторы" />
     <MESSAGE value="1.25 - 17/06/21 Глобальное обновление&#10;1. Глобальное обновление. Так как в БД добавилась таблица имен (имя+варианты перевода на разных языках), то переделана вся логика приложения с тем, чтобы данные для названий (локаций, статусов и т.д.) брать из этой новой таблицы, а не как раньше, из полей в каждой таблице (которые будут удалены). Вся загвоздка была в отсутствии JOIN в firestore (это НЕ реляционная БД), поэтому было придумано некоторое подобие (по-сути дозагрузка по id c апдейтом), теперь в приложение грузится сразу массив объектов и с именем и идентификатором&#10;2. В продолжении новой архитектуры: удалены переводчики: словари и getNameById/getIdByName&#10;3. JOIN не используется при загрузке юнитов и событий, данные просто берутся из массивов объектов, загруженных для спиннеров&#10;4. Добавлен entities.js и bis_logic.js. Удален listeners.js&#10;5. Из index.html удалены все onClick и onChange, теперь всё сделано через onEventListener в bis_logic.js. Логика в bis_logic.js теперь основана на const, а не на id&#10;6. Переделаны лисенеры, отслеживающие изменения в БД" />
     <MESSAGE value="1.26 - 17/06/21&#10;1. Удалены неиспользуемые методы, удален dictionary.js, firebaseHelper.js, listeners.js, repair.html, добавлена ссылка на AtomtexRepair" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.26 - 17/06/21&#10;1. Удалены неиспользуемые методы, удален dictionary.js, firebaseHelper.js, listeners.js, repair.html, добавлена ссылка на AtomtexRepair" />
+    <MESSAGE value="1.27 - 18/06/21&#10;1. Изменения в БД: удалены поля вариантов переводов имен из states, location, employees, devices. Теперь все переводы в &quot;names&quot;&#10;2. Добавлен класс SpinnerAdapter для удобства работы со спинерами, код стал короче и понятнее. Добавление &quot;любого значения&quot; отвязано от массивов объектов, а добавляется в SpinnerAdapter" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.27 - 18/06/21&#10;1. Изменения в БД: удалены поля вариантов переводов имен из states, location, employees, devices. Теперь все переводы в &quot;names&quot;&#10;2. Добавлен класс SpinnerAdapter для удобства работы со спинерами, код стал короче и понятнее. Добавление &quot;любого значения&quot; отвязано от массивов объектов, а добавляется в SpinnerAdapter" />
   </component>
 </project>
