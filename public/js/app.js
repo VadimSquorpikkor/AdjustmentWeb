@@ -1,3 +1,13 @@
+function rightDayString(i) {
+    if (i===11||i===12||i===13||i===14)return "дней";
+    switch (i%10) {
+        case 1:return "день";
+        case 2:
+        case 3:
+        case 4:return "дня";
+        default:return "дней";
+    }
+}
 
 function addSerialDataRowToPage(arr) {
     if (arr.length === 0) insertNothing('row_table');
@@ -28,6 +38,11 @@ function addSerialDataRowToPage(arr) {
             deviceName = getDeviceById(deviceName).getNameRu;
             state = getStateById(state).getNameRu;
             location = getLocationById(location).getNameRu;
+
+            // state = getStateById(state);
+            // if (state!=='undefined') state = state.getNameRu;//todo когда state и location будет браться из ивента, сделать, типа "deviceName = getDeviceById(deviceName).getNameRu"
+            // location = getLocationById(location);
+            // if (location!=='undefined') location = location.getNameRu;
 
             data +=
             '<div class="found_unit_item" onclick=getAllEventsByUnitIdSmall("'+unit.id+'")>'+

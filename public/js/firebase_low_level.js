@@ -60,9 +60,10 @@ function valueOf(id) {
 }
 
 
+let db = firebase.firestore();
 /**Загрузка в таблицу имен*/
 function loadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
-    /*let db = firebase.firestore();
+    /*
     db.collection('names').doc(valueOf(id)).set({
         ru: valueOf(name_ru),
         en: valueOf(name_en),
@@ -76,6 +77,19 @@ function loadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
     if (valueOf(name_it)!=="")db.collection('names').doc(valueOf(id)).set({ it: valueOf(name_it)}, { merge: true });
     if (valueOf(name_de)!=="")db.collection('names').doc(valueOf(id)).set({ de: valueOf(name_de)}, { merge: true });
     if (valueOf(name_fr)!=="")db.collection('names').doc(valueOf(id)).set({ fr: valueOf(name_fr)}, { merge: true });*/
+}
+
+function deleteUnit(id) {
+    console.log(id);
+    let unit_id = valueOf(id);
+    if (unit_id !== "") {
+        db.collection('units').doc(unit_id).delete();
+        db.collection('events').where('unit_id', "==", unit_id).get().then((querySnapshot) => {
+            querySnapshot.forEach(doc => {
+                doc.ref.delete();
+            });
+        })
+    }
 }
 
 function clearInput(id1, id2, id3, id4, id5, id6) {

@@ -137,6 +137,7 @@ function loadStates() {
             let type = doc.data().type_id;
             let location_id = doc.data().location_id;
             let state = new State(id, name_id, name_ru, type, location_id);
+            console.log('name_id = '+name_id);
 
             joinNamesRu(name_id, state, updateStatesSpinner);
 
@@ -235,7 +236,9 @@ function getDeviceById(id) {
     return id;
 }
 function getStateById(id) {
+    console.log('ID - '+id);
     for (let i = 0; i < states.length; i++) {
+        console.log(i+' - '+states[i].getId);
         if (states[i].getId===id) return states[i];
     }
     return id;
