@@ -34,6 +34,7 @@ function addSerialDataRowToPage(arr) {
             let state = unit.state_id;
             let location = unit.location_id;
             let dayString = rightDayString(daysCount);
+            let isClose = unit.close_date!==undefined;
 
             deviceName = getDeviceById(deviceName).getNameRu;
             state = getStateById(state).getNameRu;
@@ -44,8 +45,19 @@ function addSerialDataRowToPage(arr) {
             // location = getLocationById(location);
             // if (location!=='undefined') location = location.getNameRu;
 
+            let isCloseStroke = '';
+            if (isClose) {
+                isCloseStroke =
+                    '<div style="width: auto">'+
+                    '    <span class="big_orange" style="width: auto; text-align: center">РЕМОНТ ЗАВЕРШЕН</span>'+
+                    '<hr>'+
+                    '</div>';
+
+            }
+
             data +=
             '<div class="found_unit_item" onclick=getAllEventsByUnitIdSmall("'+unit.id+'")>'+
+                isCloseStroke+
             '    <div class="item_info_div">'+
             '        <span class="big_orange">'+ deviceName +'</span>'+
             '        <span class="small_white">№ '+ serial +'</span>'+

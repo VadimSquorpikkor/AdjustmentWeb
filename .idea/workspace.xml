@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/insert.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/insert.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bis_logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bis_logic.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/entities.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/entities.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebase_low_level.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -194,7 +190,8 @@
       <workItem from="1624882945765" duration="645000" />
       <workItem from="1624950993069" duration="1270000" />
       <workItem from="1625135620370" duration="45000" />
-      <workItem from="1625555100404" duration="8354000" />
+      <workItem from="1625555100404" duration="8578000" />
+      <workItem from="1625581543512" duration="355000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -413,7 +410,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624542081037</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="1.30 - 06/07/21&#10;1. Исправления&#10;2. Добавлена форма для удаления юнита по его id и всех его событий">
+      <created>1625566641531</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1625566641531</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -460,7 +464,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.07 - 09/03/21&lt;/b&gt;&#10;1. Добавлена страница для ремонтных приборов&#10;2. Добавлены методы для работы с таблицей БД для ремонтных приборов&#10;3. Реализован поиск по БД для ремонтных по их серийному номеру и имени" />
     <MESSAGE value="1.08 - 10/03/21&#10;1. Для страницы ремонтных приборов реализовано отображение результата поиска прибора в БД по его типу и серийнику (фронтенд)&#10;2. В базе данных, в таблице для ремонтных добавлена коллекция для хранения списка статусов и их даты добавления (т.е. коллекция в коллекции)&#10;3. Добавлены методы для чтения данных коллекции в коллекции&#10;4. Закомментированы лишние импорты Firebase &#10;5. Теперь при нахождении ремонтного прибора в базе, выводится таблица его статусов с датами" />
     <MESSAGE value="refactoring" />
     <MESSAGE value="1.09 - 16/03/21&#10;1. Глобальный рефакторинг. Методы переделаны. Все (почти) что напрямую работают с БД перенесены в firebaseHelperNew.js, все лисенеры перенесены в listeners.js&#10;2. На главной странице спиннеры теперь работают — фильтрация по статусам и по именам. Добавлены соответствующие методы" />
@@ -485,6 +488,7 @@
     <MESSAGE value="1.27 - 18/06/21&#10;1. Изменения в БД: удалены поля вариантов переводов имен из states, location, employees, devices. Теперь все переводы в &quot;names&quot;&#10;2. Добавлен класс SpinnerAdapter для удобства работы со спинерами, код стал короче и понятнее. Добавление &quot;любого значения&quot; отвязано от массивов объектов, а добавляется в SpinnerAdapter" />
     <MESSAGE value="1.28 - 18/06/21&#10;1. Теперь содержимое спиннеров динамически изменяется, в зависимости от выбора в других спиннерах и радио: если выбрать локацию &quot;Участок РИР&quot;, то в спиннере статусов будут отображаться только статусы для этой локации, и только те, которые соответствуют выбранному типу (серия или ремонт); при выборе &quot;Серия&quot; в локациях не будет отображаться &quot;Группа Сервиса&quot;&#10;2. Раньше при каждом изменении в спиннерах данные каждый раз подгружались из БД (по выборке на основе показаний в спиннерах), сейчас вся логика работает на основе данных, загруженных при старте, новые данные загружаются только при нажатии &quot;Найти&quot;&#10;3. Если написать номер в поле серийного номера, все спиннеры станут неактивными. Сделано, чтобы не путать пользователя: уже набрав номер, он может пытаться выбрать параметры в спиннерах, которые всё равно будут проигнорированы при поиске, так как при выбранном номере поиск будет идти ТОЛЬКО по серийному номеру" />
     <MESSAGE value="1.29 - 24/06/21&#10;1. Починил qr-генератор — не работал" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.29 - 24/06/21&#10;1. Починил qr-генератор — не работал" />
+    <MESSAGE value="1.30 - 06/07/21&#10;1. Исправления&#10;2. Добавлена форма для удаления юнита по его id и всех его событий" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.30 - 06/07/21&#10;1. Исправления&#10;2. Добавлена форма для удаления юнита по его id и всех его событий" />
   </component>
 </project>

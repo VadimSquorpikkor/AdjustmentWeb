@@ -81,7 +81,7 @@ function loadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
 
 function deleteUnit(id) {
     console.log(id);
-    let unit_id = valueOf(id);
+    /*let unit_id = valueOf(id);
     if (unit_id !== "") {
         db.collection('units').doc(unit_id).delete();
         db.collection('events').where('unit_id', "==", unit_id).get().then((querySnapshot) => {
@@ -89,7 +89,7 @@ function deleteUnit(id) {
                 doc.ref.delete();
             });
         })
-    }
+    }*/
 }
 
 function clearInput(id1, id2, id3, id4, id5, id6) {
