@@ -1,8 +1,9 @@
-
-.body {
+html, body {
     font-family: Arial;
     text-align: center;
     background-color: #444444;
+    margin:0px;
+    min-height: 100%;
 }
 
 .main_div {
@@ -12,6 +13,9 @@
     box-shadow: 2px 1px 12px 1px rgba(0, 0, 0, 0.23);
     padding: 30px 15px 20px;
     margin: 10px auto 20px;
+    min-height: 100%;
+    /*height: 800px;*/
+    /*margin: 0px;*/
     border-radius: 10px;
 }
 
@@ -20,65 +24,10 @@
     color: #ECEFF1;
 }
 
-.row_table {
-    background-color: #444444;
-    /*margin-left: 0px;*/
-    margin: auto;
-    margin-top: 20px;
-    /*margin-right: auto;*/
-    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.23);
-    padding: 2px;
-}
-
-.row_table tr {
-
-}
-
-.row_table td {
-    /*background: darkseagreen;*/
-    background: #666666;
-    /*background: #919191;*/
-    /*background: grey;*/
-    color: #ECEFF1;
-    /*color: darkorange;*/
-    width: 150px;
-}
-
-.states {
-    background: #444444;
-    margin-left: 100px;+/
-    text-align: end;
-    float: left;
-    margin-right: 0px;
-    padding: 3px;
-    color: #ECEFF1;
-}
-
-.selected {
-    background: darkorange;
-}
-
-.row_table th {
-    /*background: #039be5;*/
-    background: darkorange;
-    color: #ECEFF1;
-}
-
 h1, h3 {
     color: darkorange;
     text-shadow: 2px 3px 2px #444444;
 }
-
-/*select {
-    margin: 8px;
-    border-radius: 6px 0 0 6px;
-    font-family: "Trebuchet MS", sans-serif;
-    font-size: 14px;
-    border: 0;
-    box-shadow: inset 5px 10px 5px -9px rgba(0, 0, 0, 0.55);
-    padding-left: 8px;
-    padding-right: 8px;
-}*/
 
 .version {
     color: #ECEFF1;
@@ -86,10 +35,13 @@ h1, h3 {
 }
 
 a {
+    /*border-radius: 20px;*/
+    /*border-width: 2px;*/
+    /*border-style: solid;*/
     color: darkorange;
     font-size: 18px;
     font-family: sans-serif;
-    text-decoration: none;
+    /*text-decoration: none;*/
     padding: 2px 4px;
     transition-property: all;
     transition-duration: 450ms;
@@ -193,9 +145,9 @@ input[type="button"]:active {
 }
 
 .day_count_div {
+    text-align: right;
     float: right;
-    margin-top: 10px;
-    text-align: center;
+    /*margin-top: 10px;*/
 }
 
 .date_div {
@@ -225,7 +177,7 @@ input[type="button"]:active {
 
 .state_host {
     box-shadow: none;
-    padding-top: 0px;
+    padding-top: 6px;
     clear: both;
     /*display: none;*/
 }

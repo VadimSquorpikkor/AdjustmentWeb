@@ -191,7 +191,7 @@ function getAllEventsByUnitIdSmall(unit_id) {
     let host = STATE_PREF + unit_id;
     let size = document.getElementById(host).innerHTML.length;
     //если список событий не показан, то показать, если уже показывается (size!==0), то очищаем (удаляем) список
-    if (size === 0) getAllEventsByUnitId_new(DBASE, TABLE_EVENTS, EVENT_UNIT, unit_id, addCollectionOfDocumentToDiv_new, EVENT_DATE, DESCENDING, host);
+    if (size === 0) getAllEventsByUnitId_new(DBASE, TABLE_EVENTS, EVENT_UNIT, unit_id, addEventsCollectionToDiv, EVENT_DATE, DESCENDING, host);
     else document.getElementById(host).innerHTML = '';
 
 }
@@ -212,30 +212,35 @@ function startSearch_new() {
     console.log("name="+deviceName_id+" loc="+location_id+" state="+state_id+" empl="+employee_id+" serial="+serial+" type="+type_id);
 
     //Если поле номера пустое, то ищем по параметрам, если поле содержит значение, то ищем по этому значению, игнорируя
-    // все остальные параметры. Т.е. ищем или по параметрам, или по номеру
+    // все остальные параметры. Т.е. ищем или по параметрам, или по номеру. Тип устройства учитывается в любом из случаев
     if (serial === "") getUnitListFromBD(deviceName_id, location_id, employee_id, type_id, state_id, ANY_VALUE);
-    else getUnitListFromBD(ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE, ANY_VALUE, serial);
+    else getUnitListFromBD(ANY_VALUE, ANY_VALUE, ANY_VALUE, type_id, ANY_VALUE, serial);
 }
 
+
+function getDeviceById(id) {
+    if (id===null) return new Device("", "", EMPTY_VALUE);
+    for (let i = 0; i < devices.length; i++) {
+        if (devices[i].getId===id) return devices[i];
+    }
+    return id;
+}
 function getEmployeeById(id) {
+    if (id===null) return new Employee("", "", EMPTY_VALUE, "","");
     for (let i = 0; i < employees.length; i++) {
         if (employees[i].getId===id) return employees[i];
     }
     return id;
 }
 function getLocationById(id) {
+    if (id===null) return new Location("", "", EMPTY_VALUE);
     for (let i = 0; i < locations.length; i++) {
         if (locations[i].getId===id) return locations[i];
     }
     return id;
 }
-function getDeviceById(id) {
-    for (let i = 0; i < devices.length; i++) {
-        if (devices[i].getId===id) return devices[i];
-    }
-    return id;
-}
 function getStateById(id) {
+    if (id===null) return new State("", "", EMPTY_VALUE, "");
     console.log('ID - '+id);
     for (let i = 0; i < states.length; i++) {
         console.log(i+' - '+states[i].getId);

@@ -59,3 +59,4 @@ const REPAIR_TYPE = "repair_type";
 const ANY_VALUE = "any_value";
 const STATE_PREF = "state_";
 const DESCENDING = "desc";
+const EMPTY_VALUE = "- - -";

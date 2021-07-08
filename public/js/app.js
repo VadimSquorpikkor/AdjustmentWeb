@@ -30,15 +30,22 @@ function addSerialDataRowToPage(arr) {
             let deviceName = unit.device_id;
             let serial = unit.serial;
             let innerSerial = unit.inner_serial;
+            if (innerSerial==="") innerSerial = '';
+            else innerSerial = '(вн. '+ innerSerial +')';
             let date = stateDate + " " + stateTime;
             let state = unit.state_id;
             let location = unit.location_id;
             let dayString = rightDayString(daysCount);
             let isClose = unit.close_date!==undefined;
+            let employee = unit.employee_id;
+            let type = unit.type_id;
 
             deviceName = getDeviceById(deviceName).getNameRu;
             state = getStateById(state).getNameRu;
             location = getLocationById(location).getNameRu;
+            employee = getEmployeeById(employee).getNameRu;
+            type = type==="serial_type"?"Серия":"Ремонт";
+
 
             // state = getStateById(state);
             // if (state!=='undefined') state = state.getNameRu;//todo когда state и location будет браться из ивента, сделать, типа "deviceName = getDeviceById(deviceName).getNameRu"
@@ -49,10 +56,9 @@ function addSerialDataRowToPage(arr) {
             if (isClose) {
                 isCloseStroke =
                     '<div style="width: auto">'+
-                    '    <span class="big_orange" style="width: auto; text-align: center">РЕМОНТ ЗАВЕРШЕН</span>'+
+                    '    <span class="big_orange" style="width: auto; text-align: center">ЗАВЕРШЕН</span>'+
                     '<hr>'+
                     '</div>';
-
             }
 
             data +=
@@ -61,14 +67,17 @@ function addSerialDataRowToPage(arr) {
             '    <div class="item_info_div">'+
             '        <span class="big_orange">'+ deviceName +'</span>'+
             '        <span class="small_white">№ '+ serial +'</span>'+
-            '        <span class="small_white">(вн. '+ innerSerial +')</span><br>'+
+            '        <span class="small_white">'+ innerSerial +'</span><br>'+
             '        <span class="big_orange">'+ location +'</span><br>'+
             '        <span class="small_white">'+ date +'</span>'+
             '        <span class="small_white">'+ state +'</span>'+
             '    </div>'+
             '    <div class="day_count_div">'+
-            '        <span class="big_orange">'+ daysCount +'</span><br>'+
-            '        <span class="small_white">'+ dayString +'</span>'+
+            '        <span class="big_orange">'+ type +'</span><br>'+
+            '        <span class="small_white">Отв.: '+ employee +'</span><br>'+
+            '        <span class="small_white">Дней в работе: '+daysCount+'</span>'+
+            // '        <span class="big_orange">'+ daysCount +'</span><br>'+
+            // '        <span class="small_white">'+ dayString +'</span>'+
             '    </div>'+
             '    <div id="'+STATE_PREF+unit.id+'" class="state_host"></div>'+
             '</div>';
@@ -86,7 +95,8 @@ function insertNothing(id) {
     document.getElementById(id).innerHTML = '<span class="white_span">'+FOUND_NOTHING+'</span>'
 }
 
-function addCollectionOfDocumentToDiv_new(arr, host) {
+/**Из массива событий формирует HTML код в виде списка панелек и добавляет в DIV выбранного устройства*/
+function addEventsCollectionToDiv(arr, host) {
     let data;
     if (arr.length === 0) {
         document.getElementById(host).innerHTML =
@@ -101,6 +111,7 @@ function addCollectionOfDocumentToDiv_new(arr, host) {
             let stateTime = event.date.toDate().toLocaleTimeString('ru-RU'); //Время - 09:07:49
             let state = event.state_id;
             let location = event.location_id;
+            console.log(location);
 
             state = getStateById(state).getNameRu;
             location = getLocationById(location).getNameRu;
