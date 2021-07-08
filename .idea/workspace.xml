@@ -3,13 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/bis_logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bis_logic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/for_qr_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/for_qr_2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/qrcodegen-input-demo.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/qrcodegen-input-demo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/spinner_adapter.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/spinner_adapter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/qr_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/qr_page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +197,7 @@
       <workItem from="1625555100404" duration="8578000" />
       <workItem from="1625581543512" duration="486000" />
       <workItem from="1625661684725" duration="6100000" />
-      <workItem from="1625721979594" duration="3108000" />
+      <workItem from="1625721979594" duration="7931000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -430,7 +430,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625581981684</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="1.32 - 06/07/21&#10;1. Добавлено отображение фамилии ответственного&#10;2. Добавлено отображение типа устройства: &quot;Ремонт&quot; или &quot;Серия&quot;&#10;3. Добавлен отступ между данными устройства и списком его статусов">
+      <created>1625725541980</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1625725541980</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -477,7 +484,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactoring" />
     <MESSAGE value="1.09 - 16/03/21&#10;1. Глобальный рефакторинг. Методы переделаны. Все (почти) что напрямую работают с БД перенесены в firebaseHelperNew.js, все лисенеры перенесены в listeners.js&#10;2. На главной странице спиннеры теперь работают — фильтрация по статусам и по именам. Добавлены соответствующие методы" />
     <MESSAGE value="1.10 - 16/03/21&#10;1. Рефакторинг. Продолжение" />
     <MESSAGE value="1.11 - 18/03/21&#10;1. Изменения в названиях таблиц (навел порядок) — и в AdjustmentWeb, и в FireStore &#10;2. Теперь при поиске прибора (в ремонтных) в таблице статусов выводится и статусы и время добавления статуса (дата и время)&#10;3. Исправлены мелкие ошибки" />
@@ -502,6 +508,7 @@
     <MESSAGE value="1.29 - 24/06/21&#10;1. Починил qr-генератор — не работал" />
     <MESSAGE value="1.30 - 06/07/21&#10;1. Исправления&#10;2. Добавлена форма для удаления юнита по его id и всех его событий" />
     <MESSAGE value="1.31 - 06/07/21&#10;1. Добавлено: если ремонт окончен (юнит закрыт), то вверху панельки устройства отображается соответствующая надпись" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.31 - 06/07/21&#10;1. Добавлено: если ремонт окончен (юнит закрыт), то вверху панельки устройства отображается соответствующая надпись" />
+    <MESSAGE value="1.32 - 06/07/21&#10;1. Добавлено отображение фамилии ответственного&#10;2. Добавлено отображение типа устройства: &quot;Ремонт&quot; или &quot;Серия&quot;&#10;3. Добавлен отступ между данными устройства и списком его статусов" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.32 - 06/07/21&#10;1. Добавлено отображение фамилии ответственного&#10;2. Добавлено отображение типа устройства: &quot;Ремонт&quot; или &quot;Серия&quot;&#10;3. Добавлен отступ между данными устройства и списком его статусов" />
   </component>
 </project>

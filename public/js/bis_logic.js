@@ -165,6 +165,8 @@ function getStatesByParam(states, type_id, location_id) {
 function updateDeviceSpinner() {
     devicesSpinnerAdapter.setDataObj(devices);
     devicesSpinnerAdapter.addFirstLineObj(new Device(null, ANY_VALUE, ALL_DEVICES));
+
+    devicesForGeneratorAdapter.setDataObj(devices);
 }
 
 function loadDevices() {

@@ -80,8 +80,11 @@ var app;
         let str = getElem('security_key').value;
         setSecurityKey(str);
 
-        var sel = getElem("selected_type_for_generator");
-        var s = sel.options[sel.selectedIndex].text;
+        // var sel = getElem("selected_type_for_generator");
+        // var s = sel.options[sel.selectedIndex].text;
+        var s = devicesForGeneratorAdapter.getSelectedNameId();
+        let ru_name = devicesForGeneratorAdapter.getSelectedName();
+        let input_ru = ru_name+" "+getElem("text-input").value;
 
         // let input = getElem("selected_type").options(getElem("selected_type").selectedIndex).value + " " + getElem("text-input").value;
         let input = s + " " + getElem("text-input").value;
@@ -107,7 +110,8 @@ var app;
             var scale = parseInt(getInput("scale-input").value, 10);
             if (scale <= 0 || scale > 30)
                 return;
-            qr.drawCanvas(scale, border, canvas, input);
+            // qr.drawCanvas(scale, border, canvas, input);
+            qr.drawCanvas(scale, border, canvas, input_ru);
             canvas.style.removeProperty("display");
         }
         else {

@@ -24,6 +24,10 @@ class SpinnerAdapter {
         return this._arr_ids[this._spinner.selectedIndex];
     }
 
+    getSelectedName() {
+        return this._arr_names[this._spinner.selectedIndex];
+    }
+
     addFirstLineObj(obj) {
         this._arr_names.unshift(obj.getNameRu);
         this._arr_ids.unshift(obj.getNameId);
