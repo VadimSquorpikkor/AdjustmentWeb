@@ -101,17 +101,21 @@ function updateEmployeeSpinner() {
  * "names" оставит идентификатор, который является в этом случае именем на русском. Профит)*/
 function loadEmployees() {
     let emp_arr = [];
+    //Внимание! Для employee name_id — это id, а name — это name_id
+    //Так сделано, потому что для сохранения сотрудника в юните нужен id сотрудника
+    // (поэтому name_id — это id), а для отображения имени в спиннере достаточно
+    // name_id без подгрузки имени из таблицы имен (name — это name_id)
     DBASE.collection(TABLE_EMPLOYEES)
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             let id = doc.data().id;
-            let name_id = doc.data().name_id;
+            let name_id = id;
             let name_ru = doc.data().name_id;
             let email = doc.data().email;
             let location_id = doc.data().location_id;
             let employee = new Employee(id, name_id, name_ru, email, location_id);
 
-            joinNamesRu(name_id, employee, updateEmployeeSpinner);
+            //joinNamesRu(name_id, employee, updateEmployeeSpinner);//лишнее
 
             emp_arr.push(employee);
         });

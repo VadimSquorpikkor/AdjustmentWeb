@@ -82,12 +82,12 @@ var app;
 
         // var sel = getElem("selected_type_for_generator");
         // var s = sel.options[sel.selectedIndex].text;
-        var s = devicesForGeneratorAdapter.getSelectedNameId();
-        let ru_name = devicesForGeneratorAdapter.getSelectedName();
-        let input_ru = ru_name+" "+getElem("text-input").value;
+        var s = devicesForGeneratorAdapter.getSelectedNameId();//берем name_id выбранного элемента спиннера ("BDKG-02")
+        let ru_name = devicesForGeneratorAdapter.getSelectedName();//берем name выбранного элемента спиннера ("БДКГ-02")
+        let input_ru = ru_name+" "+getElem("text-input").value;//получаем строку с именем и номером на русском (для отображении над картинкой с QR-кодом, не участвует в создании QR-кода) ("БДКГ-02 123")
 
         // let input = getElem("selected_type").options(getElem("selected_type").selectedIndex).value + " " + getElem("text-input").value;
-        let input = s + " " + getElem("text-input").value;
+        let input = s + " " + getElem("text-input").value;//получаем строку с id имени и номером для генерации QR-кода ("BDKG-02 123")
         // var text = getElem("text-input").value;
         var text = byteArrayToString(convertData(stringToByteArray(input)));
 

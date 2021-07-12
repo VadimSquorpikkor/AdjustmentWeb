@@ -13,6 +13,8 @@ function convertData(inArray) {
         if (kN >= mKey.length)
             kN = 0;
     }
+    // alert(byteArrayToString(outArray));
+    // console.log(byteArrayToString(outArray));
     return outArray;
 }
 
