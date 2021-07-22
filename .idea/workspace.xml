@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/pics/2503.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pics/6130.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pics/6130c.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pics/BDKG-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pics/BDKG-04.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bis_logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bis_logic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/qr_code.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/qr_code.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/qrcodegen-input-demo.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/qrcodegen-input-demo.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +93,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/pics" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -106,6 +107,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\GitHub\AdjustmentWeb\public\pics" />
       <recent name="D:\GitHub\AdjustmentWeb\public" />
       <recent name="D:\GitHub\AdjustmentWeb\public\js" />
       <recent name="D:\GitHub\AdjustmentWeb" />
@@ -199,7 +201,13 @@
       <workItem from="1625751444803" duration="2070000" />
       <workItem from="1625811443512" duration="169000" />
       <workItem from="1625811771352" duration="1792000" />
-      <workItem from="1626085518321" duration="373000" />
+      <workItem from="1626085518321" duration="547000" />
+      <workItem from="1626086415621" duration="38000" />
+      <workItem from="1626245359194" duration="7000" />
+      <workItem from="1626700690132" duration="1348000" />
+      <workItem from="1626762750152" duration="1356000" />
+      <workItem from="1626874445551" duration="367000" />
+      <workItem from="1626950870071" duration="715000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -446,7 +454,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625751551911</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="1.34 - 12/07/21&#10;1. Исправлена ошибка поиска устройства по фамилии ответственного (ничего не находилось)">
+      <created>1626086052497</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1626086052497</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -493,7 +508,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.10 - 16/03/21&#10;1. Рефакторинг. Продолжение" />
     <MESSAGE value="1.11 - 18/03/21&#10;1. Изменения в названиях таблиц (навел порядок) — и в AdjustmentWeb, и в FireStore &#10;2. Теперь при поиске прибора (в ремонтных) в таблице статусов выводится и статусы и время добавления статуса (дата и время)&#10;3. Исправлены мелкие ошибки" />
     <MESSAGE value="1.13 - 31/03/21&#10;1. Добавлены профили — монтаж, сборка, регулировка, приемка, градуировка.&#10;2. Вместо вложенных в каждый unit списков статусов теперь для ВСЕХ статусов используется ОДНА коллекция&#10;3. Глобально была переделана БД, следовательно, были переделаны многие методы  &#10;4. Добавил форму для загрузки данных в БД — надоело вводить вручную (load2())" />
     <MESSAGE value="1.14 - 31/03/21&#10;1. В класс статусов и класс юнитов добавлены поля location и description&#10;2. Таблица серийных расширена на &quot;Локация&quot;, &quot;Описание&quot;&#10;2. Таблица ремонтов расширена на &quot;Статус&quot;, &quot;Локация&quot;, &quot;Описание&quot;" />
@@ -518,6 +532,7 @@
     <MESSAGE value="1.31 - 06/07/21&#10;1. Добавлено: если ремонт окончен (юнит закрыт), то вверху панельки устройства отображается соответствующая надпись" />
     <MESSAGE value="1.32 - 06/07/21&#10;1. Добавлено отображение фамилии ответственного&#10;2. Добавлено отображение типа устройства: &quot;Ремонт&quot; или &quot;Серия&quot;&#10;3. Добавлен отступ между данными устройства и списком его статусов" />
     <MESSAGE value="1.33 - 06/07/21&#10;1. Переделан js для спиннера в QR генераторе. Код на SpinnerAdapter. В спиннере отображаются русские имена, на картинке QR-кода — русское название, при этом генерация qr-кода происходит на основе идентификатора (отображается &quot;БДКГ-01&quot;, сохраняется, как &quot;BDKG-01&quot;)" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.33 - 06/07/21&#10;1. Переделан js для спиннера в QR генераторе. Код на SpinnerAdapter. В спиннере отображаются русские имена, на картинке QR-кода — русское название, при этом генерация qr-кода происходит на основе идентификатора (отображается &quot;БДКГ-01&quot;, сохраняется, как &quot;BDKG-01&quot;)" />
+    <MESSAGE value="1.34 - 12/07/21&#10;1. Исправлена ошибка поиска устройства по фамилии ответственного (ничего не находилось)" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.34 - 12/07/21&#10;1. Исправлена ошибка поиска устройства по фамилии ответственного (ничего не находилось)" />
   </component>
 </project>
