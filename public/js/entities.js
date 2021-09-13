@@ -155,9 +155,9 @@ class DUnit {
         this.device_id = device_id;
         this.employee_id = employee_id;
         this.inner_serial = inner_serial;
-        this.location_id = location_id;
+        this.location_id = (typeof location_id === 'undefined') ? null : location_id;//this.location_id = location_id;
         this.serial = serial;
-        this.state_id = state_id;
+        this.state_id = (typeof state_id === 'undefined') ? null : state_id;
         this.type_id = type_id;
         this.date = date;
         this.close_date = close_date;

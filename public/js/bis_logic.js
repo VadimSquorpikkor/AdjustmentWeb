@@ -170,7 +170,7 @@ function updateDeviceSpinner() {
     devicesSpinnerAdapter.setDataObj(devices);
     devicesSpinnerAdapter.addFirstLineObj(new Device(null, ANY_VALUE, ALL_DEVICES));
 
-    devicesForGeneratorAdapter.setDataObj(devices);
+    if (typeof devicesForGeneratorAdapter!=='undefined') devicesForGeneratorAdapter.setDataObj(devices);
 }
 
 function loadDevices() {
@@ -225,29 +225,28 @@ function startSearch_new() {
 
 
 function getDeviceById(id) {
-    if (id===null) return new Device("", "", EMPTY_VALUE);
+    if (id===null||typeof id === 'undefined') return new Device("", "", EMPTY_VALUE);
     for (let i = 0; i < devices.length; i++) {
         if (devices[i].getId===id) return devices[i];
     }
     return id;
 }
 function getEmployeeById(id) {
-    if (id===null) return new Employee("", "", EMPTY_VALUE, "","");
+    if (id===null||typeof id === 'undefined') return new Employee("", "", EMPTY_VALUE, "","");
     for (let i = 0; i < employees.length; i++) {
         if (employees[i].getId===id) return employees[i];
     }
     return id;
 }
 function getLocationById(id) {
-    if (id===null) return new Location("", "", EMPTY_VALUE);
+    if (id===null||typeof id === 'undefined') return new Location("", "", EMPTY_VALUE);
     for (let i = 0; i < locations.length; i++) {
         if (locations[i].getId===id) return locations[i];
     }
     return id;
 }
 function getStateById(id) {
-    if (id===null) return new State("", "", EMPTY_VALUE, "");
-    console.log('ID - '+id);
+    if (id===null||typeof id === 'undefined') return new State("", "", EMPTY_VALUE, "");
     for (let i = 0; i < states.length; i++) {
         console.log(i+' - '+states[i].getId);
         if (states[i].getId===id) return states[i];
