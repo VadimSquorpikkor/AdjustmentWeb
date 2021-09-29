@@ -18,7 +18,7 @@ function addSerialDataRowToPage(arr) {
         let unit;
         let data = '';
         for (let i = 0; i < arr.length; i++) {
-            console.log(i);
+            // console.log(i);
             unit = arr[i];
 
             let now_date = new Date();
@@ -111,7 +111,7 @@ function addEventsCollectionToDiv(arr, host) {
             let stateTime = event.date.toDate().toLocaleTimeString('ru-RU'); //Время - 09:07:49
             let state = event.state_id;
             let location = event.location_id;
-            console.log(location);
+            // console.log(location);
 
             state = getStateById(state).getNameRu;
             location = getLocationById(location).getNameRu;

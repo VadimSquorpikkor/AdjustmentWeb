@@ -2,7 +2,7 @@
  * Принцип хранения/загрузки данных
  * 1. Данные загружаются из БД; сущности (локация, статус, сотрудник, устройство) не имеют имен, только идентификаторы имени
  * 2. Сами имена для всех сущностей хранятся в отдельной таблице "names", у каждого имени есть варианты на других языках
- * (исключая имена устройств — для них только варианты на русском и английском)
+ * (исключая имена устройств — для них только варианты на русском и английском, и исключая employees — у них только русские)
  * 3. В приложении есть соответствующие массивы объектов для каждого вида сущностей: locations, states, employees, devices.
  * В объекте хранятся и имена, и их идентификаторы (и ещё разные данные)
  * 4. Эти массивы заполняются только при сработке соответствующих лисенеров, каждый из которых отслеживает изменения в
@@ -29,6 +29,7 @@ function joinNamesRu(name_id, obj, func) {
     docRef.get().then((doc) => {
         if (doc.exists) {
             obj.setNameRu(doc.data().ru);
+            console.log(doc.data().ru);
             func();
         } else {
             // console.log("No such document!");
@@ -36,6 +37,10 @@ function joinNamesRu(name_id, obj, func) {
     }).catch((error) => {
         // console.log("Error getting document:", error);
     });
+}
+
+function changeNameIdToNameRu(name_id, obj) {
+    obj.setNameRu(dictionary.get(name_id).ru);
 }
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -47,6 +52,8 @@ let employees = [];
 let states = [];
 /**Массив объектов всех устройств*/
 let devices = [];
+
+let dictionary = new Map();
 
 //----------------------------------------------------------------------------------------------------------------------
 /**Добавления списка локаций в спиннер*/
@@ -66,7 +73,8 @@ function loadLocation() {
             let name_ru = doc.data().name_id;
             let location = new Location(id, name_id, name_ru);
 
-            joinNamesRu(name_id, location, updateLocationSpinner);
+            // joinNamesRu(name_id, location, updateLocationSpinner);
+            changeNameIdToNameRu(name_id, location);
 
             loc_arr.push(location);
         });
@@ -91,10 +99,7 @@ function updateEmployeeSpinner() {
     employeeSpinnerAdapter.addFirstLineObj(new Employee(null, ANY_VALUE, ALL_EMPLOYEES, null, null));
 }
 
-/**Внимание: сотрудников нет в таблице имен (по крайней мере пока) поэтому join не найдя их возвращает идентификатор.
- * Поэтому join здесь не работает и, как бы, не нужен. Оставил для порядка и на тот случай, если вдруг сотрудники будут
- * добавлены в таблицу имен.
- * Сотрудников нет вот почему: они используются ТОЛЬКО в приложениях для внутреннего пользования (AdjustmentDB и
+/**Сотрудников на английском нет вот почему: они используются ТОЛЬКО в приложениях для внутреннего пользования (AdjustmentDB и
  * AdjustmentWeb, людям отслеживающих ремонт знать фамилии сотрудников не нужно), а значит значения нужны только на
  * русском, а значит можно значение на русском записать в поле name_id документа таблицы "employees", при загрузке
  * списка сотрудников в name_ru будет присвоено значение идентификатора автоматом (метод join не найдя сотрудников в
@@ -114,9 +119,6 @@ function loadEmployees() {
             let email = doc.data().email;
             let location_id = doc.data().location_id;
             let employee = new Employee(id, name_id, name_ru, email, location_id);
-
-            //joinNamesRu(name_id, employee, updateEmployeeSpinner);//лишнее
-
             emp_arr.push(employee);
         });
         employees = emp_arr;
@@ -141,10 +143,8 @@ function loadStates() {
             let type = doc.data().type_id;
             let location_id = doc.data().location_id;
             let state = new State(id, name_id, name_ru, type, location_id);
-            console.log('name_id = '+name_id);
 
-            joinNamesRu(name_id, state, updateStatesSpinner);
-
+            changeNameIdToNameRu(name_id, state);
             sta_arr.push(state);
         });
         states = sta_arr;
@@ -183,13 +183,32 @@ function loadDevices() {
             let name_ru = doc.data().name_id;
             let device = new Device(id, name_id, name_ru);
 
-            joinNamesRu(name_id, device, updateDeviceSpinner);
-
+            changeNameIdToNameRu(name_id, device);
             dev_arr.push(device);
         });
         devices = dev_arr;
         updateDeviceSpinner();
     });
+}
+//----------------------------------------------------------------------------------------------------------------------
+/**При загрузке страницы первым делом загружаются данные из таблицы имен (только русский вариант). Эти данные помещаются
+ * в Map (dictionary), где ключ — это имя документа firebase, а значение — это значение поля "ru"
+ * При загрузке данных для employees, states, devices, location вместо join (как было раньше) используется метод
+ * changeNameIdToNameRu, который из библиотеки берет значение на русском по идентификатору*/
+function loadNames() {
+    DBASE.collection(TABLE_NAMES)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // let en = doc.data().en;
+            let ru = doc.data().ru;
+            let id = doc.id;
+            dictionary.set(id, {ru: ru});
+        });
+    });
+    // loadLocation();
+    // loadEmployees();
+    // loadStates();
+    // loadDevices();
 }
 //----------------------------------------------------------------------------------------------------------------------
 /**Показывает/скрывает список всех событий для выбранного юнита*/
@@ -215,7 +234,7 @@ function startSearch_new() {
     let serial =        serialText.value;
     let type_id =       getType();
 
-    console.log("name="+deviceName_id+" loc="+location_id+" state="+state_id+" empl="+employee_id+" serial="+serial+" type="+type_id);
+    //console.log("name="+deviceName_id+" loc="+location_id+" state="+state_id+" empl="+employee_id+" serial="+serial+" type="+type_id);
 
     //Если поле номера пустое, то ищем по параметрам, если поле содержит значение, то ищем по этому значению, игнорируя
     // все остальные параметры. Т.е. ищем или по параметрам, или по номеру. Тип устройства учитывается в любом из случаев
@@ -248,7 +267,7 @@ function getLocationById(id) {
 function getStateById(id) {
     if (id===null||typeof id === 'undefined') return new State("", "", EMPTY_VALUE, "");
     for (let i = 0; i < states.length; i++) {
-        console.log(i+' - '+states[i].getId);
+        // console.log(i+' - '+states[i].getId);
         if (states[i].getId===id) return states[i];
     }
     return id;
@@ -314,7 +333,14 @@ let employeeSpinnerAdapter = new SpinnerAdapter(employeeSpinner);
 let stateSpinnerAdapter = new SpinnerAdapter(statesSpinner);
 
 
-listen_new(DBASE, TABLE_LOCATIONS, loadLocation);
-listen_new(DBASE, TABLE_EMPLOYEES, loadEmployees);
-listen_new(DBASE, TABLE_STATES, loadStates);
-listen_new(DBASE, TABLE_DEVICES, loadDevices);
+loadNames();
+
+loadLocation();
+loadEmployees();
+loadStates();
+loadDevices();
+
+// listen_new(DBASE, TABLE_LOCATIONS, loadLocationSimple);
+// listen_new(DBASE, TABLE_EMPLOYEES, loadEmployees);
+// listen_new(DBASE, TABLE_STATES, loadStates);
+// listen_new(DBASE, TABLE_DEVICES, loadDevices);

@@ -201,6 +201,28 @@ let dUnitConverter = {
     }
 };
 
+let dUnitConverterAll = {
+    toFirestore: function (dunit) {
+        return {
+            id: dunit.id,
+            description: dunit.description,
+            device_id: dunit.device_id,
+            employee_id: dunit.employee_id,
+            inner_serial: dunit.inner_serial,
+            location_id: dunit.location_id,
+            serial: dunit.serial,
+            state_id: dunit.state_id,
+            type_id: dunit.type_id,
+            date: dunit.date,
+            close_date: dunit.close_date
+        };
+    },
+    fromFirestore: function (snapshot, options) {
+        const data = snapshot.data(options);
+        return new DUnit(data.id, data.description, data.device_id, data.employee_id, data.inner_serial, data.location_id, data.serial, data.state_id, data.type_id, data.date, data.close_date);
+    }
+};
+
 /**Класс статусов. Содержит сам статус и его дату*/
 class DEvent {
     constructor(date, description, location_id, state_id, unit_id) {

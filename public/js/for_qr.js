@@ -28,7 +28,7 @@ function listen(database, table, func) {
     database.collection(table)
         .onSnapshot((snapshot) => {
             snapshot.docChanges().forEach((change) => {
-                console.log(change.doc.data());
+                // console.log(change.doc.data());
                 getPairedCollectionFromDB(table, function (arr_id/*, arr_name*/) {
                     func(/*arr_name, */arr_id); //Эта функция
                 });

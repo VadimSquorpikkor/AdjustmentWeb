@@ -16,7 +16,7 @@ function getAllEventsByUnitId_new(database, table, param, value, func, orderBy, 
             let event = new DEvent(doc.data().date, doc.data().description, doc.data().location_id, doc.data().state_id, doc.data().unit_id);
             arr.push(event);
         });
-        console.log(arr.length);
+        // console.log(arr.length);
         func(arr, host);
     });
 }
@@ -47,6 +47,7 @@ function getAllUnitsByParam(database, table, converter,
     let arr = [];
     query.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
+            console.log("-------------one more--------------");
             // Convert to object
             obj = doc.data();
             arr.push(obj);
@@ -62,7 +63,7 @@ function valueOf(id) {
 
 let db = firebase.firestore();
 /**Загрузка в таблицу имен*/
-function loadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
+function uploadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
     db.collection('names').doc(valueOf(id)).set({
         ru: valueOf(name_ru),
         en: valueOf(name_en),
@@ -80,7 +81,7 @@ function loadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
 
 /**Загрузка новых устройств. Заполняет все поля в таблице устройств и дополнительно прописывает в таблицу имен русский и английский вариант написания*/
 function loadNewDevice(id, devset_id, ru, en) {
-    loadNames(id, ru, en, "", "", "");
+    uploadNames(id, ru, en, "", "", "");
 
     db.collection('devices').doc(valueOf(id)).set({
         devset_id: valueOf(devset_id),
@@ -96,7 +97,7 @@ function loadNewDevice(id, devset_id, ru, en) {
 }
 
 function deleteUnit(id) {
-    console.log(id);
+    // console.log(id);
     let unit_id = valueOf(id);
     if (unit_id !== "") {
         db.collection('units').doc(unit_id).delete();
