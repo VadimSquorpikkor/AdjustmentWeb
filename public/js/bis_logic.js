@@ -5,41 +5,36 @@
  * (исключая имена устройств — для них только варианты на русском и английском, и исключая employees — у них только русские)
  * 3. В приложении есть соответствующие массивы объектов для каждого вида сущностей: locations, states, employees, devices.
  * В объекте хранятся и имена, и их идентификаторы (и ещё разные данные)
- * 4. Эти массивы заполняются только при сработке соответствующих лисенеров, каждый из которых отслеживает изменения в
- * соответствующей сущности таблице в БД ("devices", "locations", "employees", "states"). Таким образов данные в массивы
- * загружаются из БД только при изменении данных (лисенер для локаций срабатывает только при изменениях в таблице "locations",
- * на другие не обращает внимания) или при старте приложения — загрузке страницы (срабатывают все лисенеры)
  * 4. Массивы играют роль словарей и источников данных, из них формируются спиннеры, с их помощью переводятся идентификаторы
  * в имена и обратно, это всё происходит БЕЗ обращения в БД
- * 5. Для заполнения спинеров данными, получения идентификаторов по выбранным пунктам и др, осуществляется через SpinnerAdapter
- * 6. В load методах в массивы загружаются объекты с данными из таблицы, в самих методах используется квази JOIN, чтобы
- * после получения идентификаторов имен сразу же получить из таблицы "names" имена на нужном языке
- * 7. При загрузке юнитов и событий JOIN уже не нужен, данные для имен берутся в соответствующем объекте (locations[i].getNameRu)
+ * 5. При загрузке страницы первым делом загружаются данные из таблицы имен (только русский вариант). Эти данные помещаются
+ * в Map (dictionary), где ключ — это имя документа firebase, а значение — это значение поля "ru"
+ * При загрузке данных для employees, states, devices, location вместо join (как было раньше) используется метод
+ * changeNameIdToNameRu, который из библиотеки берет значение на русском по идентификатору
+ * 6. Для заполнения спинеров данными, получения идентификаторов по выбранным пунктам и др, осуществляется через SpinnerAdapter
+ * 7.
  * */
 
 
-/**
- *
- * @param name_id этот идентификатор будет заменен именем из таблицы имен
- * @param obj объект в котором поле name_ru будет заменено с идентификатора, заданного в конструкторе, на нормальное имя
- * @param func функция, которая будет обновлять спиннер новыми данными
- */
-function joinNamesRu(name_id, obj, func) {
-    let docRef = DBASE.collection(TABLE_NAMES).doc(name_id);
-    docRef.get().then((doc) => {
-        if (doc.exists) {
-            obj.setNameRu(doc.data().ru);
-            console.log(doc.data().ru);
-            func();
-        } else {
-            // console.log("No such document!");
-        }
-    }).catch((error) => {
-        // console.log("Error getting document:", error);
-    });
+
+//так было раньше
+// 4. Эти массивы заполняются только при сработке соответствующих лисенеров, каждый из которых отслеживает изменения в
+// * соответствующей сущности таблице в БД ("devices", "locations", "employees", "states"). Таким образов данные в массивы
+// * загружаются из БД только при изменении данных (лисенер для локаций срабатывает только при изменениях в таблице "locations",
+// * на другие не обращает внимания) или при старте приложения — загрузке страницы (срабатывают все лисенеры)
+//В load методах в массивы загружаются объекты с данными из таблицы, в самих методах используется квази JOIN, чтобы
+//  * после получения идентификаторов имен сразу же получить из таблицы "names" имена на нужном языке
+//  * 7. При загрузке юнитов и событий JOIN уже не нужен, данные для имен берутся в соответствующем объекте (locations[i].getNameRu)
+
+
+
+function getName(id) {
+    if (!dictionary.has(id)) return id;
+    return (typeof dictionary.get(id).en)==='undefined'?dictionary.get(id):dictionary.get(id).ru;
 }
 
 function changeNameIdToNameRu(name_id, obj) {
+    // obj.setNameRu(getName(name_id)); //не работает
     obj.setNameRu(dictionary.get(name_id).ru);
 }
 //----------------------------------------------------------------------------------------------------------------------
@@ -52,7 +47,7 @@ let employees = [];
 let states = [];
 /**Массив объектов всех устройств*/
 let devices = [];
-
+/**Словарь id->names*/
 let dictionary = new Map();
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -73,9 +68,7 @@ function loadLocation() {
             let name_ru = doc.data().name_id;
             let location = new Location(id, name_id, name_ru);
 
-            // joinNamesRu(name_id, location, updateLocationSpinner);
             changeNameIdToNameRu(name_id, location);
-
             loc_arr.push(location);
         });
         locations = loc_arr;
@@ -173,6 +166,19 @@ function updateDeviceSpinner() {
     if (typeof devicesForGeneratorAdapter!=='undefined') devicesForGeneratorAdapter.setDataObj(devices);
 }
 
+
+
+function listen(table, func) {
+    DBASE.collection(table)
+        .get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            func(doc);
+        });
+    });
+}
+
+
+
 function loadDevices() {
     let dev_arr = [];
     DBASE.collection(TABLE_DEVICES)
@@ -182,6 +188,11 @@ function loadDevices() {
             let name_id = doc.data().name_id;
             let name_ru = doc.data().name_id;
             let device = new Device(id, name_id, name_ru);
+
+            //альт вариант
+            // changeNameIdToNameRu(name_id, device);
+            // devices.push(device);
+            // updateDeviceSpinner();
 
             changeNameIdToNameRu(name_id, device);
             dev_arr.push(device);

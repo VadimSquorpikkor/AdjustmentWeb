@@ -192,12 +192,13 @@ let dUnitConverter = {
             state_id: dunit.state_id,
             type_id: dunit.type_id,
             date: dunit.date,
-            close_date: dunit.close_date
+            close_date: dunit.close_date,
+            trackid: dunit.trackid
         };
     },
     fromFirestore: function (snapshot, options) {
         const data = snapshot.data(options);
-        return new DUnit(data.id, data.description, data.device_id, data.employee_id, data.inner_serial, data.location_id, data.serial, data.state_id, data.type_id, data.date, data.close_date);
+        return new DUnit(data.id, data.description, data.device_id, data.employee_id, data.inner_serial, data.location_id, data.serial, data.state_id, data.type_id, data.date, data.close_date, data.trackid);
     }
 };
 
@@ -214,12 +215,13 @@ let dUnitConverterAll = {
             state_id: dunit.state_id,
             type_id: dunit.type_id,
             date: dunit.date,
-            close_date: dunit.close_date
+            close_date: dunit.close_date,
+            trackid: dunit.trackid
         };
     },
     fromFirestore: function (snapshot, options) {
         const data = snapshot.data(options);
-        return new DUnit(data.id, data.description, data.device_id, data.employee_id, data.inner_serial, data.location_id, data.serial, data.state_id, data.type_id, data.date, data.close_date);
+        return new DUnit(data.id, data.description, data.device_id, data.employee_id, data.inner_serial, data.location_id, data.serial, data.state_id, data.type_id, data.date, data.close_date, data.trackid);
     }
 };
 

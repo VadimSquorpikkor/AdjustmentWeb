@@ -6,13 +6,13 @@
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/insert.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/insert.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/bis_logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bis_logic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/entities.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/entities.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebase_low_level.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/for_qr.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/for_qr.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/for_qr_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/for_qr_2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/insert_page_biz.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/insert_page_biz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +220,8 @@
       <workItem from="1631282590608" duration="800000" />
       <workItem from="1631534463179" duration="6213000" />
       <workItem from="1631600700742" duration="618000" />
-      <workItem from="1632909523220" duration="9732000" />
+      <workItem from="1632909523220" duration="14672000" />
+      <workItem from="1632924908215" duration="4068000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -495,7 +496,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631539555086</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="1.37 - 29/09/21&#10;1. Исправлены причины дооолгой загрузки данных из БД: был ошибочная реализация listen_new метода (внутри цикла получения данных ещё цикл получения данных, вместо 10 раз данные загружались 10 раз по 10 (100)); вместо join теперь библиотека.&#10;2. Новый алгоритм получения данных и перевода id-&gt;name: при загрузке страницы первым делом загружаются данные из таблицы имен (только русский вариант). Эти данные помещаются в Map (dictionary), где ключ — это имя документа firebase, а значение — это значение поля &quot;ru&quot;. При загрузке данных для employees, states, devices, location вместо join (как было раньше) используется метод changeNameIdToNameRu, который из библиотеки берет значение на русском по идентификатору">
+      <created>1632919469659</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1632919469659</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -542,7 +550,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.15 - 31/03/21&#10;1. Добавлена страница для загрузки новых данных в БД. JS код закомментирован для безопасности, буду раскомментировать при необходимости и пока не сделаю аутентификацию" />
     <MESSAGE value="1.16 - 09/04/21&lt;/b&gt;&#10;1. Переделано под обновленную базу данных (см. коммит AdjustmentDB 1.28 - 08/04/21, база глобально менялась).&#10;2. Добавлена иконка&#10;3. Добавлен фильтр для ремонтных&#10;4. Для ремонтных и серийных: если ничего не найдено, вместо таблицы будет отображаться &quot;Не найдено&quot;" />
     <MESSAGE value="1.16 - 09/04/21 на дом" />
     <MESSAGE value="1.17 - 21/04/21&#10;1. Теперь на сгенерированном коде в самом изображении отображается тип устройства и его номер&#10;2. Добавлено для ввода номера кнопки &quot;+&quot; &quot;-&quot; (увеличивать / уменьшать номер)&#10;3. Только для Chrome: сгенерированное изображение автоматом помещается в буфер обмена" />
@@ -567,6 +574,7 @@
     <MESSAGE value="1.34 - 22/07/21 (Версия не обновлялась)&#10;1. Добавились картинки для БД" />
     <MESSAGE value="1.35 - 10/09/21&#10;1. В insert добавлены поля и методы для загрузки новых устройств в БД. Заполняет все поля в таблице устройств и дополнительно прописывает в таблицу имен русский и английский вариант написания" />
     <MESSAGE value="1.36 - 13/09/21&#10;1. Исправлены ошибки загрузки результатов поиска, когда у устройства нет никакого статуса (добавлено  if (typeof id === 'undefined'))" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.36 - 13/09/21&#10;1. Исправлены ошибки загрузки результатов поиска, когда у устройства нет никакого статуса (добавлено  if (typeof id === 'undefined'))" />
+    <MESSAGE value="1.37 - 29/09/21&#10;1. Исправлены причины дооолгой загрузки данных из БД: был ошибочная реализация listen_new метода (внутри цикла получения данных ещё цикл получения данных, вместо 10 раз данные загружались 10 раз по 10 (100)); вместо join теперь библиотека.&#10;2. Новый алгоритм получения данных и перевода id-&gt;name: при загрузке страницы первым делом загружаются данные из таблицы имен (только русский вариант). Эти данные помещаются в Map (dictionary), где ключ — это имя документа firebase, а значение — это значение поля &quot;ru&quot;. При загрузке данных для employees, states, devices, location вместо join (как было раньше) используется метод changeNameIdToNameRu, который из библиотеки берет значение на русском по идентификатору" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.37 - 29/09/21&#10;1. Исправлены причины дооолгой загрузки данных из БД: был ошибочная реализация listen_new метода (внутри цикла получения данных ещё цикл получения данных, вместо 10 раз данные загружались 10 раз по 10 (100)); вместо join теперь библиотека.&#10;2. Новый алгоритм получения данных и перевода id-&gt;name: при загрузке страницы первым делом загружаются данные из таблицы имен (только русский вариант). Эти данные помещаются в Map (dictionary), где ключ — это имя документа firebase, а значение — это значение поля &quot;ru&quot;. При загрузке данных для employees, states, devices, location вместо join (как было раньше) используется метод changeNameIdToNameRu, который из библиотеки берет значение на русском по идентификатору" />
   </component>
 </project>

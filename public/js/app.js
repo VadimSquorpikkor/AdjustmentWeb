@@ -39,6 +39,8 @@ function addSerialDataRowToPage(arr) {
             let isClose = unit.close_date!==undefined;
             let employee = unit.employee_id;
             let type = unit.type_id;
+            let trackId = unit.trackid;
+            if (trackId===null || typeof trackId==='undefined')trackId = '- - -';
 
             deviceName = getDeviceById(deviceName).getNameRu;
             state = getStateById(state).getNameRu;
@@ -52,19 +54,21 @@ function addSerialDataRowToPage(arr) {
             // location = getLocationById(location);
             // if (location!=='undefined') location = location.getNameRu;
 
+            let trackIdStroke = type==="Серия"?'':'<span class="big_orange">ID: '+ trackId +'</span><br>';
+
             let isCloseStroke = '';
             if (isClose) {
                 isCloseStroke =
                     '<div style="width: auto">'+
-                    '    <span class="big_orange" style="width: auto; text-align: center">ЗАВЕРШЕН</span>'+
-                    '<hr>'+
+                    '    <span class="big_green" style="width: auto; text-align: center">ЗАВЕРШЕН</span>'+
+                    // '<hr>'+
                     '</div>';
             }
 
             data +=
             '<div class="found_unit_item" onclick=getAllEventsByUnitIdSmall("'+unit.id+'")>'+
                 isCloseStroke+
-            '    <div class="item_info_div">'+
+            '    <div class="item_info_div">'+trackIdStroke+
             '        <span class="big_orange">'+ deviceName +'</span>'+
             '        <span class="small_white">№ '+ serial +'</span>'+
             '        <span class="small_white">'+ innerSerial +'</span><br>'+

@@ -36,7 +36,7 @@ function getAllUnitsByParam(database, table, converter,
                             param_5, value_5,
                             param_6, value_6,
                             func) {
-    let query = database.collection(table).withConverter(converter);//todo убрать конвертер?
+    let query = database.collection(table);//.withConverter(converter);//todo убрать конвертер?
     if (value_1 !== ANY_VALUE) query = query.where(param_1, "==", value_1)
     if (value_2 !== ANY_VALUE) query = query.where(param_2, "==", value_2)
     if (value_3 !== ANY_VALUE) query = query.where(param_3, "==", value_3)

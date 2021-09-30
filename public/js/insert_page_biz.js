@@ -74,5 +74,6 @@ const devsetSpinner = document.getElementById('devset_spinner');
 
 let devsetSpinnerAdapter = new SpinnerAdapter(devsetSpinner);
 
-listen_new(DBASE, TABLE_DEVSETS, loadDevsets);
+loadDevsets();
+//listen_new(DBASE, TABLE_DEVSETS, loadDevsets);
 

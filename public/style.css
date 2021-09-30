@@ -144,6 +144,11 @@ input[type="button"]:active {
     color: orange;
 }
 
+.big_green {
+    font-size: 14px;
+    color: greenyellow;
+}
+
 .day_count_div {
     text-align: right;
     float: right;
