@@ -19,8 +19,18 @@ html, body {
     border-radius: 10px;
 }
 
+.locations_div {
+    background-color: #555555;
+    box-shadow: 2px 1px 12px 1px rgba(0, 0, 0, 0.23);
+    padding: 30px 15px 20px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 20pc;
+    float: left;
+}
+
 .white_span {
-    background: #666666;
+    background: #555555;
     color: #ECEFF1;
 }
 

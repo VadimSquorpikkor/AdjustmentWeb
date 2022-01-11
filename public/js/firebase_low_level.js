@@ -23,7 +23,11 @@ function getAllEventsByUnitId_new(database, table, param, value, func, orderBy, 
 
 /**Обертка для getAllUnitsByParam*/
 function getUnitListFromBD(deviceName, location, employee, type, state, serial) {
-    getAllUnitsByParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_DEVICE, deviceName, UNIT_LOCATION, location, UNIT_EMPLOYEE, employee, UNIT_TYPE, type, UNIT_STATE, state, UNIT_SERIAL, serial, addSerialDataRowToPage);
+    getAllUnitsByParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_DEVICE, deviceName, UNIT_LOCATION, location, UNIT_EMPLOYEE, employee, UNIT_TYPE, type, UNIT_STATE, state, UNIT_SERIAL, serial, null, addSerialDataRowToPage);
+}
+
+function getRepairUnitListFromBDByLocation(location, div, func) {
+    getAllUnitsByParam(DBASE, TABLE_UNITS, dUnitConverter, UNIT_DEVICE, ANY_VALUE, UNIT_LOCATION, location, UNIT_EMPLOYEE, ANY_VALUE, UNIT_TYPE, REPAIR_TYPE, UNIT_STATE, ANY_VALUE, UNIT_SERIAL, ANY_VALUE, div, func);
 }
 //todo кроме ANY_VALUE добавить ещё null и ""
 /**Получить все объекты из коллекции, совпадающие по параметрам. Если значение параметра равно ANY_VALUE,
@@ -35,6 +39,7 @@ function getAllUnitsByParam(database, table, converter,
                             param_4, value_4,
                             param_5, value_5,
                             param_6, value_6,
+                            div,
                             func) {
     let query = database.collection(table);//.withConverter(converter);//todo убрать конвертер?
     if (value_1 !== ANY_VALUE) query = query.where(param_1, "==", value_1)
@@ -52,7 +57,9 @@ function getAllUnitsByParam(database, table, converter,
             obj = doc.data();
             arr.push(obj);
         });
-        func(arr);
+
+        if (div===null) func(arr);
+        else func(arr, div);
     });
 }
 
@@ -61,7 +68,7 @@ function valueOf(id) {
 }
 
 
-let db = firebase.firestore();
+/////////// let db = firebase.firestore();
 /**Загрузка в таблицу имен*/
 function uploadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
     db.collection('names').doc(valueOf(id)).set({

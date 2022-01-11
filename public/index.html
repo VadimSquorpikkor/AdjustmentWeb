@@ -10,6 +10,8 @@
     <script defer src="/__/firebase/8.2.9/firebase-firestore.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
+    <script defer src="/__/firebase/8.2.9/firebase-auth.js"></script>
+
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script defer src="js/constants.js"></script>
@@ -24,14 +26,88 @@
 
 <body class="body">
 
+<input type="email" id="email" placeholder="Type email">
+<input type="text" id="pass" placeholder="password">
+<input type="button" id="send" value="signIn">
+<input type="button" id="sign_out" value="signOut">
+<span id="error_text" style="display: none; color: white"></span>
+
+<script type="module">
+    //////latest version of firestore.rules already up to date, skipping upload
+//////someemail@gmail.com someemail
+
+    function getPassword(input) {
+        input.type = "text";
+        let value = input.value;
+        input.type = "password";
+        return value;
+    }
+
+    function showError(error) {
+        document.getElementById("error_text").style.display = 'block';
+        document.getElementById("error_text").innerHTML = error;
+    }
+
+    let email = document.getElementById("email").value;
+    let pass = document.getElementById("pass").value;
+    document.getElementById("send").onclick = function () {
+        console.log('email = '+email+' | pass = '+pass);
+        firebase.auth().signInWithEmailAndPassword(email, pass)
+            .then((userCredential) => {
+                console.log("...signedIn");
+                // Signed in
+                var user = userCredential.user;
+                // ...
+            })
+            .catch((error) => {
+                console.log("...signedInError");
+                console.log(error.code);
+                console.log(error.message);
+                showError(error.message);
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
+    }
+
+    /**SignOut по клику по кнопке*/
+    document.getElementById("sign_out").onclick = function () {
+        document.getElementById("error_text").style.display = 'none';
+        firebase.auth().signOut().then(function() {
+            console.log('signed Out...');
+        }, function(error) {
+            console.error('Sign Out Error...', error);
+        });
+    };
+
+    /**Слушает состояние авторизации и выводит в консоль статус*/
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            var uid = user.uid;
+            console.log(uid);
+            ////console.log(user.email);
+        } else {
+            // User is signed out
+            console.log("...LogOut");
+        }
+    });
+
+
+</script>
+
+
 <div class="main_div" id="main_div">
 
     <a href="qr_page.html">QR-генератор</a>
     <a href="https://atomtexrepair.web.app/">Сайт Ремонта</a>
     <a href="insert.html">Добавить</a>
+    <a href="locations.html">Локации</a>
 
     <h1>AdjustmentWeb</h1>
     <h3>База данных УРиР</h3>
+
+
 
     <div class="search_filter_div">
 
@@ -60,7 +136,7 @@
 
     <img id="main_logo" src="logo_big_grayscale.png" width="400px" style="margin: auto"><br>
 
-    <span class="version">Версия — 1.38</span>
+    <span class="version">Версия — 1.39</span>
 </div>
 </body>
 </html>

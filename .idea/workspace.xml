@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/js/locations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/locations.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bis_logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bis_logic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/entities.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/entities.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebase_low_level.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/for_qr_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/for_qr_2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/insert_page_biz.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/insert_page_biz.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -221,7 +218,19 @@
       <workItem from="1631534463179" duration="6213000" />
       <workItem from="1631600700742" duration="618000" />
       <workItem from="1632909523220" duration="14672000" />
-      <workItem from="1632924908215" duration="4068000" />
+      <workItem from="1632924908215" duration="4143000" />
+      <workItem from="1633610918958" duration="601000" />
+      <workItem from="1636528633733" duration="24000" />
+      <workItem from="1636549705696" duration="15000" />
+      <workItem from="1639470800272" duration="3146000" />
+      <workItem from="1639659212385" duration="8000" />
+      <workItem from="1639992386420" duration="1803000" />
+      <workItem from="1640605486411" duration="43000" />
+      <workItem from="1640614400796" duration="18000" />
+      <workItem from="1641390218390" duration="2400000" />
+      <workItem from="1641448296149" duration="19000" />
+      <workItem from="1641814056858" duration="8282000" />
+      <workItem from="1641880498562" duration="17917000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -503,7 +512,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632919469659</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="1.38 - 01/10/21&#10;1. Исправлена загрузка списка устройств для страницы QR-кода и страницы ввода параметров&#10;2. Добавлено отображение trackId в найденных устройствах (только в ремонтных)&#10;3. Переделана надпись &quot;ЗАВЕРШЕН&quot; (раньше сливалась с остальными данными)">
+      <created>1632999605501</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1632999605501</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -550,7 +566,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.16 - 09/04/21&lt;/b&gt;&#10;1. Переделано под обновленную базу данных (см. коммит AdjustmentDB 1.28 - 08/04/21, база глобально менялась).&#10;2. Добавлена иконка&#10;3. Добавлен фильтр для ремонтных&#10;4. Для ремонтных и серийных: если ничего не найдено, вместо таблицы будет отображаться &quot;Не найдено&quot;" />
     <MESSAGE value="1.16 - 09/04/21 на дом" />
     <MESSAGE value="1.17 - 21/04/21&#10;1. Теперь на сгенерированном коде в самом изображении отображается тип устройства и его номер&#10;2. Добавлено для ввода номера кнопки &quot;+&quot; &quot;-&quot; (увеличивать / уменьшать номер)&#10;3. Только для Chrome: сгенерированное изображение автоматом помещается в буфер обмена" />
     <MESSAGE value="1.18 - 28/04/21&#10;1. Глобально переписан JS. Лисенеры теперь загружают пары списков -- список для имен и список для идентификаторов. На странице будут выводиться имена, в БД будут передаваться идентификаторы&#10;2. Перерисована главная страница: теперь здесь сделан глобальный поиск устройств по БД, размещен фильтр для поиска. Поиск по: типу (серия/ремонт), по имени устройства, по локации, по статусу, по фамилии ответственного&#10;3. Если в параметре поиска написать серийный номер, то поиск будет везтись ТОЛЬКО по серийному номеру, все другие параметры будут игнорироваться&#10;4. Содержимое спиннера для статусов зависит от выбранного типа (серия/ремонт) и от выбранной локации, если выбрать &quot;Все локации&quot;, то будут отображаться все существующие статусы&#10;5. Все списки загружаются лисенерами, а значит любое изменение в соответствующей коллекции в БД немедленно приведет к обновлению соответствующего списка и спиннера без перезагрузки страницы&#10;6. Реализован переводчик из id в имя и из имени в id (для списков данных)&#10;7. В списке найденных устройств теперь все данные показываются правильно (раньше вместо названия указывался его идентификатор)" />
@@ -575,6 +590,7 @@
     <MESSAGE value="1.35 - 10/09/21&#10;1. В insert добавлены поля и методы для загрузки новых устройств в БД. Заполняет все поля в таблице устройств и дополнительно прописывает в таблицу имен русский и английский вариант написания" />
     <MESSAGE value="1.36 - 13/09/21&#10;1. Исправлены ошибки загрузки результатов поиска, когда у устройства нет никакого статуса (добавлено  if (typeof id === 'undefined'))" />
     <MESSAGE value="1.37 - 29/09/21&#10;1. Исправлены причины дооолгой загрузки данных из БД: был ошибочная реализация listen_new метода (внутри цикла получения данных ещё цикл получения данных, вместо 10 раз данные загружались 10 раз по 10 (100)); вместо join теперь библиотека.&#10;2. Новый алгоритм получения данных и перевода id-&gt;name: при загрузке страницы первым делом загружаются данные из таблицы имен (только русский вариант). Эти данные помещаются в Map (dictionary), где ключ — это имя документа firebase, а значение — это значение поля &quot;ru&quot;. При загрузке данных для employees, states, devices, location вместо join (как было раньше) используется метод changeNameIdToNameRu, который из библиотеки берет значение на русском по идентификатору" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.37 - 29/09/21&#10;1. Исправлены причины дооолгой загрузки данных из БД: был ошибочная реализация listen_new метода (внутри цикла получения данных ещё цикл получения данных, вместо 10 раз данные загружались 10 раз по 10 (100)); вместо join теперь библиотека.&#10;2. Новый алгоритм получения данных и перевода id-&gt;name: при загрузке страницы первым делом загружаются данные из таблицы имен (только русский вариант). Эти данные помещаются в Map (dictionary), где ключ — это имя документа firebase, а значение — это значение поля &quot;ru&quot;. При загрузке данных для employees, states, devices, location вместо join (как было раньше) используется метод changeNameIdToNameRu, который из библиотеки берет значение на русском по идентификатору" />
+    <MESSAGE value="1.38 - 01/10/21&#10;1. Исправлена загрузка списка устройств для страницы QR-кода и страницы ввода параметров&#10;2. Добавлено отображение trackId в найденных устройствах (только в ремонтных)&#10;3. Переделана надпись &quot;ЗАВЕРШЕН&quot; (раньше сливалась с остальными данными)" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.38 - 01/10/21&#10;1. Исправлена загрузка списка устройств для страницы QR-кода и страницы ввода параметров&#10;2. Добавлено отображение trackId в найденных устройствах (только в ремонтных)&#10;3. Переделана надпись &quot;ЗАВЕРШЕН&quot; (раньше сливалась с остальными данными)" />
   </component>
 </project>

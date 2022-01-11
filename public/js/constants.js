@@ -1,4 +1,5 @@
 /**Имя базы данных*/
+console.log('...загрузка constant');
 const DBASE = firebase.firestore();
 const TABLE_NAMES = "names";
 
@@ -60,3 +61,9 @@ const ANY_VALUE = "any_value";
 const STATE_PREF = "state_";
 const DESCENDING = "desc";
 const EMPTY_VALUE = "- - -";
+
+const ASSEMBLY_LOCATION_ID = "assembly";
+const ADJUSTMENT_LOCATION_ID = "adjustment";
+const GRADUATION_LOCATION_ID = "graduation";
+const REAPAIR_AREA_LOCATION_ID = "repair_area";
+const SOLDERING_LOCATION_ID = "soldering";
