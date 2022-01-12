@@ -68,59 +68,24 @@ function valueOf(id) {
 }
 
 
-/////////// let db = firebase.firestore();
-/**Загрузка в таблицу имен*/
-function uploadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
-    db.collection('names').doc(valueOf(id)).set({
-        ru: valueOf(name_ru),
-        en: valueOf(name_en),
-        it: valueOf(name_it),
-        de: valueOf(name_de),
-        fr: valueOf(name_fr)
-    }, { merge: true });
-
-    if (valueOf(name_ru)!=="")db.collection('names').doc(valueOf(id)).set({ ru: valueOf(name_ru)}, { merge: true });
-    if (valueOf(name_en)!=="")db.collection('names').doc(valueOf(id)).set({ en: valueOf(name_en)}, { merge: true });
-    if (valueOf(name_it)!=="")db.collection('names').doc(valueOf(id)).set({ it: valueOf(name_it)}, { merge: true });
-    if (valueOf(name_de)!=="")db.collection('names').doc(valueOf(id)).set({ de: valueOf(name_de)}, { merge: true });
-    if (valueOf(name_fr)!=="")db.collection('names').doc(valueOf(id)).set({ fr: valueOf(name_fr)}, { merge: true });
+function eraseSecureKey() {
+    secureKey = "";
 }
 
-/**Загрузка новых устройств. Заполняет все поля в таблице устройств и дополнительно прописывает в таблицу имен русский и английский вариант написания*/
-function loadNewDevice(id, devset_id, ru, en) {
-    uploadNames(id, ru, en, "", "", "");
-
-    db.collection('devices').doc(valueOf(id)).set({
-        devset_id: valueOf(devset_id),
-        id: valueOf(id),
-        img_path: "https://adjustmentdb.web.app/pics/" + valueOf(id) + ".png",
-        name_id: valueOf(id)
-    }, { merge: true });
-
-    db.collection('names').doc(valueOf(id)).set({
-        ru: valueOf(ru),
-        en: valueOf(id)
-    }, { merge: true });
+/**Получает из БД секретный ключ (нужен для генерации QR-кода). Если ключ не удалось загрузить, на странице выводится
+ * сообщение об ошибке*/
+function getSecureKey() {
+    DBASE.collection(TABLE_SETTINGS).doc(SECURE_KEY_DOC)
+        .get().then((doc) => {
+        if (doc.exists) {
+            secureKey = doc.data().value;
+            console.log("..."+secureKey);
+        } else showError('ВНИМАНИЕ! Ошибка ключа безопасности');
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+        showError('ВНИМАНИЕ! Ошибка ключа безопасности');
+    });
+    console.log("..."+secureKey);
 }
 
-function deleteUnit(id) {
-    // console.log(id);
-    let unit_id = valueOf(id);
-    if (unit_id !== "") {
-        db.collection('units').doc(unit_id).delete();
-        db.collection('events').where('unit_id', "==", unit_id).get().then((querySnapshot) => {
-            querySnapshot.forEach(doc => {
-                doc.ref.delete();
-            });
-        })
-    }
-}
-
-function clearInput(id1, id2, id3, id4, id5, id6) {
-    document.getElementById(id1).value = "";
-    document.getElementById(id2).value = "";
-    document.getElementById(id3).value = "";
-    document.getElementById(id4).value = "";
-    document.getElementById(id5).value = "";
-    document.getElementById(id6).value = "";
-}
+let secureKey = "";

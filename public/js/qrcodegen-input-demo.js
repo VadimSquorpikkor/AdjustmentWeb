@@ -77,7 +77,9 @@ var app;
 
 
 
-        let str = getElem('security_key').value;
+        ////// let str = getElem('security_key').value;
+        let str = secureKey;
+        console.log('secureKey - '+str);
         setSecurityKey(str);
 
         // var sel = getElem("selected_type_for_generator");
@@ -106,6 +108,7 @@ var app;
         var border = parseInt(getInput("border-input").value, 10);
         if (border < 0 || border > 100)
             return;
+        if (secureKey==="")return;
         if (bitmapOutput) {
             var scale = parseInt(getInput("scale-input").value, 10);
             if (scale <= 0 || scale > 30)

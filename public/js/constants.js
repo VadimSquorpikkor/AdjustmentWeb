@@ -2,7 +2,8 @@
 console.log('...загрузка constant');
 const DBASE = firebase.firestore();
 const TABLE_NAMES = "names";
-
+const TABLE_SETTINGS = "_settings";
+const SECURE_KEY_DOC = "secure_key";
 
 const ALL_DEVICES = "Все устройства";
 const ALL_STATES = "Все статусы";

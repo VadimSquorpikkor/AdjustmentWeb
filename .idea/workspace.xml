@@ -2,14 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/js/locations.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/locations.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/index_auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/insert.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/insert.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebase_low_level.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/insert_page_biz.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/insert_page_biz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/qrcodegen-input-demo.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/qrcodegen-input-demo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locations.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/locations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/qr_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/qr_page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +233,8 @@
       <workItem from="1641390218390" duration="2400000" />
       <workItem from="1641448296149" duration="19000" />
       <workItem from="1641814056858" duration="8282000" />
-      <workItem from="1641880498562" duration="17917000" />
+      <workItem from="1641880498562" duration="22889000" />
+      <workItem from="1641966749596" duration="14414000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -519,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632999605501</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="1.39 - 11/01/22&#10;1. Начал делать страницу отображения нахождения устройств: 5 плиток (по кол-ву локаций) в каждой отображается список устройств которые находятся в данный момент в текущей локацией с подробной информацией об устройстве (тип, номер, ответственный и др). При перемещении реального устройства на другую локацию происходит немедленное изменение списков и отображаемых данных БЕЗ перезагрузки страницы (сервис отслеживает изменения в локациях)&#10;2. Начал делать авторизацию. Пока всё плохо">
+      <created>1641905255469</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1641905255469</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -566,7 +577,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.16 - 09/04/21 на дом" />
     <MESSAGE value="1.17 - 21/04/21&#10;1. Теперь на сгенерированном коде в самом изображении отображается тип устройства и его номер&#10;2. Добавлено для ввода номера кнопки &quot;+&quot; &quot;-&quot; (увеличивать / уменьшать номер)&#10;3. Только для Chrome: сгенерированное изображение автоматом помещается в буфер обмена" />
     <MESSAGE value="1.18 - 28/04/21&#10;1. Глобально переписан JS. Лисенеры теперь загружают пары списков -- список для имен и список для идентификаторов. На странице будут выводиться имена, в БД будут передаваться идентификаторы&#10;2. Перерисована главная страница: теперь здесь сделан глобальный поиск устройств по БД, размещен фильтр для поиска. Поиск по: типу (серия/ремонт), по имени устройства, по локации, по статусу, по фамилии ответственного&#10;3. Если в параметре поиска написать серийный номер, то поиск будет везтись ТОЛЬКО по серийному номеру, все другие параметры будут игнорироваться&#10;4. Содержимое спиннера для статусов зависит от выбранного типа (серия/ремонт) и от выбранной локации, если выбрать &quot;Все локации&quot;, то будут отображаться все существующие статусы&#10;5. Все списки загружаются лисенерами, а значит любое изменение в соответствующей коллекции в БД немедленно приведет к обновлению соответствующего списка и спиннера без перезагрузки страницы&#10;6. Реализован переводчик из id в имя и из имени в id (для списков данных)&#10;7. В списке найденных устройств теперь все данные показываются правильно (раньше вместо названия указывался его идентификатор)" />
     <MESSAGE value="1.19 - 28/04/21&#10;1. Перерисовал элемент списка найденных элементов: теперь список не в виде таблицы, каждый элемент отдельной плиткой. Отображается для каждого элемента: название устройства, серийный и внутренний номер, локация, дата/время последнего события, статус, количество дней в последней локации" />
@@ -591,6 +601,7 @@
     <MESSAGE value="1.36 - 13/09/21&#10;1. Исправлены ошибки загрузки результатов поиска, когда у устройства нет никакого статуса (добавлено  if (typeof id === 'undefined'))" />
     <MESSAGE value="1.37 - 29/09/21&#10;1. Исправлены причины дооолгой загрузки данных из БД: был ошибочная реализация listen_new метода (внутри цикла получения данных ещё цикл получения данных, вместо 10 раз данные загружались 10 раз по 10 (100)); вместо join теперь библиотека.&#10;2. Новый алгоритм получения данных и перевода id-&gt;name: при загрузке страницы первым делом загружаются данные из таблицы имен (только русский вариант). Эти данные помещаются в Map (dictionary), где ключ — это имя документа firebase, а значение — это значение поля &quot;ru&quot;. При загрузке данных для employees, states, devices, location вместо join (как было раньше) используется метод changeNameIdToNameRu, который из библиотеки берет значение на русском по идентификатору" />
     <MESSAGE value="1.38 - 01/10/21&#10;1. Исправлена загрузка списка устройств для страницы QR-кода и страницы ввода параметров&#10;2. Добавлено отображение trackId в найденных устройствах (только в ремонтных)&#10;3. Переделана надпись &quot;ЗАВЕРШЕН&quot; (раньше сливалась с остальными данными)" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.38 - 01/10/21&#10;1. Исправлена загрузка списка устройств для страницы QR-кода и страницы ввода параметров&#10;2. Добавлено отображение trackId в найденных устройствах (только в ремонтных)&#10;3. Переделана надпись &quot;ЗАВЕРШЕН&quot; (раньше сливалась с остальными данными)" />
+    <MESSAGE value="1.39 - 11/01/22&#10;1. Начал делать страницу отображения нахождения устройств: 5 плиток (по кол-ву локаций) в каждой отображается список устройств которые находятся в данный момент в текущей локацией с подробной информацией об устройстве (тип, номер, ответственный и др). При перемещении реального устройства на другую локацию происходит немедленное изменение списков и отображаемых данных БЕЗ перезагрузки страницы (сервис отслеживает изменения в локациях)&#10;2. Начал делать авторизацию. Пока всё плохо" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.39 - 11/01/22&#10;1. Начал делать страницу отображения нахождения устройств: 5 плиток (по кол-ву локаций) в каждой отображается список устройств которые находятся в данный момент в текущей локацией с подробной информацией об устройстве (тип, номер, ответственный и др). При перемещении реального устройства на другую локацию происходит немедленное изменение списков и отображаемых данных БЕЗ перезагрузки страницы (сервис отслеживает изменения в локациях)&#10;2. Начал делать авторизацию. Пока всё плохо" />
   </component>
 </project>
