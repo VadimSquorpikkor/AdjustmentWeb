@@ -284,6 +284,13 @@ function getStateById(id) {
     return id;
 }
 //----------------------------------------------------------------------------------------------------------------------
+loadNames();
+
+loadLocation();
+loadEmployees();
+loadStates();
+loadDevices();
+
 
 const serialRadio = document.getElementById('serial_radio');
 const repairRadio = document.getElementById('repair_radio');
@@ -344,12 +351,7 @@ let employeeSpinnerAdapter = new SpinnerAdapter(employeeSpinner);
 let stateSpinnerAdapter = new SpinnerAdapter(statesSpinner);
 
 
-loadNames();
 
-loadLocation();
-loadEmployees();
-loadStates();
-loadDevices();
 
 // listen_new(DBASE, TABLE_LOCATIONS, loadLocationSimple);
 // listen_new(DBASE, TABLE_EMPLOYEES, loadEmployees);

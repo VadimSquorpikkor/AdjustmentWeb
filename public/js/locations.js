@@ -31,16 +31,17 @@ function addListToDiv(arr, div) {
 
             let stateDate = unit.date.toDate().toLocaleDateString('ru-RU'); //Дата - 18.03.2021
             let stateTime = unit.date.toDate().toLocaleTimeString('ru-RU'); //Время - 09:07:49
-            let deviceName = unit.device_id;
+            let deviceName = '- - -';
+            deviceName = unit.device_id;
             let serial = unit.serial;
             let date = stateDate + " " + stateTime;
             let state = unit.state_id;
             let isClose = unit.close_date!==undefined;
             let employee = unit.employee_id;
 
-            // deviceName = getDeviceById(deviceName).getNameRu;
-            // state = getStateById(state).getNameRu;
-            // employee = getEmployeeById(employee).getNameRu;
+            deviceName = getDeviceById(deviceName).getNameRu;
+            state = getStateById(state).getNameRu;
+            employee = getEmployeeById(employee).getNameRu;
 
             let isCloseStroke = '';
             if (isClose) {
@@ -55,7 +56,7 @@ function addListToDiv(arr, div) {
                 isCloseStroke+
                 '    <div class="item_info_div">'+
                 '        <span class="big_orange">'+ deviceName +'</span>'+
-                '        <span class="small_white">№ '+ serial +'</span>'+
+                '        <span class="small_white">№ '+ serial +'</span><br>'+
                 '        <span class="small_white">'+ date +'</span>'+
                 '        <span class="small_white">'+ state +'</span>'+
                 '        <span class="small_white">Отв.: '+ employee +'</span><br>'+

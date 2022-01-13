@@ -45,6 +45,7 @@ document.getElementById("sign_out").onclick = function () {
     });
 };
 
+let accEmail;
 /**Слушает состояние авторизации и выводит в консоль статус. Включает/отключает отображение элементов UI*/
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -56,6 +57,8 @@ firebase.auth().onAuthStateChanged((user) => {
         //document.getElementById('input_form').style.display = 'block';
         document.getElementById('employee_name').innerHTML = "Пользователь "+user.email;
         uiVisible(true);
+        // console.log('user.email - '+user.email);
+        // accEmail = user.email;
     } else {
         // User is signed out
         console.log("...LogOut");
@@ -73,6 +76,7 @@ function uiVisible(isSigned) {
         document.getElementById('pass').style.display = 'none';
         document.getElementById('sign_out').style.display = 'inline-block';
         document.getElementById('employee_name').style.display = 'inline-block';
+        // if (accEmail==='admin@admin.com'&&document.getElementById('admin_input_form')!==null) document.getElementById('admin_input_form').style.display = 'block';
         getSecureKey();
     } else {
         document.getElementById('input_form').style.display = 'none';
@@ -82,6 +86,7 @@ function uiVisible(isSigned) {
         document.getElementById('pass').style.display = 'inline-block';
         document.getElementById('sign_out').style.display = 'none';
         document.getElementById('employee_name').style.display = 'none';
+        // if (document.getElementById('admin_input_form')!==null)document.getElementById('admin_input_form').style.display = 'none';
         eraseSecureKey();
     }
 
