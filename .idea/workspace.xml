@@ -2,17 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/js/index_biz.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/insert.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/insert.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/bis_logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bis_logic.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/firebase_low_level.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/for_qr_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/for_qr_2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/index_auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index_auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/insert_page_biz.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/insert_page_biz.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/locations.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/locations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locations.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/locations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/qrcodegen.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/qrcodegen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/spinner_adapter.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/spinner_adapter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/qr_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/qr_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
     </list>
@@ -238,6 +241,7 @@
       <workItem from="1641880498562" duration="22889000" />
       <workItem from="1641966749596" duration="18602000" />
       <workItem from="1642053307267" duration="21239000" />
+      <workItem from="1642140339908" duration="5435000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -547,7 +551,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642054952471</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="1.42 - 13/01/22&#10;1. Для страницы отслеживания (location.html): отображается краткая инфа, при клике по div с инфой div раскрывается показывая подробную инфу&#10;2. Поле ввода пароля сделано как пароль&#10;3. Для страницы ввода данных в БД: добавлять/удалять данные теперь может только пользователь-администратор. При авторизации не администратора выводится соответствующее сообщение">
+      <created>1642140470286</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1642140470286</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -594,7 +605,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.19 - 28/04/21&#10;1. Перерисовал элемент списка найденных элементов: теперь список не в виде таблицы, каждый элемент отдельной плиткой. Отображается для каждого элемента: название устройства, серийный и внутренний номер, локация, дата/время последнего события, статус, количество дней в последней локации" />
     <MESSAGE value="1.20 - 29/04/21&#10;1. Переделан внешний вид фильтра: теперь красиво в виде плитки&#10;2. Если список найденных не отображается, то на месте списка отображается логотип (по аналогии с Android приложением AdjustmentDB)&#10;3. Исправлена ошибка перевода списков имен устройств" />
     <MESSAGE value="1.21 - 29/04/21&#10;1. Переписаны лисенеры. Сокращение кода&#10;2. Слово &quot;день&quot; в элементе списка теперь выводится в нужном падеже, в зависимости от количества дней" />
     <MESSAGE value="1.23 - 30/04/21&#10;1. Добавлено: при клике на элементе списка найденных устройств раскрывается список событий этого устройства. При повторном клике — список исчезает" />
@@ -619,6 +629,7 @@
     <MESSAGE value="1.39 - 11/01/22&#10;1. Начал делать страницу отображения нахождения устройств: 5 плиток (по кол-ву локаций) в каждой отображается список устройств которые находятся в данный момент в текущей локацией с подробной информацией об устройстве (тип, номер, ответственный и др). При перемещении реального устройства на другую локацию происходит немедленное изменение списков и отображаемых данных БЕЗ перезагрузки страницы (сервис отслеживает изменения в локациях)&#10;2. Начал делать авторизацию. Пока всё плохо" />
     <MESSAGE value="1.40 - 12/01/22&#10;1. Авторизация. Сделан вход по email+паролю для каждой страницы. Войти может только зарегистрированный администратором пользователь. Все страницы сайта не работают без успешной авторизации&#10;2. Переделана генерация QR-кода: убрано поле ввода ключа, если пользователь вошел в систему, то ключ берется из БД и подставляется при генерации, т.е. вводить ключ больше не нужно. Если ключ не удалось загрузить, на странице выводится сообщение об ошибке, сам код не генерируется" />
     <MESSAGE value="1.41 - 13/01/22&#10;1. Для locations.html сделан перевод (было: показывались идентификаторы вместо имен)&#10;2. Упорядочено отображение ссылок" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.41 - 13/01/22&#10;1. Для locations.html сделан перевод (было: показывались идентификаторы вместо имен)&#10;2. Упорядочено отображение ссылок" />
+    <MESSAGE value="1.42 - 13/01/22&#10;1. Для страницы отслеживания (location.html): отображается краткая инфа, при клике по div с инфой div раскрывается показывая подробную инфу&#10;2. Поле ввода пароля сделано как пароль&#10;3. Для страницы ввода данных в БД: добавлять/удалять данные теперь может только пользователь-администратор. При авторизации не администратора выводится соответствующее сообщение" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.42 - 13/01/22&#10;1. Для страницы отслеживания (location.html): отображается краткая инфа, при клике по div с инфой div раскрывается показывая подробную инфу&#10;2. Поле ввода пароля сделано как пароль&#10;3. Для страницы ввода данных в БД: добавлять/удалять данные теперь может только пользователь-администратор. При авторизации не администратора выводится соответствующее сообщение" />
   </component>
 </project>

@@ -1,8 +1,6 @@
 /***/
 class SpinnerAdapter {
 
-
-
     constructor(spinner) {
         this._spinner = spinner;
 
@@ -21,10 +19,12 @@ class SpinnerAdapter {
     }
 
     getSelectedNameId() {
+        if (this._arr_ids===undefined)return;
         return this._arr_ids[this._spinner.selectedIndex];
     }
 
     getSelectedName() {
+        if (this._arr_names===undefined)return;
         return this._arr_names[this._spinner.selectedIndex];
     }
 

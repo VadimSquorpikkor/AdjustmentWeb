@@ -229,7 +229,14 @@ var qrcodegen;
             // ctx.textAlign = "center";
             // ctx.fillText("Hello World", canvas.width/2, canvas.height/2);
 
-            canvas.toBlob(blob => navigator.clipboard.write([new ClipboardItem({'image/png': blob})]));
+            if (typeof ClipboardItem == 'undefined') {
+                document.getElementById('gen_result').innerHTML = 'Этот браузер не поддерживает копирование QR-кода в буфер обмена';
+                console.log('....undefined');
+            }
+            else canvas.toBlob(blob => {
+                document.getElementById('gen_result').innerHTML = 'Сгенерированный QR-код скопирован в буфер обмена';
+                return navigator.clipboard.write([new ClipboardItem({'image/png': blob})]);
+            });
 
         };
         // Returns a string of SVG code for an image depicting this QR Code, with the given number

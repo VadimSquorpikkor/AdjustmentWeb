@@ -36,6 +36,8 @@
         <article>
             <h1>QR генератор</h1>
 
+            <p id="gen_result" style="color: #ECEFF1"></p>
+
             <div id="input_form" style="display: none">
 
 <!--                <script type="text/javascript">getSecureKey()</script>-->
@@ -70,11 +72,13 @@
                     </table>
                 </form>
 
-                <div class="nice_details">
+                <br>
+
+                <div class="nice_details" style="color: antiquewhite">
                     <details>
                         <summary>Настройки</summary>
 
-                        <table>
+                        <table style="margin: auto">
                             <tr>
                                 <td><strong>Error correction:</strong></td>
                                 <td>
@@ -151,7 +155,7 @@
             </div>
 
             <script defer src="js/constants.js"></script>
-            <script defer src="js/app.js"></script>
+<!--            <script defer src="js/app.js"></script>-->
             <script defer src="js/firebase_low_level.js"></script>
 
 <!--            <script defer src="js/for_qr.js"></script>-->
@@ -163,9 +167,9 @@
 
 <!--            <script defer src="js/firebaseHelper.js"></script>-->
 <!--            <script defer src="js/listeners.js"></script>-->
+            <script defer src="js/qr_code.js"></script>
             <script defer src="js/qrcodegen.js"></script>
             <script defer src="js/qrcodegen-input-demo.js"></script>
-            <script defer src="js/qr_code.js"></script>
 
             <script defer src="js/index_auth.js"></script>
         </article>

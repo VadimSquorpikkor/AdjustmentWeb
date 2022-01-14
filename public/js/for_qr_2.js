@@ -1,13 +1,8 @@
-
 const devicesForGenerator = document.getElementById('selected_type_for_generator');
-
 let devicesForGeneratorAdapter = new SpinnerAdapter(devicesForGenerator);
-
-// listen_new(DBASE, TABLE_DEVICES, loadDevices2);
-loadDevices2();
-
-
 let devices = [];
+
+loadDevices2();
 
 function updateDeviceSpinner2() {
     devicesForGeneratorAdapter.setDataObj(devices);
@@ -29,7 +24,7 @@ function loadDevices2() {
             dev_arr.push(device);
         });
         devices = dev_arr;
-        updateDeviceSpinner();
+        //////////updateDeviceSpinner();
     });
 }
 

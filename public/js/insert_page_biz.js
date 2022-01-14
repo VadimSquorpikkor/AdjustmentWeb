@@ -1,7 +1,6 @@
-const DBASE = firebase.firestore();
-const TABLE_DEVSETS = "device_set";
-const DEVSET_ID = "id";
-const TABLE_NAMES = "names";
+function valueOf(id) {
+    return document.getElementById(id).value
+}
 
 errorField = document.getElementById("error_text");
 console.log('errorField = '+errorField);

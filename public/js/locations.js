@@ -83,6 +83,6 @@ function listen_changes(location, div, func) {
 listen_changes(ADJUSTMENT_LOCATION_ID, divReg, addListToDiv);
 listen_changes(ASSEMBLY_LOCATION_ID, divSbr, addListToDiv);
 listen_changes(GRADUATION_LOCATION_ID, divLin, addListToDiv);
-listen_changes(REAPAIR_AREA_LOCATION_ID, divSer, addListToDiv);
+listen_changes(REPAIR_AREA_LOCATION_ID, divSer, addListToDiv);
 listen_changes(SOLDERING_LOCATION_ID, divMon, addListToDiv);
 

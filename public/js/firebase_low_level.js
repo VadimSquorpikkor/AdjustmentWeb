@@ -1,4 +1,3 @@
-
 function listen_new(database, table, func) {
     database.collection(table)
         .onSnapshot((snapshot) => {
@@ -62,11 +61,6 @@ function getAllUnitsByParam(database, table, converter,
         else func(arr, div);
     });
 }
-
-function valueOf(id) {
-    return document.getElementById(id).value
-}
-
 
 function eraseSecureKey() {
     secureKey = "";

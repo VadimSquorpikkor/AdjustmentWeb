@@ -51,6 +51,8 @@ const DEVICE_ID = "id";
 const DEVICE_NAME = "name";
 const DEVICE_TYPE = "type";
 
+const TABLE_DEVSETS = "device_set";
+
 const TYPE_ANY = "any_type";
 const TYPE_REPAIR = "repair_type";
 const TYPE_SERIAL = "serial_type";
@@ -66,5 +68,5 @@ const EMPTY_VALUE = "- - -";
 const ASSEMBLY_LOCATION_ID = "assembly";
 const ADJUSTMENT_LOCATION_ID = "adjustment";
 const GRADUATION_LOCATION_ID = "graduation";
-const REAPAIR_AREA_LOCATION_ID = "repair_area";
+const REPAIR_AREA_LOCATION_ID = "repair_area";
 const SOLDERING_LOCATION_ID = "soldering";

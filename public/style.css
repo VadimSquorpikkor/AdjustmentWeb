@@ -55,6 +55,7 @@ a {
     padding: 2px 4px;
     transition-property: all;
     transition-duration: 450ms;
+    text-decoration: none;
 }
 
 a:hover {

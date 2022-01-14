@@ -1,5 +1,3 @@
-//////latest version of firestore.rules already up to date, skipping upload
-
 uiVisible(false);
 
 function getPassword(input) {
