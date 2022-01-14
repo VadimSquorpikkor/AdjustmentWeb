@@ -3,6 +3,9 @@ const TABLE_DEVSETS = "device_set";
 const DEVSET_ID = "id";
 const TABLE_NAMES = "names";
 
+errorField = document.getElementById("error_text");
+console.log('errorField = '+errorField);
+
 /**Массив комплектов*/
 let devsets = [];
 
@@ -83,6 +86,7 @@ loadDevsets();
 let db = firebase.firestore();
 /**Загрузка в таблицу имен*/
 function uploadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
+    if (!canInsertData) return;
     db.collection('names').doc(valueOf(id)).set({
         ru: valueOf(name_ru),
         en: valueOf(name_en),
@@ -100,6 +104,7 @@ function uploadNames(id, name_ru, name_en, name_it, name_de, name_fr) {
 
 /**Загрузка новых устройств. Заполняет все поля в таблице устройств и дополнительно прописывает в таблицу имен русский и английский вариант написания*/
 function loadNewDevice(id, devset_id, ru, en) {
+    if (!canInsertData) return;
     uploadNames(id, ru, en, "", "", "");
 
     db.collection('devices').doc(valueOf(id)).set({
@@ -117,6 +122,7 @@ function loadNewDevice(id, devset_id, ru, en) {
 
 /**Удаляет устройство из БД, также удаляет все события данного устройства*/
 function deleteUnit(id) {
+    if (!canInsertData) return;
     // console.log(id);
     let unit_id = valueOf(id);
     if (unit_id !== "") {

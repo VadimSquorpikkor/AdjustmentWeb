@@ -15,8 +15,6 @@
  * 7.
  * */
 
-
-
 //так было раньше
 // 4. Эти массивы заполняются только при сработке соответствующих лисенеров, каждый из которых отслеживает изменения в
 // * соответствующей сущности таблице в БД ("devices", "locations", "employees", "states"). Таким образов данные в массивы
@@ -26,19 +24,15 @@
 //  * после получения идентификаторов имен сразу же получить из таблицы "names" имена на нужном языке
 //  * 7. При загрузке юнитов и событий JOIN уже не нужен, данные для имен берутся в соответствующем объекте (locations[i].getNameRu)
 
-
-
 function getName(id) {
     if (!dictionary.has(id)) return id;
     return (typeof dictionary.get(id).en)==='undefined'?dictionary.get(id):dictionary.get(id).ru;
 }
 
 function changeNameIdToNameRu(name_id, obj) {
-    // obj.setNameRu(getName(name_id)); //не работает
     obj.setNameRu(dictionary.get(name_id).ru);
 }
 //----------------------------------------------------------------------------------------------------------------------
-
 /**Массив объектов всех локаций*/
 let locations = [];
 /**Массив объектов всех сотрудников*/
@@ -49,15 +43,7 @@ let states = [];
 let devices = [];
 /**Словарь id->names*/
 let dictionary = new Map();
-
 //----------------------------------------------------------------------------------------------------------------------
-/**Добавления списка локаций в спиннер*/
-function updateLocationSpinner() {
-    let selectedLocations = getLocationsByParam(locations, getType());
-    locationSpinnerAdapter.setDataObj(selectedLocations);
-    locationSpinnerAdapter.addFirstLineObj(new Location(null, ANY_VALUE, ALL_LOCATIONS));
-}
-
 function loadLocation() {
     let loc_arr = [];
     DBASE.collection(TABLE_LOCATIONS)
@@ -72,7 +58,7 @@ function loadLocation() {
             loc_arr.push(location);
         });
         locations = loc_arr;
-        updateLocationSpinner();
+        if (document.getElementById('location_spinner')!==null) updateLocationSpinner();
     });
 }
 
@@ -86,12 +72,6 @@ function getLocationsByParam(locations, type_id) {
     return new_arr;
 }
 //----------------------------------------------------------------------------------------------------------------------
-/**Добавления списка сотрудников в спиннер*/
-function updateEmployeeSpinner() {
-    employeeSpinnerAdapter.setDataObj(employees);
-    employeeSpinnerAdapter.addFirstLineObj(new Employee(null, ANY_VALUE, ALL_EMPLOYEES, null, null));
-}
-
 /**Сотрудников на английском нет вот почему: они используются ТОЛЬКО в приложениях для внутреннего пользования (AdjustmentDB и
  * AdjustmentWeb, людям отслеживающих ремонт знать фамилии сотрудников не нужно), а значит значения нужны только на
  * русском, а значит можно значение на русском записать в поле name_id документа таблицы "employees", при загрузке
@@ -115,16 +95,10 @@ function loadEmployees() {
             emp_arr.push(employee);
         });
         employees = emp_arr;
-        updateEmployeeSpinner();
+        if (document.getElementById('location_spinner')!==null) updateEmployeeSpinner();
     });
 }
 //----------------------------------------------------------------------------------------------------------------------
-function updateStatesSpinner() {
-    let selectedStates = getStatesByParam(states, getType(), locationSpinnerAdapter.getSelectedNameId());
-    stateSpinnerAdapter.setDataObj(selectedStates);
-    stateSpinnerAdapter.addFirstLineObj(new State(null, ANY_VALUE, ALL_STATES, null, null));
-}
-
 function loadStates() {
     let sta_arr = [];
     DBASE.collection(TABLE_STATES)
@@ -141,7 +115,7 @@ function loadStates() {
             sta_arr.push(state);
         });
         states = sta_arr;
-        updateStatesSpinner();
+        if (document.getElementById('location_spinner')!==null) updateStatesSpinner();
     });
 }
 
@@ -159,15 +133,6 @@ function getStatesByParam(states, type_id, location_id) {
     return new_arr;
 }
 //----------------------------------------------------------------------------------------------------------------------
-function updateDeviceSpinner() {
-    devicesSpinnerAdapter.setDataObj(devices);
-    devicesSpinnerAdapter.addFirstLineObj(new Device(null, ANY_VALUE, ALL_DEVICES));
-
-    if (typeof devicesForGeneratorAdapter!=='undefined') devicesForGeneratorAdapter.setDataObj(devices);
-}
-
-
-
 function listen(table, func) {
     DBASE.collection(table)
         .get().then((querySnapshot) => {
@@ -176,8 +141,6 @@ function listen(table, func) {
         });
     });
 }
-
-
 
 function loadDevices() {
     let dev_arr = [];
@@ -198,7 +161,7 @@ function loadDevices() {
             dev_arr.push(device);
         });
         devices = dev_arr;
-        updateDeviceSpinner();
+        if (document.getElementById('location_spinner')!==null) updateDeviceSpinner();
     });
 }
 //----------------------------------------------------------------------------------------------------------------------
@@ -230,6 +193,13 @@ function getAllEventsByUnitIdSmall(unit_id) {
     if (size === 0) getAllEventsByUnitId_new(DBASE, TABLE_EVENTS, EVENT_UNIT, unit_id, addEventsCollectionToDiv, EVENT_DATE, DESCENDING, host);
     else document.getElementById(host).innerHTML = '';
 
+}
+
+/**Показывает/скрывает доп инфо*/
+function showHideInfo(unit_id) {
+    let elem = document.getElementById(unit_id);
+    if (elem.style.display === 'none') elem.style.display = 'inline-block';
+    else elem.style.display = 'none';
 }
 
 function startSearch_new() {
@@ -285,75 +255,7 @@ function getStateById(id) {
 }
 //----------------------------------------------------------------------------------------------------------------------
 loadNames();
-
 loadLocation();
 loadEmployees();
 loadStates();
 loadDevices();
-
-
-const serialRadio = document.getElementById('serial_radio');
-const repairRadio = document.getElementById('repair_radio');
-const serialText = document.getElementById('serial');
-const namesSpinner = document.getElementById('names_spinner');
-const locationSpinner = document.getElementById('location_spinner');
-const statesSpinner = document.getElementById('states_spinner');
-const employeeSpinner = document.getElementById('employee_spinner');
-const searchButton = document.getElementById('search_button');
-
-let isSerial = serialRadio.checked;
-
-function getType() {
-    return isSerial?SERIAL_TYPE:REPAIR_TYPE;
-}
-
-serialRadio.addEventListener('click', function () {
-    isSerial = true;
-    updateStatesSpinner();
-    updateLocationSpinner();
-});
-
-repairRadio.addEventListener('click', function () {
-    isSerial = false;
-    updateStatesSpinner();
-    updateLocationSpinner();
-});
-
-locationSpinner.addEventListener('change', function () {
-    updateStatesSpinner();
-});
-
-searchButton.addEventListener('click', function () {
-    startSearch_new(namesSpinner, locationSpinner, statesSpinner, employeeSpinner, serialText, serialRadio);
-});
-
-/**Лисенер изменений поля ввода серийного номера. Если поле не пустое, все спиннеры не активны, если пустое — активны.
- * Так надо, так как если ввести серийный номер и нажать поиск, то поиск будет идти ТОЛЬКО по серийному номеру, игнорируя
- * спиннеры. Сделано, чтобы не путать пользователя (уже набрав номер, он может пытаться выбрать параметры в спиннерах,
- * которые всё равно будут проигнорированы при поиске)*/
-serialText.addEventListener('input', function () {
-    if (serialText.value.length !== 0) {
-        namesSpinner.disabled = true;
-        locationSpinner.disabled = true;
-        employeeSpinner.disabled = true;
-        statesSpinner.disabled = true;
-    } else {
-        namesSpinner.disabled = false;
-        locationSpinner.disabled = false;
-        employeeSpinner.disabled = false;
-        statesSpinner.disabled = false;
-    }
-});
-
-let locationSpinnerAdapter = new SpinnerAdapter(locationSpinner);
-let devicesSpinnerAdapter = new SpinnerAdapter(namesSpinner);
-let employeeSpinnerAdapter = new SpinnerAdapter(employeeSpinner);
-let stateSpinnerAdapter = new SpinnerAdapter(statesSpinner);
-
-
-
-
-// listen_new(DBASE, TABLE_LOCATIONS, loadLocationSimple);
-// listen_new(DBASE, TABLE_EMPLOYEES, loadEmployees);
-// listen_new(DBASE, TABLE_STATES, loadStates);
-// listen_new(DBASE, TABLE_DEVICES, loadDevices);

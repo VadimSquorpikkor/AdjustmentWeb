@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/js/index_biz.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/insert.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/insert.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/bis_logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bis_logic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/index_auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index_auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/insert_page_biz.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/insert_page_biz.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/locations.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/locations.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/locations.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/locations.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/qr_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/qr_page.html" afterDir="false" />
@@ -234,7 +237,7 @@
       <workItem from="1641814056858" duration="8282000" />
       <workItem from="1641880498562" duration="22889000" />
       <workItem from="1641966749596" duration="18602000" />
-      <workItem from="1642053307267" duration="1607000" />
+      <workItem from="1642053307267" duration="21239000" />
     </task>
     <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
       <created>1614694181223</created>
@@ -537,7 +540,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641988030522</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="1.41 - 13/01/22&#10;1. Для locations.html сделан перевод (было: показывались идентификаторы вместо имен)&#10;2. Упорядочено отображение ссылок">
+      <created>1642054952471</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1642054952471</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -584,7 +594,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.18 - 28/04/21&#10;1. Глобально переписан JS. Лисенеры теперь загружают пары списков -- список для имен и список для идентификаторов. На странице будут выводиться имена, в БД будут передаваться идентификаторы&#10;2. Перерисована главная страница: теперь здесь сделан глобальный поиск устройств по БД, размещен фильтр для поиска. Поиск по: типу (серия/ремонт), по имени устройства, по локации, по статусу, по фамилии ответственного&#10;3. Если в параметре поиска написать серийный номер, то поиск будет везтись ТОЛЬКО по серийному номеру, все другие параметры будут игнорироваться&#10;4. Содержимое спиннера для статусов зависит от выбранного типа (серия/ремонт) и от выбранной локации, если выбрать &quot;Все локации&quot;, то будут отображаться все существующие статусы&#10;5. Все списки загружаются лисенерами, а значит любое изменение в соответствующей коллекции в БД немедленно приведет к обновлению соответствующего списка и спиннера без перезагрузки страницы&#10;6. Реализован переводчик из id в имя и из имени в id (для списков данных)&#10;7. В списке найденных устройств теперь все данные показываются правильно (раньше вместо названия указывался его идентификатор)" />
     <MESSAGE value="1.19 - 28/04/21&#10;1. Перерисовал элемент списка найденных элементов: теперь список не в виде таблицы, каждый элемент отдельной плиткой. Отображается для каждого элемента: название устройства, серийный и внутренний номер, локация, дата/время последнего события, статус, количество дней в последней локации" />
     <MESSAGE value="1.20 - 29/04/21&#10;1. Переделан внешний вид фильтра: теперь красиво в виде плитки&#10;2. Если список найденных не отображается, то на месте списка отображается логотип (по аналогии с Android приложением AdjustmentDB)&#10;3. Исправлена ошибка перевода списков имен устройств" />
     <MESSAGE value="1.21 - 29/04/21&#10;1. Переписаны лисенеры. Сокращение кода&#10;2. Слово &quot;день&quot; в элементе списка теперь выводится в нужном падеже, в зависимости от количества дней" />
@@ -609,6 +618,7 @@
     <MESSAGE value="1.38 - 01/10/21&#10;1. Исправлена загрузка списка устройств для страницы QR-кода и страницы ввода параметров&#10;2. Добавлено отображение trackId в найденных устройствах (только в ремонтных)&#10;3. Переделана надпись &quot;ЗАВЕРШЕН&quot; (раньше сливалась с остальными данными)" />
     <MESSAGE value="1.39 - 11/01/22&#10;1. Начал делать страницу отображения нахождения устройств: 5 плиток (по кол-ву локаций) в каждой отображается список устройств которые находятся в данный момент в текущей локацией с подробной информацией об устройстве (тип, номер, ответственный и др). При перемещении реального устройства на другую локацию происходит немедленное изменение списков и отображаемых данных БЕЗ перезагрузки страницы (сервис отслеживает изменения в локациях)&#10;2. Начал делать авторизацию. Пока всё плохо" />
     <MESSAGE value="1.40 - 12/01/22&#10;1. Авторизация. Сделан вход по email+паролю для каждой страницы. Войти может только зарегистрированный администратором пользователь. Все страницы сайта не работают без успешной авторизации&#10;2. Переделана генерация QR-кода: убрано поле ввода ключа, если пользователь вошел в систему, то ключ берется из БД и подставляется при генерации, т.е. вводить ключ больше не нужно. Если ключ не удалось загрузить, на странице выводится сообщение об ошибке, сам код не генерируется" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.40 - 12/01/22&#10;1. Авторизация. Сделан вход по email+паролю для каждой страницы. Войти может только зарегистрированный администратором пользователь. Все страницы сайта не работают без успешной авторизации&#10;2. Переделана генерация QR-кода: убрано поле ввода ключа, если пользователь вошел в систему, то ключ берется из БД и подставляется при генерации, т.е. вводить ключ больше не нужно. Если ключ не удалось загрузить, на странице выводится сообщение об ошибке, сам код не генерируется" />
+    <MESSAGE value="1.41 - 13/01/22&#10;1. Для locations.html сделан перевод (было: показывались идентификаторы вместо имен)&#10;2. Упорядочено отображение ссылок" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.41 - 13/01/22&#10;1. Для locations.html сделан перевод (было: показывались идентификаторы вместо имен)&#10;2. Упорядочено отображение ссылок" />
   </component>
 </project>

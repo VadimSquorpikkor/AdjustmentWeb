@@ -14,7 +14,7 @@ divSbr.innerHTML = '<span class="white_span">'+EMPTY_LOCATION+'</span>'
 divMon.innerHTML = '<span class="white_span">'+EMPTY_LOCATION+'</span>'
 divSer.innerHTML = '<span class="white_span">'+EMPTY_LOCATION+'</span>'
 
-
+/**Для страницы локаций: добавляет информацию о каждом ремонтном устройстве в соответствующий локации div*/
 function addListToDiv(arr, div) {
     if (arr.length === 0) div.innerHTML = '<span class="white_span">'+EMPTY_LOCATION+'</span>';
     else if (div != null) {
@@ -52,15 +52,16 @@ function addListToDiv(arr, div) {
             }
 
             data +=
-                '<div class="found_unit_item" onclick=getAllEventsByUnitIdSmall("'+unit.id+'")>'+
+                '<div class="found_unit_item" onclick=showHideInfo("'+unit.id+'")>'+
                 isCloseStroke+
                 '    <div class="item_info_div">'+
                 '        <span class="big_orange">'+ deviceName +'</span>'+
                 '        <span class="small_white">№ '+ serial +'</span><br>'+
-                '        <span class="small_white">'+ date +'</span>'+
-                '        <span class="small_white">'+ state +'</span>'+
-                '        <span class="small_white">Отв.: '+ employee +'</span><br>'+
-                '        <span class="small_white">Дней в работе: '+daysCount+'</span>'+
+
+                '        <span id="'+unit.id+'" style="display: none"><span class="small_white">Дата: '+ date +'</span><br>'+
+                '        <span class="small_white">Статус: '+ state +'</span><br>'+
+                '        <span class="small_white">Ответственный: '+ employee +'</span><br>'+
+                '        <span class="small_white">Дней в ремонте: '+daysCount+'</span></span>'+
                 '    </div>'+
                 '    <div id="'+STATE_PREF+unit.id+'" class="state_host"></div>'+
                 '</div>';

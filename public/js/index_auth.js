@@ -45,7 +45,6 @@ document.getElementById("sign_out").onclick = function () {
     });
 };
 
-let accEmail;
 /**Слушает состояние авторизации и выводит в консоль статус. Включает/отключает отображение элементов UI*/
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -53,19 +52,37 @@ firebase.auth().onAuthStateChanged((user) => {
         // https://firebase.google.com/docs/reference/js/firebase.User
         var uid = user.uid;
         console.log(uid);
-        ////console.log(user.email);
-        //document.getElementById('input_form').style.display = 'block';
+        setInsertPage(user.email, true);
+        /*if (user.email==='admin@admin.com') {
+            console.log('...You can');
+            canInsertData = true;
+        } else {
+            canInsertData = false;
+        }*/
         document.getElementById('employee_name').innerHTML = "Пользователь "+user.email;
         uiVisible(true);
-        // console.log('user.email - '+user.email);
-        // accEmail = user.email;
     } else {
         // User is signed out
         console.log("...LogOut");
-        //document.getElementById('input_form').style.display = 'none';
         uiVisible(false);
+        setInsertPage('', false)
+        // canInsertData = false;
     }
 });
+
+function setInsertPage(email, state) {
+    if (state===false) canInsertData = false;
+    else if (email==='admin@admin.com') canInsertData = true;
+    if (document.getElementById('admin_text')!==null) {
+        if (canInsertData) document.getElementById('admin_text').style.display = 'none';
+        else {
+            document.getElementById('admin_text').style.display = 'inline-block';
+            document.getElementById('admin_text').innerHTML = 'Только администратор может добавлять данные в БД';
+        }
+    }
+}
+
+let canInsertData = false;
 
 function uiVisible(isSigned) {
     if (isSigned) {
