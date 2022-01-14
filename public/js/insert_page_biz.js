@@ -30,20 +30,6 @@ class Devset {
         this._name_ru = value;
     }
 }
-
-
-function joinNamesRu(name_id, obj, func) {
-    console.log(name_id);
-    let docRef = DBASE.collection(TABLE_NAMES).doc(name_id);
-    docRef.get().then((doc) => {
-        if (doc.exists) {
-            // console.log(doc.data().ru);
-            obj.setNameRu(doc.data().ru);
-            func();
-        }
-    });
-}
-
 //----------------------------------------------------------------------------------------------------------------------
 function updateDevSetSpinner() {
     // console.log(devsets.length);

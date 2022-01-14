@@ -1,5 +1,3 @@
-console.log('...загрузка');
-
 const EMPTY_LOCATION = 'Ничего нет...';
 
 let divReg = document.getElementById("location_reg");
@@ -69,15 +67,6 @@ function addListToDiv(arr, div) {
 
         div.innerHTML = '' + data;
     }
-}
-
-/**Слушатель новых событий у выбранной локации. Если в локации что-то изменилось, автоматом выводится информация на
- * странице (без перезагрузки)*/
-function listen_changes(location, div, func) {
-    DBASE.collection(TABLE_UNITS).where('location_id', "==", location)
-        .onSnapshot((snapshot) => {
-            snapshot.docChanges().forEach(() => getRepairUnitListFromBDByLocation(location, div, func));
-        });
 }
 
 listen_changes(ADJUSTMENT_LOCATION_ID, divReg, addListToDiv);

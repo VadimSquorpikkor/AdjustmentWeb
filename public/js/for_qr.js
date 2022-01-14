@@ -1,3 +1,6 @@
+/**НЕ ИСПОЛЬЗУЕТСЯ*/
+
+
 function insertSpinnerByArray(name, arr) {
     if (document.getElementById(name) != null) {
         let code = '';
