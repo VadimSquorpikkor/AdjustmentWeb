@@ -8,23 +8,25 @@ fdictionary.set('adj_r_utochnenie',     {ru: 'Уточнение'});
 fdictionary.set('adj_s_calibrovka',     {ru: 'Калибровка'});
 fdictionary.set('adj_s_nastroika',      {ru: 'Настройка'});
 fdictionary.set('adj_s_otgruzka',       {ru: 'Отгрузка'});
-fdictionary.set('adjustment',           {ru: 'Участок РИР'});
 fdictionary.set('ass_a_razborka',       {ru: 'Разборка'});
 fdictionary.set('ass_a_sborka',         {ru: 'Сборка'});
 fdictionary.set('ass_a_zamena',         {ru: 'Замена'});
-fdictionary.set('assembly',             {ru: 'Сборочный участок'});
 fdictionary.set('gra_a_graduirovka',    {ru: 'Градуировка'});
 fdictionary.set('gra_a_psi',            {ru: 'ПСИ'});
-fdictionary.set('graduation',           {ru: 'Градуировка'});
 fdictionary.set('rep_r_prinyat',        {ru: 'Принят в ремонт'});
 fdictionary.set('rep_r_raschet',        {ru: 'Расчет'});
-fdictionary.set('repair_area',          {ru: 'Группа сервиса'});
-fdictionary.set('serial_number_prefix', {ru: '№'});
 fdictionary.set('sol_a_montag',         {ru: 'Монтаж'});
-fdictionary.set('soldering',            {ru: 'Монтаж'});
 fdictionary.set('rep_r_vydano',         {ru: 'Выдано'});
 fdictionary.set('rep_r_otpravleno',     {ru: 'Отправлено'});
 fdictionary.set('rep_r_ozidanie',       {ru: 'Ожидание оплаты'});
+
+fdictionary.set('adjustment',           {ru: 'Участок РИР'});
+fdictionary.set('assembly',             {ru: 'Сборочный участок'});
+fdictionary.set('graduation',           {ru: 'Градуировка'});
+fdictionary.set('repair_area',          {ru: 'Группа сервиса'});
+fdictionary.set('soldering',            {ru: 'Монтаж'});
+
+fdictionary.set('serial_number_prefix', {ru: '№'});
 
 fdictionary.set('trackid',              {ru:'Track ID'});
 fdictionary.set('trackid_doted',        {ru:'Track ID:'});
@@ -111,13 +113,13 @@ fdictionary.set('BDPS-01',     {ru: 'БДПС-01'});
 fdictionary.set('BDPS-02',     {ru: 'БДПС-02'});
 fdictionary.set('BDRM-05',     {ru: 'БДРМ-05'});
 fdictionary.set('BDRM-11',     {ru: 'БДРМ-11'});
-fdictionary.set('BT-DU3',     {ru: 'BT-DU3'});
-fdictionary.set('BT-DU4',     {ru: 'BT-DU4'});
-fdictionary.set('PU',         {ru: 'БОИ'});
-fdictionary.set('PU2',        {ru: 'БОИ-2'});
-fdictionary.set('PU4',        {ru: 'БОИ-4'});
-fdictionary.set('PU5',        {ru: 'БОИ-5'});
-fdictionary.set('USB-DU',     {ru: 'USB-БД'});
+fdictionary.set('BT-DU3',      {ru: 'BT-DU3'});
+fdictionary.set('BT-DU4',      {ru: 'BT-DU4'});
+fdictionary.set('PU',          {ru: 'БОИ'});
+fdictionary.set('PU2',         {ru: 'БОИ-2'});
+fdictionary.set('PU4',         {ru: 'БОИ-4'});
+fdictionary.set('PU5',         {ru: 'БОИ-5'});
+fdictionary.set('USB-DU',      {ru: 'USB-БД'});
 
 /**Если в словаре нет id, возвращает id*/
 function getName(id) {
