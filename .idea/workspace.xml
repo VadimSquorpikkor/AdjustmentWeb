@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/js2/qr_biz.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js2/qr_code.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js2/qrcodegen-input-demo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js2/qrcodegen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js2/data_bridge.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js2/data_bridge.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js2/dictionary.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js2/dictionary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js2/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js2/firebase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js2/index_biz.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js2/index_biz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js2/main_biz.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js2/main_biz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/qr_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/qr_page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -407,13 +411,6 @@
       <workItem from="1643892152097" duration="777000" />
       <workItem from="1644413629760" duration="2430000" />
     </task>
-    <task id="LOCAL-00001" summary="1.01&#10;Добавлен класс DUnit и конвертер для работы с Firebase &#10;Добавлен метод загрузки всех документов DUnit с Firestore. Работает и загружает данные в &lt;a&gt;&lt;/a&gt;">
-      <created>1614694181223</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1614694181223</updated>
-    </task>
     <task id="LOCAL-00002" summary="1.03 - 03/03/21&#10;1. Добавлен лисенер изменений в БД. При изменении/добавлении данных в БД данные на странице автоматически обновляются БЕЗ ПЕРЕЗАГРУЗКИ страницы&#10;2. Данные отображаются в виде таблицы (динамически добавляется из JS: addDataRowToPage(unit[]))&#10;3. Добавлен CSS&#10;4. Добавлен ReadMe.md и Version.md&#10;5. Веб страница — https://adjustmentdb.web.app/">
       <created>1614761783832</created>
       <option name="number" value="00002" />
@@ -750,7 +747,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644497264640</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="1.44 - 10/02/22&#10;1. Глобальная переделка ч.3. Переделан весь код JS для страницы поиска">
+      <created>1644499971724</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1644499971724</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -800,7 +804,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="1.24 - 17/05/21&#10;1. Изменения в БД: теперь вместо одного русского языка для названий (name) добавлены 4 языка: Русский, Английский, Китайский, Итальянский, соответственно изменен код загружающий имена (name -&gt; name_ru).&#10;2. На странице загрузки (insert.html) добавлены поля для 4-х языков. Исправлено: раньше в случае загрузки не полного списка параметров для таблицы, проигнорированные параметры удалялись из таблицы (т.е. при сохранении по id сохранялись параметры, переданные в методе сохранения, если в таблице по этому id были ещё какие-то параметры, то они удалялись из таблицы). Теперь параметры добавляются (merge: true) (см. firebase_low_level)" />
     <MESSAGE value="1.24 - 11/06/21 (версия не меняется)&#10;1. Начал переделывать логику перевода (идентификаторы -&gt; имена, и обратно). Теперь лисенер отслеживает таблицу имен и при событиях загружает в Map идентификатор+имя. Во второй Map: имя+идентификатор (для обратного перевода). Когда то же самое будет доделано для AdjustmentDB, БД станет ещё ближе к нормальной форме, во всех таблицах будут убраны имена, остануться только идентификаторы" />
     <MESSAGE value="1.25 - 17/06/21 Глобальное обновление&#10;1. Глобальное обновление. Так как в БД добавилась таблица имен (имя+варианты перевода на разных языках), то переделана вся логика приложения с тем, чтобы данные для названий (локаций, статусов и т.д.) брать из этой новой таблицы, а не как раньше, из полей в каждой таблице (которые будут удалены). Вся загвоздка была в отсутствии JOIN в firestore (это НЕ реляционная БД), поэтому было придумано некоторое подобие (по-сути дозагрузка по id c апдейтом), теперь в приложение грузится сразу массив объектов и с именем и идентификатором&#10;2. В продолжении новой архитектуры: удалены переводчики: словари и getNameById/getIdByName&#10;3. JOIN не используется при загрузке юнитов и событий, данные просто берутся из массивов объектов, загруженных для спиннеров&#10;4. Добавлен entities.js и bis_logic.js. Удален listeners.js&#10;5. Из index.html удалены все onClick и onChange, теперь всё сделано через onEventListener в bis_logic.js. Логика в bis_logic.js теперь основана на const, а не на id&#10;6. Переделаны лисенеры, отслеживающие изменения в БД" />
     <MESSAGE value="1.26 - 17/06/21&#10;1. Удалены неиспользуемые методы, удален dictionary.js, firebaseHelper.js, listeners.js, repair.html, добавлена ссылка на AtomtexRepair" />
@@ -825,7 +828,8 @@
     <MESSAGE value="1.44 - 14/01/22&#10;1. Для эксперимента добавил библиотеку (fdictionary), в которой храню names, locations, devices. При загрузке страницы эти данные теперь берутся не из БД, а из этой библиотеки, это сделано, чтобы сократить кол-во запросов в БД. Из минусов: теперь если добавлю/поменяю имена, локации или устройства в БД, то придется их также менять в fdictionary (раньше ничего не нужно было менять, всё автоматом).&#10;2. Перенес код для БД в один файл (firebase_low_level) (за исключением insert_page_biz.js)" />
     <MESSAGE value="1.44 - 09/02/22&#10;1. По-мелочи" />
     <MESSAGE value="1.44 - 10/02/22&#10;1. Глобальная переделка ч.2. Начало переделки страницы поиска" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.44 - 10/02/22&#10;1. Глобальная переделка ч.2. Начало переделки страницы поиска" />
+    <MESSAGE value="1.44 - 10/02/22&#10;1. Глобальная переделка ч.3. Переделан весь код JS для страницы поиска" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.44 - 10/02/22&#10;1. Глобальная переделка ч.3. Переделан весь код JS для страницы поиска" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/js/entities.js">

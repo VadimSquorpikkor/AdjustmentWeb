@@ -20,6 +20,7 @@ function getDevices() {
     console.log('*********getDevices')
     devices = getAllDevicesFromFile();
     if (document.getElementById('names_spinner')!==null) updateDeviceSpinner();
+    if (document.getElementById('selected_type_for_generator')!==null) updateDeviceSpinner();
 }
 
 function getDeviceSets() {
