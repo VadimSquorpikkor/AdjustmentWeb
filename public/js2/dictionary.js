@@ -123,8 +123,8 @@ function getAllEmployeesFromFile() {
     let arr = [];
     console.log('...getAllEmployeesFromFile');
     arr.push(new Employee('11', 'Русакевич',    'rusakevich.av@gmail.com',  'adjustment'));
-    arr.push(new Employee('11', 'Сериков',      'uniqdela@gmail.com',       'adjustment'));
-    arr.push(new Employee('11', 'Nautiz',       'atomtexstudio@gmail.com',  'repair_area'));
+    arr.push(new Employee('3', 'Сериков',      'uniqdela@gmail.com',       'adjustment'));
+    arr.push(new Employee('10', 'Nautiz',       'atomtexstudio@gmail.com',  'repair_area'));
     return arr;
 }
 

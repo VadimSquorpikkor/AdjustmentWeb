@@ -65,7 +65,15 @@ function getStateById(id) {
     return id;
 }
 
-
+//----------------------------------------------------------------------------------------------------------------------
+/**Показывает/скрывает список всех событий для выбранного юнита*/
+function getAllEventsByUnitIdSmall(unit_id) {
+    let host = STATE_PREF + unit_id;
+    let size = document.getElementById(host).innerHTML.length;
+    //если список событий не показан, то показать, если уже показывается (size!==0), то очищаем (удаляем) список
+    if (size === 0) getAllEventsByUnitId(unit_id, addEventsCollectionToDiv, EVENT_DATE, DESCENDING, host);
+    else document.getElementById(host).innerHTML = '';
+}
 //----------------------------------------------------------------------------------------------------------------------
 getLocations();
 getEmployees();

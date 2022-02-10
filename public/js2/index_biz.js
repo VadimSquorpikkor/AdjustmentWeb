@@ -79,3 +79,23 @@ function updateDeviceSpinner() {
     devicesSpinnerAdapter.addFirstLineObj(new Device(ANY_VALUE, ALL_DEVICES, ''));
     if (typeof devicesForGeneratorAdapter!=='undefined') devicesForGeneratorAdapter.setDataObj(devices);
 }
+
+function startSearch_new() {
+    // В начало массива добавляется объект "все локации" (имя="все локации", id="any_value", когда
+    // getUnitListFromBD получает параметр "any_value", значит выборка будет игнорировать значение локации, т.е. будет
+    // выбран юнит с любой локацией
+
+    let deviceName_id = devicesSpinnerAdapter.getSelectedId();
+    let location_id =   locationSpinnerAdapter.getSelectedId();
+    let state_id =      stateSpinnerAdapter.getSelectedId();
+    let employee_id =   employeeSpinnerAdapter.getSelectedId();
+    let serial =        serialText.value;
+    let type_id =       getType();
+
+    //console.log("name="+deviceName_id+" loc="+location_id+" state="+state_id+" empl="+employee_id+" serial="+serial+" type="+type_id);
+
+    //Если поле номера пустое, то ищем по параметрам, если поле содержит значение, то ищем по этому значению, игнорируя
+    // все остальные параметры. Т.е. ищем или по параметрам, или по номеру. Тип устройства учитывается в любом из случаев
+    if (serial === "") getUnits(deviceName_id, location_id, employee_id, type_id, state_id, ANY_VALUE);
+    else getUnits(ANY_VALUE, ANY_VALUE, ANY_VALUE, type_id, ANY_VALUE, serial);
+}
