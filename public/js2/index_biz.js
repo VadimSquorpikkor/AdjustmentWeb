@@ -52,36 +52,30 @@ serialText.addEventListener('input', function () {
 });
 
 let locationSpinnerAdapter = new SpinnerAdapter(locationSpinner);
-let devicesSpinnerAdapter = new SpinnerAdapter(namesSpinner);
+let devicesSpinnerAdapter = new  SpinnerAdapter(namesSpinner);
 let employeeSpinnerAdapter = new SpinnerAdapter(employeeSpinner);
 let stateSpinnerAdapter = new SpinnerAdapter(statesSpinner);
-
-// listen_new(DBASE, TABLE_LOCATIONS, loadLocationSimple);
-// listen_new(DBASE, TABLE_EMPLOYEES, loadEmployees);
-// listen_new(DBASE, TABLE_STATES, loadStates);
-// listen_new(DBASE, TABLE_DEVICES, loadDevices);
 
 /**Добавления списка локаций в спиннер*/
 function updateLocationSpinner() {
     let selectedLocations = getLocationsByParam(locations, getType());
     locationSpinnerAdapter.setDataObj(selectedLocations);
-    locationSpinnerAdapter.addFirstLineObj(new Location(null, ANY_VALUE, ALL_LOCATIONS));
+    locationSpinnerAdapter.addFirstLineObj(new Location(ANY_VALUE, ALL_LOCATIONS));
 }
 /**Добавления списка сотрудников в спиннер*/
 function updateEmployeeSpinner() {
     employeeSpinnerAdapter.setDataObj(employees);
-    employeeSpinnerAdapter.addFirstLineObj(new Employee(null, ANY_VALUE, ALL_EMPLOYEES, null, null));
+    employeeSpinnerAdapter.addFirstLineObj(new Employee(ANY_VALUE, ALL_EMPLOYEES, null, null));
 }
 
 function updateStatesSpinner() {
-    let selectedStates = getStatesByParam(states, getType(), locationSpinnerAdapter.getSelectedNameId());
+    let selectedStates = getStatesByParam(states, getType(), locationSpinnerAdapter.getSelectedId());
     stateSpinnerAdapter.setDataObj(selectedStates);
-    stateSpinnerAdapter.addFirstLineObj(new State(null, ANY_VALUE, ALL_STATES, null, null));
+    stateSpinnerAdapter.addFirstLineObj(new State(ANY_VALUE, ALL_STATES, null, null));
 }
 
 function updateDeviceSpinner() {
     devicesSpinnerAdapter.setDataObj(devices);
-    devicesSpinnerAdapter.addFirstLineObj(new Device(null, ANY_VALUE, ALL_DEVICES));
-
+    devicesSpinnerAdapter.addFirstLineObj(new Device(ANY_VALUE, ALL_DEVICES, ''));
     if (typeof devicesForGeneratorAdapter!=='undefined') devicesForGeneratorAdapter.setDataObj(devices);
 }

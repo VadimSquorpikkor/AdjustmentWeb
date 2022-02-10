@@ -85,10 +85,10 @@ function getAllDevicesFromFile() {//todo добавить devSet
 function getAllLocationsFromFile() {
     let arr = [];
     console.log('...getAllLocationsFromFile');
-    arr.push(new Location('adjustment',      'Участок РИР'));
-    arr.push(new Location('assembly',      'Сборочный участок'));
-    arr.push(new Location('graduation',      'Градуировка'));
-    arr.push(new Location('repair_area',      'Группа сервиса'));
+    arr.push(new Location('adjustment',     'Участок РИР'));
+    arr.push(new Location('assembly',       'Сборочный участок'));
+    arr.push(new Location('graduation',     'Градуировка'));
+    arr.push(new Location('repair_area',    'Группа сервиса'));
     arr.push(new Location('soldering',      'Монтаж'));
     return arr;
 }
@@ -96,39 +96,59 @@ function getAllLocationsFromFile() {
 function getAllStatesFromFile() {
     let arr = [];
     console.log('...getAllStatesFromFile');
-    arr.push(new State('adj_r_diagnostica',    'Диагностика'));
-    arr.push(new State('adj_r_poverka',        'Поверка'));
-    arr.push(new State('adj_s_poverka',        'Поверка'));
-    arr.push(new State('adj_r_soglasovanie',   'Согласование'));
-    arr.push(new State('adj_r_ispytania',      'Испытания'));
-    arr.push(new State('adj_r_utochnenie',     'Уточнение'));
-    arr.push(new State('adj_s_calibrovka',     'Калибровка'));
-    arr.push(new State('adj_s_nastroika',      'Настройка'));
-    arr.push(new State('adj_s_otgruzka',       'Отгрузка'));
-    arr.push(new State('ass_a_razborka',       'Разборка'));
-    arr.push(new State('ass_a_sborka',         'Сборка'));
-    arr.push(new State('ass_a_zamena',         'Замена'));
-    arr.push(new State('gra_a_graduirovka',    'Градуировка'));
-    arr.push(new State('gra_a_psi',            'ПСИ'));
-    arr.push(new State('rep_r_prinyat',        'Принят в ремонт'));
-    arr.push(new State('rep_r_raschet',        'Расчет'));
-    arr.push(new State('sol_a_montag',         'Монтаж'));
-    arr.push(new State('rep_r_vydano',         'Выдано'));
-    arr.push(new State('rep_r_otpravleno',     'Отправлено'));
-    arr.push(new State('rep_r_ozidanie',       'Ожидание оплаты'));
+    arr.push(new State('adj_r_diagnostica',    'Диагностика',       REPAIR_TYPE,     'adjustment'));
+    arr.push(new State('adj_r_ispytania',      'Испытания',         REPAIR_TYPE,     'adjustment'));
+    arr.push(new State('adj_r_poverka',        'Поверка',           REPAIR_TYPE,     'adjustment'));
+    arr.push(new State('adj_r_soglasovanie',   'Согласование',      REPAIR_TYPE,     'adjustment'));
+    arr.push(new State('adj_r_utochnenie',     'Уточнение',         REPAIR_TYPE,     'adjustment'));
+    arr.push(new State('adj_s_poverka',        'Поверка',           SERIAL_TYPE,     'adjustment'));
+    arr.push(new State('adj_s_calibrovka',     'Калибровка',        SERIAL_TYPE,     'adjustment'));
+    arr.push(new State('adj_s_nastroika',      'Настройка',         SERIAL_TYPE,     'adjustment'));
+    arr.push(new State('adj_s_otgruzka',       'Отгрузка',          SERIAL_TYPE,     'adjustment'));
+    arr.push(new State('ass_a_razborka',       'Разборка',          TYPE_ANY,        'assembly'));
+    arr.push(new State('ass_a_sborka',         'Сборка',            TYPE_ANY,        'assembly'));
+    arr.push(new State('ass_a_zamena',         'Замена',            TYPE_ANY,        'assembly'));
+    arr.push(new State('gra_a_graduirovka',    'Градуировка',       TYPE_ANY,        'graduation'));
+    arr.push(new State('gra_a_psi',            'ПСИ',               TYPE_ANY,        'graduation'));
+    arr.push(new State('rep_r_prinyat',        'Принят в ремонт',   REPAIR_TYPE,     'repair_area'));
+    arr.push(new State('rep_r_raschet',        'Расчет',            REPAIR_TYPE,     'repair_area'));
+    arr.push(new State('rep_r_vydano',         'Выдано',            REPAIR_TYPE,     'repair_area'));
+    arr.push(new State('rep_r_otpravleno',     'Отправлено',        REPAIR_TYPE,     'repair_area'));
+    arr.push(new State('rep_r_ozidanie',       'Ожидание оплаты',   REPAIR_TYPE,     'repair_area'));
+    arr.push(new State('sol_a_montag',         'Монтаж',            TYPE_ANY,        'soldering'));
     return arr;
 }
 
 function getAllEmployeesFromFile() {
     let arr = [];
     console.log('...getAllEmployeesFromFile');
-    arr.push(new Employee());
+    arr.push(new Employee('11', 'Русакевич',    'rusakevich.av@gmail.com',  'adjustment'));
+    arr.push(new Employee('11', 'Сериков',      'uniqdela@gmail.com',       'adjustment'));
+    arr.push(new Employee('11', 'Nautiz',       'atomtexstudio@gmail.com',  'repair_area'));
     return arr;
 }
 
 function getAllDevSetsFromFile() {
     let arr = [];
     console.log('...getAllDevSetsFromFile');
-    arr.push(new DeviceSet('',      ''));
+    arr.push(new DeviceSet('AT1117M',   ' МКС-AT1117M'));
+    arr.push(new DeviceSet('AT1120',    ' МКС-AT1120'));
+    arr.push(new DeviceSet('AT1120A',   ' МКС-AT1120A'));
+    arr.push(new DeviceSet('AT1120M',   ' МКС-AT1120M'));
+    arr.push(new DeviceSet('AT1125',    ' МКС-AT1125'));
+    arr.push(new DeviceSet('AT1125A',   ' МКС-AT1125A'));
+    arr.push(new DeviceSet('AT1315',    ' МКС-AT1315'));
+    arr.push(new DeviceSet('AT1320',    ' РКГ-AT1320A'));
+    arr.push(new DeviceSet('AT1320A',   ' РКГ-AT1320A'));
+    arr.push(new DeviceSet('AT1320C',   ' РКГ-AT1320C'));
+    arr.push(new DeviceSet('AT1320M',   ' РКГ-AT1320М'));
+    arr.push(new DeviceSet('AT2327',    ' СРК-AT2327'));
+    arr.push(new DeviceSet('AT2329',    ' УРК-AT2329'));
+    arr.push(new DeviceSet('AT2331',    ' ДРГ-AT2331'));
+    arr.push(new DeviceSet('AT6101C',   ' МКС-AT6101C'));
+    arr.push(new DeviceSet('AT6101CM',  ' МКС-AT6101CM'));
+    arr.push(new DeviceSet('AT6103',    ' МКС-AT6103'));
+    arr.push(new DeviceSet('AT6110',    ' УРК-AT6110'));
     return arr;
 }
+

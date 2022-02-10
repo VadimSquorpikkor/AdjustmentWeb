@@ -19,6 +19,7 @@ class Location extends Entity{
      */
     constructor(id, name_ru) {
         super(id, name_ru);
+        console.log(id);
     }
 }
 
@@ -60,6 +61,7 @@ class Device extends Entity{
     /**
      * @param id идентификатор
      * @param name_ru имя для отображения (на русском)
+     * @param dev_set имя комплекта устройства (если есть)
      */
     constructor(id, name_ru, dev_set) {
         super(id, name_ru);

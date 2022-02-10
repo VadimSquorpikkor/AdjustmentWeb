@@ -1,4 +1,4 @@
-/***/
+
 class SpinnerAdapter {
 
     constructor(spinner) {
@@ -6,19 +6,15 @@ class SpinnerAdapter {
 
     }
 
-    setData(arr_names, arr_ids) {
-        this._arr_names = arr_names;
-        this._arr_ids = arr_ids;
-        updateSpinner(this._spinner, this._arr_names);
-    }
-
     setDataObj(arr) {
         this._arr_names = getNames(arr);
         this._arr_ids = getIds(arr);
+        console.log('***'+this._arr_names[0]);
+        console.log('***'+this._arr_ids[0]);
         updateSpinner(this._spinner, this._arr_names);
     }
 
-    getSelectedNameId() {
+    getSelectedId() {
         if (this._arr_ids===undefined)return;
         return this._arr_ids[this._spinner.selectedIndex];
     }
@@ -30,7 +26,7 @@ class SpinnerAdapter {
 
     addFirstLineObj(obj) {
         this._arr_names.unshift(obj.getNameRu);
-        this._arr_ids.unshift(obj.getNameId);
+        this._arr_ids.unshift(obj.getId);
         updateSpinner(this._spinner, this._arr_names);
     }
 }
@@ -55,7 +51,7 @@ function getNames(arr) {
 function getIds(arr) {
     let newArr = [];
     for (let i = 0; i < arr.length; i++) {
-        newArr.push(arr[i].getNameId)
+        newArr.push(arr[i].getId)
     }
     return newArr;
 }
