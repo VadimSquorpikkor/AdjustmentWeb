@@ -29,6 +29,14 @@ html, body {
     float: left;
 }
 
+.locations_div_2 {
+    background-color: #555555;
+    box-shadow: 2px 1px 12px 1px rgba(0, 0, 0, 0.23);
+    padding: 5px 15px 15px;
+    margin: 5px 20px;
+    border-radius: 10px;
+}
+
 .white_span {
     background: #555555;
     color: #ECEFF1;
@@ -225,3 +233,44 @@ input[type="button"]:active {
     display: inline-block;
     text-align: right
 }
+
+.div_title_left {
+    color: #ECEFF1;
+    display: inline-block;
+    text-shadow: 2px 3px 2px #444444;
+    text-align: left;
+    font-size: 14px;
+}
+
+/*region ------- Таблицы --------------------------------------------------------------------------------------------------------*/
+.table_two_colors {
+    box-shadow: 4px 4px 3px 0 rgba(0, 0, 0, 0.23);
+}
+.table_two_colors tr:nth-child(odd){
+    background-color: #ffe4c4;
+}
+table a[href$='.ods']:hover, table a[href$='.odt']:hover, table a[href$='.docx']:hover, table a[href$='.xlsx']:hover, table a[href$='.xls']:hover, table a[href$='.pdf']:hover, table a[href$='.doc']:hover {
+    /*padding-left: 22px;*/
+    background-size: 22px;
+    background-color: unset;
+}
+table {
+    font-size: 12px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+td {
+    background-color: #ECEFF1;
+}
+
+th {
+    background-color: #4CAF50;
+    color: #ECEFF1;
+}
+/*endregion ------------------------------------------------------------------------------------------------------------*/
