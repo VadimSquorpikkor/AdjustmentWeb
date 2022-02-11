@@ -2,11 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/js2/insert_page_biz.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js2/locations.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/insert.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/insert.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/bis_logic.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/constants.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/dictionary.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/entities.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/firebase_low_level.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/for_qr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/for_qr_2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/index_auth.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/index_biz.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/insert_page_biz.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/locations.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/qr_code.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/qrcodegen-input-demo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/qrcodegen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/spinner_adapter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js2/data_bridge.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js2/data_bridge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js2/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js2/firebase.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/locations.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/locations.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/qr_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/qr_page.html" afterDir="false" />
     </list>
@@ -407,14 +426,7 @@
       <workItem from="1642772052303" duration="1522000" />
       <workItem from="1643892152097" duration="777000" />
       <workItem from="1644413629760" duration="2430000" />
-      <workItem from="1644559205184" duration="5338000" />
-    </task>
-    <task id="LOCAL-00003" summary="1.04 - 03/03/21&#10;1. Добавлен динамически связанный с БД спиннер для имен устройств. При изменении/добавлении имен в БД (отдельная таблица имен) данные в спиннере автоматически обновляются  &#10;2. Добавлен динамически связанный с БД спиннер для названий статусов. При изменении/добавлении статусов в БД (отдельная таблица статусов) данные в спиннере автоматически обновляются">
-      <created>1614781068309</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1614781068309</updated>
+      <workItem from="1644559205184" duration="8023000" />
     </task>
     <task id="LOCAL-00004" summary="1.05 - 05/03/21&#10;1. Добавлена страница для генерации QR-кода: тип устройства выбирается из выпадающего спиннера (пока статический, потом будет динамически подгружаться данными из БД) и вводится внутренний серийник. Строка для qr-кода шифруется. Для безопасности добавлено поле ввода ключа для шифрования, без него полученный qr-код будет некорректным и не будет распознаваться в приложении для телефона. Потом для получения графического ключа будет отдельное приложение, пока так — из странички.">
       <created>1614929863650</created>
@@ -752,7 +764,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644502280870</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="1.46 - 11/02/22&#10;1. Глобальная переделка ч.5. Переделан весь код JS для страницы &quot;Добавить&quot;. Из страницы удален код для таблицы nameId">
+      <created>1644564951941</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1644564951941</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -802,7 +821,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="1.25 - 17/06/21 Глобальное обновление&#10;1. Глобальное обновление. Так как в БД добавилась таблица имен (имя+варианты перевода на разных языках), то переделана вся логика приложения с тем, чтобы данные для названий (локаций, статусов и т.д.) брать из этой новой таблицы, а не как раньше, из полей в каждой таблице (которые будут удалены). Вся загвоздка была в отсутствии JOIN в firestore (это НЕ реляционная БД), поэтому было придумано некоторое подобие (по-сути дозагрузка по id c апдейтом), теперь в приложение грузится сразу массив объектов и с именем и идентификатором&#10;2. В продолжении новой архитектуры: удалены переводчики: словари и getNameById/getIdByName&#10;3. JOIN не используется при загрузке юнитов и событий, данные просто берутся из массивов объектов, загруженных для спиннеров&#10;4. Добавлен entities.js и bis_logic.js. Удален listeners.js&#10;5. Из index.html удалены все onClick и onChange, теперь всё сделано через onEventListener в bis_logic.js. Логика в bis_logic.js теперь основана на const, а не на id&#10;6. Переделаны лисенеры, отслеживающие изменения в БД" />
     <MESSAGE value="1.26 - 17/06/21&#10;1. Удалены неиспользуемые методы, удален dictionary.js, firebaseHelper.js, listeners.js, repair.html, добавлена ссылка на AtomtexRepair" />
     <MESSAGE value="1.27 - 18/06/21&#10;1. Изменения в БД: удалены поля вариантов переводов имен из states, location, employees, devices. Теперь все переводы в &quot;names&quot;&#10;2. Добавлен класс SpinnerAdapter для удобства работы со спинерами, код стал короче и понятнее. Добавление &quot;любого значения&quot; отвязано от массивов объектов, а добавляется в SpinnerAdapter" />
     <MESSAGE value="1.28 - 18/06/21&#10;1. Теперь содержимое спиннеров динамически изменяется, в зависимости от выбора в других спиннерах и радио: если выбрать локацию &quot;Участок РИР&quot;, то в спиннере статусов будут отображаться только статусы для этой локации, и только те, которые соответствуют выбранному типу (серия или ремонт); при выборе &quot;Серия&quot; в локациях не будет отображаться &quot;Группа Сервиса&quot;&#10;2. Раньше при каждом изменении в спиннерах данные каждый раз подгружались из БД (по выборке на основе показаний в спиннерах), сейчас вся логика работает на основе данных, загруженных при старте, новые данные загружаются только при нажатии &quot;Найти&quot;&#10;3. Если написать номер в поле серийного номера, все спиннеры станут неактивными. Сделано, чтобы не путать пользователя: уже набрав номер, он может пытаться выбрать параметры в спиннерах, которые всё равно будут проигнорированы при поиске, так как при выбранном номере поиск будет идти ТОЛЬКО по серийному номеру" />
@@ -827,7 +845,8 @@
     <MESSAGE value="1.44 - 10/02/22&#10;1. Глобальная переделка ч.2. Начало переделки страницы поиска" />
     <MESSAGE value="1.44 - 10/02/22&#10;1. Глобальная переделка ч.3. Переделан весь код JS для страницы поиска" />
     <MESSAGE value="1.45 - 10/02/22&#10;1. Глобальная переделка ч.4. Переделан весь код JS для страницы QR" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.45 - 10/02/22&#10;1. Глобальная переделка ч.4. Переделан весь код JS для страницы QR" />
+    <MESSAGE value="1.46 - 11/02/22&#10;1. Глобальная переделка ч.5. Переделан весь код JS для страницы &quot;Добавить&quot;. Из страницы удален код для таблицы nameId" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.46 - 11/02/22&#10;1. Глобальная переделка ч.5. Переделан весь код JS для страницы &quot;Добавить&quot;. Из страницы удален код для таблицы nameId" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/js/entities.js">

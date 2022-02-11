@@ -12,6 +12,13 @@ divSbr.innerHTML = '<span class="white_span">'+EMPTY_LOCATION+'</span>'
 divMon.innerHTML = '<span class="white_span">'+EMPTY_LOCATION+'</span>'
 divSer.innerHTML = '<span class="white_span">'+EMPTY_LOCATION+'</span>'
 
+/**Показывает/скрывает доп инфо*/
+function showHideInfo(unit_id) {
+    let elem = document.getElementById(unit_id);
+    if (elem.style.display === 'none') elem.style.display = 'inline-block';
+    else elem.style.display = 'none';
+}
+
 /**Для страницы локаций: добавляет информацию о каждом ремонтном устройстве в соответствующий локации div*/
 function addListToDiv(arr, div) {
     if (arr.length === 0) div.innerHTML = '<span class="white_span">'+EMPTY_LOCATION+'</span>';

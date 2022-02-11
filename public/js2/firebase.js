@@ -85,3 +85,16 @@ function getAllEventsByUnitId(value, func, orderBy, order, host){
         func(arr, host);
     });
 }
+
+function getRepairUnitListFromBDByLocation(location, div, func) {
+    getAllUnitsByParam(DBASE, TABLE_UNITS, UNIT_DEVICE, ANY_VALUE, UNIT_LOCATION, location, UNIT_EMPLOYEE, ANY_VALUE, UNIT_TYPE, REPAIR_TYPE, UNIT_STATE, ANY_VALUE, UNIT_SERIAL, ANY_VALUE, div, func);
+}
+
+/**Слушатель новых событий у выбранной локации. Если в локации что-то изменилось, автоматом выводится информация на
+ * странице (без перезагрузки)*/
+function listen_changes(location, div, func) {
+    DBASE.collection(TABLE_UNITS).where('location_id', "==", location)
+        .onSnapshot((snapshot) => {
+            snapshot.docChanges().forEach(() => getRepairUnitListFromBDByLocation(location, div, func));
+        });
+}
