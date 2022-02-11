@@ -12,13 +12,28 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
+    <!--старая работающая версия-->
+    <!--
     <script defer src="js/dictionary.js"></script>
     <script defer src="js/constants.js"></script>
     <script defer src="js/app.js"></script>
     <script defer src="js/firebase_low_level.js"></script>
     <script defer src="js/spinner_adapter.js"></script>
     <script defer src="js/insert_page_biz.js"></script>
-    <script defer src="js/index_auth.js"></script>
+    <script defer src="js/index_auth.js"></script>-->
+
+    <!--новая версия JS-->
+    <script defer src="js2/dictionary.js"></script>
+    <script defer src="js2/constants.js"></script>
+    <script defer src="js2/app.js"></script>
+    <script defer src="js2/data_bridge.js"></script>
+    <script defer src="js2/firebase.js"></script>
+    <script defer src="js2/entities.js"></script>
+    <script defer src="js2/spinner_adapter.js"></script>
+    <script defer src="js2/insert_page_biz.js"></script>
+    <script defer src="js2/main_biz.js"></script>
+    <script defer src="js2/index_auth.js"></script>
+
 </head>
 
 <body class="body">
@@ -36,7 +51,7 @@
     <div id="link_div">
         <a href="index.html">Поиск</a>
         <a href="qr_page.html">QR-генератор</a>
-        <a href="https://atomtexrepair.web.app/">Сайт Ремонта</a>
+<!--        <a href="https://atomtexrepair.web.app/">Сайт Ремонта</a>-->
         <a class="a_selected">Добавить</a>
         <a href="locations.html">Отслеживание</a>
     </div>
@@ -44,20 +59,9 @@
     <h1>AdjustmentInsertData</h1>
 
     <hr>
-    <h3>Names</h3>
 
     <div id="input_form" style="display: none">
-        <input type="text" placeholder="id" id="n_id" style="width:150px"><br><br>
-        <input type="text" placeholder="en" id="n2" style="width:100px">
-        <input type="text" placeholder="fr" id="n5" style="width:100px">
-        <input type="text" placeholder="de" id="n4" style="width:100px">
-        <input type="text" placeholder="it" id="n3" style="width:100px">
-        <input type="text" placeholder="ru" id="n1" style="width:100px">
-        <br><br>
-        <input type="button" onclick="uploadNames('n_id', 'n1', 'n2', 'n3', 'n4', 'n5')" value="Добавить">
-        <input type="button" onclick="clearInput('n_id', 'n1', 'n2', 'n3', 'n4', 'n5')" value="Очистить">
 
-        <hr>
         <h3>Удалить юнит и его события</h3>
         <input type="text" placeholder="unit id" id="unit_id" style="width:150px">
         <br><br>
@@ -67,14 +71,14 @@
         <h3>Добавить устройство</h3>
 
         <select id="devset_spinner" style="width:165px; margin-bottom: 4px"></select>
-        <input type="button" onclick="copySpinnerTo('devset_id')" value="-->">
+        <input type="button" onclick="copySpinnerTo('devset_id')" value=&rarr;>
         <input type="text" placeholder="devset_id"  id="devset_id"  style="width:100px"><br><br>
         <input type="text" placeholder="dev_id"     id="dev_id"     style="width:150px">
         <input type="text" placeholder="ru_name"    id="ru_name"    style="width:100px">
-        <!--<input type="text" placeholder="en_name"    id="en_name"    style="width:100px">-->
+        <input type="text" placeholder="en_name"    id="en_name"    style="width:100px">
         <br><br>
-        <input type="button" onclick="loadNewDevice('dev_id', 'devset_id', 'ru_name')" value="Добавить">
-        <input type="button" onclick="clearInput('dev_id', 'ru_name', 'ru_name', 'ru_name', 'ru_name', 'ru_name')" value="Очистить">
+        <input type="button" onclick="loadNewDevice('dev_id', 'devset_id', 'ru_name', 'en_name')" value="Добавить">
+        <input type="button" onclick="clearInput('devset_id', 'dev_id', 'ru_name', 'en_name')" value="Очистить">
 
     </div>
 
