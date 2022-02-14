@@ -14,7 +14,7 @@ function getSecureKey() {
         console.log("Error getting document:", error);
         showError('ВНИМАНИЕ! Ошибка ключа безопасности');
     });
-    console.log("..."+secureKey);
+    console.log("..." + secureKey);
 }
 
 
@@ -61,19 +61,20 @@ function getAllUnitsByParam(database, table,
             let type_id = doc.data().type_id;
             let date = doc.data().date;
             let close_date = doc.data().close_date;
-            let unit = new Unit(id, description, device_id, employee_id, inner_serial, location_id, serial, state_id, type_id, date, close_date)
+            let event_last_date = doc.data().last_event_date;
+            let unit = new Unit(id, description, device_id, employee_id, inner_serial, location_id, serial, state_id, type_id, date, close_date, event_last_date)
 
             arr.push(unit);
         });
 
-        if (div===null) func(arr);
+        if (div === null) func(arr);
         else func(arr, div);
     });
 }
 
-function getAllEventsByUnitId(value, func, orderBy, order, host){
-        let arr = [];
-        DBASE.collection(TABLE_EVENTS)
+function getAllEventsByUnitId(value, func, orderBy, order, host) {
+    let arr = [];
+    DBASE.collection(TABLE_EVENTS)
         .where(EVENT_UNIT, "==", value)
         .orderBy(orderBy, order)
         .get().then((querySnapshot) => {

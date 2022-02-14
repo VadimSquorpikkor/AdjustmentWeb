@@ -83,7 +83,7 @@ class DeviceSet extends Entity{
 
 /** Класс для устройства, или блока детектирования */
 class Unit {
-    constructor(id, description, device_id, employee_id, inner_serial, location_id, serial, state_id, type_id, date, close_date) {
+    constructor(id, description, device_id, employee_id, inner_serial, location_id, serial, state_id, type_id, date, close_date, last_event_date) {
         this.id = id;
         this.description = description;
         this.device_id = device_id;
@@ -95,6 +95,7 @@ class Unit {
         this.type_id = type_id;
         this.date = date;
         this.close_date = close_date;
+        this.last_event_date = last_event_date;
     }
 }
 

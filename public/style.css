@@ -258,9 +258,6 @@ table {
     font-size: 12px;
     border-collapse: collapse;
     width: 100%;
-}
-
-table, th, td {
     border: 1px solid black;
     text-align: center;
 }
@@ -268,6 +265,15 @@ table, th, td {
 td {
     background-color: #ECEFF1;
 }
+
+/*.noborder {
+    border: none;
+    background-color: #555555;
+}
+
+.noborder td{
+    background-color: #555555;
+}*/
 
 th {
     background-color: #4CAF50;

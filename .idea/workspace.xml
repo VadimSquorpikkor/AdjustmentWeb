@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="1.48 - 11/02/22&#10;1. Исправлен список устройств (удалены лишние), к устройствам добавлены имена комплектов">
-      <change afterPath="$PROJECT_DIR$/public/js2/locations2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/locations2.html" afterDir="false" />
+    <list default="true" id="50540ca5-1370-48ac-b1ae-220b3b212e0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VERSION.md" beforeDir="false" afterPath="$PROJECT_DIR$/VERSION.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locations.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/locations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js2/entities.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js2/entities.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js2/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js2/firebase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js2/locations2.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js2/locations2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locations2.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/locations2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/qr_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/qr_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
