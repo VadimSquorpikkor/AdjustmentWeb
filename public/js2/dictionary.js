@@ -6,6 +6,8 @@ function getAllDevicesFromFile() {//todo добавить devSet
     arr.push(new Device('AT1123',      'ДКС-AT1123',    ''));
     arr.push(new Device('AT2503',      'ДКГ-AT2503',    ''));
     arr.push(new Device('AT6130',      'МКС-AT6130',    ''));
+    arr.push(new Device('AT6130A',     'МКС-AT6130A',   ''));
+    arr.push(new Device('AT6130B',     'МКС-AT6130B',   ''));
     arr.push(new Device('AT6130C',     'МКС-AT6130C',   ''));
     arr.push(new Device('AT920',       'МРП-AT920',     'AT2327'));
     arr.push(new Device('AT920B',      'МРП-AT920B',    'AT2327'));
@@ -121,9 +123,22 @@ function getAllStatesFromFile() {
 function getAllEmployeesFromFile() {
     let arr = [];
     console.log('...getAllEmployeesFromFile');
-    arr.push(new Employee('11', 'Русакевич',    'rusakevich.av@gmail.com',  'adjustment'));
-    arr.push(new Employee('3',  'Сериков',      'uniqdela@gmail.com',       'adjustment'));
-    arr.push(new Employee('10', 'Nautiz',       'atomtexstudio@gmail.com',  'repair_area'));
+    arr.push(new Employee('100', 'Доливец Д.И.',    'atomtex112@gmail.com',  'repair_area'));
+    arr.push(new Employee('101', 'Русакевич А.В.',    'uchrir@gmail.com',  'adjustment'));
+    arr.push(new Employee('102', 'Курбатова Н.В.',    'uchrir@gmail.com',  'adjustment'));
+    arr.push(new Employee('103', 'Крылов А.В.',    '',  'adjustment'));
+    arr.push(new Employee('104', 'Люфко Е.А.',    '',  'adjustment'));
+    arr.push(new Employee('105', 'Лешкевич С.В.',    '',  'adjustment'));
+    arr.push(new Employee('106', 'Кульчинский С.Р.',    '',  'adjustment'));
+    arr.push(new Employee('107', 'Писаренко В.Г.',    '',  'adjustment'));
+    arr.push(new Employee('108', 'Кульчинский Д.Р.',    '',  'adjustment'));
+    arr.push(new Employee('109', 'Пшенко А.А.',    '',  'adjustment'));
+    arr.push(new Employee('110', 'Булатый Р.О.',    '',  'adjustment'));
+    arr.push(new Employee('111', 'Кречко А.И.',    '',  'adjustment'));
+    arr.push(new Employee('112', 'Карук И.А.',    '',  'adjustment'));
+    arr.push(new Employee('113', 'Германенко И.И.',    '',  'adjustment'));
+    arr.push(new Employee('114', 'Фекленкова П.А.',    '',  'adjustment'));
+    arr.push(new Employee('115', 'Полторан А.А.',    '',  'adjustment'));
     return arr;
 }
 

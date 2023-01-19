@@ -42,7 +42,9 @@ function addListToDiv(arr, div) {
             let date = stateDate + " " + stateTime;
             let state = unit.state_id;
             let isClose = unit.close_date!==undefined;
+            // let employee = unit.employee_id;
             let employee = unit.employee_id;
+            console.log('EMPLOYEE = '+employee);
 
             deviceName = getDeviceById(deviceName).getNameRu;
             state = getStateById(state).getNameRu;

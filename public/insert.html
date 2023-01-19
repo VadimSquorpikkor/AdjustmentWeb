@@ -69,6 +69,19 @@
         <input type="button" onclick="loadNewDevice('dev_id', 'devset_id', 'ru_name', 'en_name')" value="Добавить">
         <input type="button" onclick="clearInput('devset_id', 'dev_id', 'ru_name', 'en_name')" value="Очистить">
 
+        <hr>
+        <h3>Добавить пользователя</h3>
+
+        <select id="location_spinner1" style="width:165px; margin-bottom: 4px"></select>
+        <input type="button" onclick="copyLocationSpinnerTo('location_id')" value=&rarr;>
+        <input type="text" placeholder="email"          id="e_email"  style="width:100px"><br><br>
+        <input type="text" placeholder="id"             id="id"     style="width:150px">
+        <input type="text" placeholder="location_id"    id="location_id"    style="width:100px">
+        <input type="text" placeholder="name"           id="name"    style="width:100px">
+        <br><br>
+        <input type="button" onclick="loadNewEmployee('e_email', 'location_id', 'name')" value="Добавить">
+        <input type="button" onclick="clearInput('email', 'id', 'location_id', 'name')" value="Очистить">
+
     </div>
 
 </div>

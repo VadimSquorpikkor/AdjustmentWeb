@@ -13,8 +13,14 @@ function copySpinnerTo(field) {
     else document.getElementById(field).value = oldValue+"&"+name;
 }
 
+function copyLocationSpinnerTo(field) {
+    document.getElementById(field).value = locationSpinnerAdapter.getSelectedId();
+}
+
 const devsetSpinner = document.getElementById('devset_spinner');
 let devsetSpinnerAdapter = new SpinnerAdapter(devsetSpinner);
+const locationSpinner = document.getElementById('location_spinner1');
+let locationSpinnerAdapter = new SpinnerAdapter(locationSpinner);
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -28,6 +34,18 @@ function loadNewDevice(id, devset_id, ru, en) {
         name_ru: valueOf(ru)
     }, { merge: true });
     alert("Устройство "+ru+" добавлено в БД");
+}
+
+/**Загрузка новых устройств. Заполняет все поля в таблице устройств*/
+function loadNewEmployee(email, id, location_id, name) {
+    if (!canInsertData) return;
+    DBASE.collection(TABLE_EMPLOYEES).doc(valueOf(id)).set({
+        email: valueOf(email),
+        location_id: valueOf(location_id),
+        name_en: valueOf(name),
+        name_ru: valueOf(name)
+    }, { merge: true });
+    alert("Пользователь "+name+" добавлен в БД");
 }
 
 /**Удаляет устройство из БД, также удаляет все события данного устройства*/
